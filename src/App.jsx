@@ -1,4 +1,5 @@
 import "./styles/app.css";
+import './styles/fonts.css'
 import { Routes, Route } from "react-router-dom";
 import { useAuth } from "./context/useAuth";
 import Navbar from "./components/Navbar";
