@@ -1,5 +1,12 @@
-import { useState } from "react";
+// General
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
+import "../styles/create-event.css";
+import axios from "axios";
+import { useAuth } from "../context/useAuth";
+
+// MUI
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
@@ -11,13 +18,14 @@ import Chip from "@mui/material/Chip";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import InputLabel from "@mui/material/InputLabel";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { ThemeProvider } from "@mui/material/styles";
+import { theme } from "../context/theme";
 
+// Icons
 import { CiLocationOn } from "react-icons/ci";
 import { IoIosArrowBack } from "react-icons/io";
-import { motion } from "framer-motion";
-import "../styles/create-event.css";
-// import backgroudn images
+
+// Backgrounds
 import bg1 from "../assets/backgrounds/1.webp";
 import bg2 from "../assets/backgrounds/2.webp";
 import bg3 from "../assets/backgrounds/3.webp";
@@ -44,14 +52,14 @@ const Form = () => {
   });
   const [personName, setPersonName] = useState([]);
   const navigate = useNavigate();
+  const SERVER = import.meta.env.VITE_SERVER;
+  const { user } = useAuth();
 
   const names = [
-    { id: 1, name: "John Doe" },
-    { id: 2, name: "Jane Doe" },
-    { id: 3, name: "John Smith" },
-    { id: 4, name: "Jane Smith" },
-    { id: 5, name: "John Johnson" },
-    { id: 6, name: "Jane Johnson" },
+    { id: "65d8b08c0806ca2aca3837d9", name: "John Doe" },
+    { id: "65d8b65ead9e5b3b3d55a311", name: "Jane Doe" },
+    { id: "65d8b713ad91b47dfbc6c28c", name: "John Smith" },
+    { id: "65d8d016f431be9b9227159a", name: "Jane Smith" },
   ];
 
   const images = [
@@ -69,18 +77,14 @@ const Form = () => {
     bg12,
   ];
 
-  const theme = createTheme({
-    typography: {
-      fontFamily: "--var(--body-font)",
-    },
-  });
-
   const handleNext = () => {
     setFormStep((step) => step + 1);
+    window.scrollTo(0, 0);
   };
 
   const handleBack = () => {
     setFormStep((step) => step - 1);
+    window.scrollTo(0, 0);
   };
 
   const handleChipChange = (event) => {
@@ -98,6 +102,7 @@ const Form = () => {
       participants: uniqueParticipants.map((v) => v.id),
     });
   };
+
   const handleSelectImage = (key, value) => {
     setFormData({ ...formData, [key]: value });
     const images = document.querySelectorAll(".image");
@@ -111,11 +116,35 @@ const Form = () => {
 
   const handleChange = (key, value) => {
     setFormData({ ...formData, [key]: value });
-    console.log(formData);
   };
 
-  const handleSubmit = () => {
-    console.log(formData);
+  const handleSubmit = async () => {
+    const date = new Date(formData.date);
+    const time = new Date(formData.time);
+    const dateTime = new Date(
+      date.getFullYear(),
+      date.getMonth(),
+      date.getDate(),
+      time.getHours(),
+      time.getMinutes()
+    );
+    const data = {
+      title: formData.title,
+      description: formData.description,
+      date: { start: dateTime, end: "" },
+      location: { description: formData.location, lat: 0, long: 0 },
+      participants: formData.participants,
+      picture: formData.image,
+      owner: user.user._id,
+    };
+
+    try {
+      const response = await axios.post(`${SERVER}/events`, data);
+      console.log(response);
+      navigate("/");
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -131,7 +160,9 @@ const Form = () => {
             <Button className="back-btn" onClick={() => navigate(-1)}>
               <IoIosArrowBack />
             </Button>
-            <h2>Create an event</h2>
+            <div className="title-container">
+              <h2>Create an event</h2>
+            </div>
           </motion.div>
 
           {/* STEP 1 */}
@@ -146,6 +177,7 @@ const Form = () => {
               animate={{ x: -100 * formStep + "%" }}
               transition={{ ease: "easeOut", duration: 0.3 }}
               className="form-step title"
+              // hide scroll bar
             >
               <InputLabel className="form-step-label">
                 What is it about?
@@ -182,6 +214,7 @@ const Form = () => {
                 disabled={!formData.title}
                 type="button"
                 onClick={handleNext}
+                className="next-btn"
               >
                 Next
               </Button>
@@ -201,6 +234,7 @@ const Form = () => {
               <DateCalendar
                 label="Date"
                 onChange={(newValue) => handleChange("date", newValue)}
+                className="date-picker"
               />
               <TimePicker
                 label="Time"
@@ -212,6 +246,7 @@ const Form = () => {
                 id="outlined-basic"
                 label="Location"
                 variant="outlined"
+                required
                 InputProps={{
                   endAdornment: (
                     <CiLocationOn
@@ -229,7 +264,7 @@ const Form = () => {
                   gap: "4rem",
                 }}
               >
-                <Button type="button" onClick={handleBack}>
+                <Button className="back-btn" type="button" onClick={handleBack}>
                   Back
                 </Button>
                 <Button
@@ -240,6 +275,7 @@ const Form = () => {
                   }
                   type="button"
                   onClick={handleNext}
+                  className="next-btn"
                 >
                   Next
                 </Button>
@@ -282,10 +318,10 @@ const Form = () => {
                   gap: "4rem",
                 }}
               >
-                <Button type="button" onClick={handleBack}>
+                <Button className="back-btn" type="button" onClick={handleBack}>
                   Back
                 </Button>
-                <Button type="button" onClick={handleNext}>
+                <Button className="next-btn" type="button" onClick={handleNext}>
                   Next
                 </Button>
               </Box>
@@ -326,7 +362,7 @@ const Form = () => {
                   marginBottom: "10rem",
                 }}
               >
-                <Button type="button" onClick={handleBack}>
+                <Button className="back-btn" type="button" onClick={handleBack}>
                   Back
                 </Button>
                 <Button type="submit" onClick={handleSubmit}>
