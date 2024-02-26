@@ -10,8 +10,8 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import CircularProgress from "@mui/material/CircularProgress";
-import { createTheme } from "@mui/material/styles";
 import { ThemeProvider } from "@mui/material/styles";
+import { theme } from "../context/theme";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -48,32 +48,6 @@ const Login = () => {
       },
     }),
   };
-
-  const theme = createTheme({
-    typography: {
-      fontFamily: "var(--body-font)",
-    },
-    components: {
-      MuiOutlinedInput: {
-        styleOverrides: {
-          root: {
-            "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-              borderColor: "var(--quinary-color) !important",
-            },
-          },
-        },
-      },
-      MuiInputLabel: {
-        styleOverrides: {
-          root: {
-            "&.Mui-focused": {
-              color: "var(--quinary-color) !important",
-            },
-          },
-        },
-      },
-    },
-  });
 
   useEffect(() => {
     return () => {
@@ -137,7 +111,7 @@ const Login = () => {
                 <CircularProgress
                   size={24}
                   sx={{
-                    color: "var(--quaternary-color)",
+                    color: "var(--primary-color)",
                     position: "absolute",
                     top: "50%",
                     left: "50%",

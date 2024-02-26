@@ -18,7 +18,8 @@ import Chip from "@mui/material/Chip";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import InputLabel from "@mui/material/InputLabel";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { ThemeProvider } from "@mui/material/styles";
+import { theme } from "../context/theme";
 
 // Icons
 import { CiLocationOn } from "react-icons/ci";
@@ -76,19 +77,6 @@ const Form = () => {
     bg12,
   ];
 
-  const theme = createTheme({
-    typography: {
-      fontFamily: "--var(--body-font)",
-    },
-    components: {
-      // Name of the component
-      MuiButtonBase: {
-        border: "3px solid red",
-        defaultProps: {},
-      },
-    },
-  });
-
   const handleNext = () => {
     setFormStep((step) => step + 1);
     window.scrollTo(0, 0);
@@ -128,12 +116,9 @@ const Form = () => {
 
   const handleChange = (key, value) => {
     setFormData({ ...formData, [key]: value });
-    console.log(formData);
   };
 
   const handleSubmit = async () => {
-    console.log(user);
-    // format date and time
     const date = new Date(formData.date);
     const time = new Date(formData.time);
     const dateTime = new Date(
@@ -229,6 +214,7 @@ const Form = () => {
                 disabled={!formData.title}
                 type="button"
                 onClick={handleNext}
+                className="next-btn"
               >
                 Next
               </Button>
@@ -248,6 +234,7 @@ const Form = () => {
               <DateCalendar
                 label="Date"
                 onChange={(newValue) => handleChange("date", newValue)}
+                className="date-picker"
               />
               <TimePicker
                 label="Time"
@@ -259,6 +246,7 @@ const Form = () => {
                 id="outlined-basic"
                 label="Location"
                 variant="outlined"
+                required
                 InputProps={{
                   endAdornment: (
                     <CiLocationOn
@@ -276,7 +264,7 @@ const Form = () => {
                   gap: "4rem",
                 }}
               >
-                <Button type="button" onClick={handleBack}>
+                <Button className="back-btn" type="button" onClick={handleBack}>
                   Back
                 </Button>
                 <Button
@@ -287,6 +275,7 @@ const Form = () => {
                   }
                   type="button"
                   onClick={handleNext}
+                  className="next-btn"
                 >
                   Next
                 </Button>
@@ -329,10 +318,10 @@ const Form = () => {
                   gap: "4rem",
                 }}
               >
-                <Button type="button" onClick={handleBack}>
+                <Button className="back-btn" type="button" onClick={handleBack}>
                   Back
                 </Button>
-                <Button type="button" onClick={handleNext}>
+                <Button className="next-btn" type="button" onClick={handleNext}>
                   Next
                 </Button>
               </Box>
@@ -373,7 +362,7 @@ const Form = () => {
                   marginBottom: "10rem",
                 }}
               >
-                <Button type="button" onClick={handleBack}>
+                <Button className="back-btn" type="button" onClick={handleBack}>
                   Back
                 </Button>
                 <Button type="submit" onClick={handleSubmit}>
