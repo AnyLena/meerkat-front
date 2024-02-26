@@ -97,6 +97,7 @@ const Login = () => {
               id="outlined-basic"
               label="Password"
               variant="outlined"
+              type="password"
             />
             <Box sx={{ position: "relative" }}>
               <Button

@@ -235,12 +235,14 @@ const Form = () => {
                 label="Date"
                 onChange={(newValue) => handleChange("date", newValue)}
                 className="date-picker"
+                required
               />
               <TimePicker
                 label="Time"
                 onChange={(newValue) => handleChange("time", newValue)}
                 style={{}}
                 ampm={false}
+                required
               />
               <TextField
                 id="outlined-basic"
@@ -250,7 +252,7 @@ const Form = () => {
                 InputProps={{
                   endAdornment: (
                     <CiLocationOn
-                      style={{ fontSize: "2rem", color: "darkGrey" }}
+                      style={{ fontSize: "2rem", color: "darkGrey"}}
                     />
                   ),
                 }}
