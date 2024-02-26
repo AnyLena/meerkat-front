@@ -1,6 +1,8 @@
 * {
   margin: 0;
   padding: 0;
+  font-family: 'Gafata', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #222;
 }
 
 a {
@@ -11,11 +13,11 @@ a:hover {
 }
 
 body {
-  
 }
 
-h1 {
-  
+h1, h2, h3 {
+    font-family: 'Oswald', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-transform: uppercase;
 }
 
 button {

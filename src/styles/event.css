@@ -1,0 +1,26 @@
+body {
+  margin: 0;
+  background: url(../assets/background/bg1.jpg) no-repeat fixed;
+  background-size: 100vw;
+}
+
+.event {
+  margin: 0;
+  height: 90dvh;
+
+  h1 {
+    position: relative;
+    top: 50%;
+    width: 100%;
+    text-align: center;
+    padding: 20px 0 80px 0;
+  }
+  .header {
+    margin-top: 70%;
+    background-color: rgba(255, 255, 255, 0.5);
+  }
+
+  .info {
+    position: relative;
+  }
+}
