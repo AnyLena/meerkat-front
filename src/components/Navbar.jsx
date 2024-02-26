@@ -17,7 +17,8 @@ const Navbar = () => {
   const navigate = useNavigate();
 
   const navStyle = {
-    backgroundColor: "#454D66",
+
+    backgroundColor: 'var(--background-color)',
     position: "fixed",
     height: "70px",
     bottom: 0,
