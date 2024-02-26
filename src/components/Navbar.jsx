@@ -18,7 +18,7 @@ const Navbar = () => {
 
   const navStyle = {
     backgroundColor: "#454D66",
-    position: "sticky",
+    position: "fixed",
     height: "70px",
     bottom: 0,
     width: "100%",

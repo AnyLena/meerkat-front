@@ -8,8 +8,8 @@ import CreateEvent from './views/CreateEvent';
 import Login from './views/Login';
 import Signup from './views/Signup';
 import Profile from './views/Profile';
-
-
+import "./styles/app.css";
+import "./styles/fonts.css";
 
 function App() {
 
