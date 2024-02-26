@@ -5,6 +5,15 @@
   color: #222;
 }
 
+:root {
+    --alert-color: #fe7f2d;
+    --headingBG-color: #fcca46;
+    --background-color: #233d4d;
+    --secondary-color: #a1c181;
+    --primary-color: #619b8a;
+    
+  }
+
 a {
  
 }
@@ -13,7 +22,9 @@ a:hover {
 }
 
 body {
-}
+    /* padding-bottom: 120px;
+    */
+} 
 
 h1, h2, h3 {
     font-family: 'Oswald', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;

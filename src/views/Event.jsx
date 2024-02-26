@@ -13,6 +13,7 @@ const Event = () => {
 
   const [start, setStart] = useState({});
   const [end, setEnd] = useState({});
+  const [backgroundImage, setBackgroundImage] = useState(BG1);
 
   const convertDate = (timestamp) => {
     const date = new Date(timestamp);
@@ -73,6 +74,14 @@ const Event = () => {
     console.log(eventData);
   }, [eventData]);
 
+  useEffect(() => {
+    const body = document.querySelector("body");
+    body.style.backgroundImage = `url(${backgroundImage})`;
+    body.style.backgroundRepeat = "no-repeat";
+    body.style.backgroundAttachment = "fixed";
+    body.style.backgroundSize = "100vw";
+  }, [eventData]);
+
   return (
     <>
       {Object.keys(eventData).length > 0 ? (
@@ -81,14 +90,24 @@ const Event = () => {
             <h1>{eventData.title}</h1>
           </div>
           <section className="info">
-            <div className="time">
-              <p>{start.day}</p>
-              <p>{start.month}</p>
-              <p>{start.weekday}</p>
-              <p>
-                {start.hours}:{start.minutes} – {end.hours}:{end.minutes}
-              </p>
-              <img src={Envelope} alt="" />
+            <div className="time-infobox">
+              <div className="time-date">
+                <p className="day">{start.day}</p>
+                <p>{start.month}</p>
+              </div>
+              <div className="time-center">
+                <p className="day">{start.weekday}</p>
+                <p>
+                  {start.hours}:{start.minutes} – {end.hours}:{end.minutes}
+                </p>
+              </div>
+              <div className="time-envelope">
+                <img src={Envelope} alt="" />
+
+                <div className="red-circle">
+                  <p>10</p>
+                </div>
+              </div>
             </div>
 
             <div className="participants"></div>
@@ -98,12 +117,19 @@ const Event = () => {
             </div>
 
             {eventData.todos.length > 0 ? (
-              <div className="toDoList">
+              <>
                 <h2>TO-DO-List</h2>
-                {eventData.todos.map((todo, index) => (
-                  <li key={index}> {todo.title} </li>
-                ))}
-              </div>
+                <div className="todo-list">
+                  {eventData.todos.map((todo, index) => (
+                    <div className="todo-item" key={index}>
+                      <div className="circle" style={{backgroundColor: todo.done ? 'var(--secondary-color)' : 'white'}}></div>
+                      <p> {todo.title}</p>
+                      <div className="assigned"></div>
+                      <button>edit</button>
+                    </div>
+                  ))}
+                </div>
+              </>
             ) : null}
           </section>
         </section>
