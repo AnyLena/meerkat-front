@@ -1,4 +1,4 @@
-import Profile from "../assets/profile.png";
+import Profile from "../assets/decorations/traveler.jpg";
 
 const Todolist = ({ todos }) => {
   return (

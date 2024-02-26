@@ -141,7 +141,7 @@
       border: none;
     }
   }
-  .profile-img {
+  .profile-img, .profile-img img {
     height: 30px;
     width: 30px;
     background-color: var(--headingBG-color);
@@ -151,20 +151,16 @@
     display: flex;
     justify-content: center;
     align-items: center;
-
-    img {
-      height: 85%;
-    }
   }
 
   .participants {
     margin: 30px;
 
     .flex-container {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        font-size: 1.2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 1.2rem;
     }
     .grid-container {
       display: grid;
@@ -176,5 +172,12 @@
       width: 40px;
     }
 
+    img {
+        height: 40px;
+        width: 40px;
+        border-radius: 30px;
+        border: 2px solid var(--background-color);
+        margin: 5px;
+      }
   }
 }
