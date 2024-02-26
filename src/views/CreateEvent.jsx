@@ -17,9 +17,9 @@ import { TimePicker } from "@mui/x-date-pickers/TimePicker";
 import Chip from "@mui/material/Chip";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
-import InputLabel from "@mui/material/InputLabel";
 import { ThemeProvider } from "@mui/material/styles";
 import { theme } from "../context/theme";
+import { renderTimeViewClock } from "@mui/x-date-pickers/timeViewRenderers";
 
 // Icons
 import { CiLocationOn } from "react-icons/ci";
@@ -107,10 +107,11 @@ const Form = () => {
     setFormData({ ...formData, [key]: value });
     const images = document.querySelectorAll(".image");
     images.forEach((image) => {
-      image.style.border = "none";
+      image.classList.remove("selected");
     });
     const selectedImage = document.querySelector(`[style*="${value}"]`);
-    selectedImage.style.border = "4px solid var(--primary-color)";
+    selectedImage.classList.add("selected");
+
     console.log(formData);
   };
 
@@ -157,8 +158,19 @@ const Form = () => {
             transition={{ ease: "easeInOut", duration: 0.5 }}
             className="create-event-header"
           >
-            <Button className="back-btn" onClick={() => navigate(-1)}>
-              <IoIosArrowBack />
+            <Button
+              className="back-btn"
+              onClick={() => navigate(-1)}
+              sx={{
+                borderRadius: "50%",
+                backgroundColor: "rgba(0, 0, 0, 0.1)",
+                color: "white",
+                width: "40px",
+                height: "40px",
+                minWidth: "0 !important",
+              }}
+            >
+              <IoIosArrowBack style={{ fontSize: "1.25rem" }} />
             </Button>
             <div className="title-container">
               <h2>Create an event</h2>
@@ -179,9 +191,9 @@ const Form = () => {
               className="form-step title"
               // hide scroll bar
             >
-              <InputLabel className="form-step-label">
-                What is it about?
-              </InputLabel>
+              <label className="form-step-label">
+                <p>What is it about?</p>
+              </label>
 
               <Box
                 component="form"
@@ -215,6 +227,7 @@ const Form = () => {
                 type="button"
                 onClick={handleNext}
                 className="next-btn"
+                sx={{ width: "60px", margin: "2rem auto" }}
               >
                 Next
               </Button>
@@ -227,9 +240,9 @@ const Form = () => {
               transition={{ ease: "easeInOut", duration: 0.3 }}
               className="form-step date"
             >
-              <InputLabel className="form-step-label">
-                When and where?
-              </InputLabel>
+              <label className="form-step-label">
+                <p>When and where?</p>
+              </label>
 
               <DateCalendar
                 label="Date"
@@ -237,12 +250,16 @@ const Form = () => {
                 className="date-picker"
                 required
               />
+
               <TimePicker
                 label="Time"
-                onChange={(newValue) => handleChange("time", newValue)}
-                style={{}}
-                ampm={false}
                 required
+                onChange={(newValue) => handleChange("time", newValue)}
+                viewRenderers={{
+                  hours: renderTimeViewClock,
+                  minutes: renderTimeViewClock,
+                  seconds: renderTimeViewClock,
+                }}
               />
               <TextField
                 id="outlined-basic"
@@ -252,9 +269,14 @@ const Form = () => {
                 InputProps={{
                   endAdornment: (
                     <CiLocationOn
-                      style={{ fontSize: "2rem", color: "darkGrey"}}
+                      style={{ fontSize: "2rem", color: "darkGrey" }}
                     />
                   ),
+                }}
+                sx={{
+                  ".MuiInputBase-root": {
+                    alignItems: "center", // Align the input text and the adornment vertically
+                  },
                 }}
                 onChange={(e) => handleChange("location", e.target.value)}
               />
@@ -262,8 +284,9 @@ const Form = () => {
                 sx={{
                   display: "flex",
                   flexDirection: "row",
-                  justifyContent: "space-between",
+                  justifyContent: "center",
                   gap: "4rem",
+                  marginTop: "2rem",
                 }}
               >
                 <Button className="back-btn" type="button" onClick={handleBack}>
@@ -291,7 +314,9 @@ const Form = () => {
               transition={{ ease: "easeInOut", duration: 0.3 }}
               className="form-step participants"
             >
-              <InputLabel className="form-step-label">Who's coming?</InputLabel>
+              <label className="form-step-label">
+                <p>Who's coming?</p>
+              </label>
               <Select
                 labelId="demo-multiple-chip-label"
                 id="demo-multiple-chip"
@@ -316,8 +341,9 @@ const Form = () => {
                 sx={{
                   display: "flex",
                   flexDirection: "row",
-                  justifyContent: "space-between",
+                  justifyContent: "center",
                   gap: "4rem",
+                  marginTop: "2rem",
                 }}
               >
                 <Button className="back-btn" type="button" onClick={handleBack}>
@@ -336,9 +362,9 @@ const Form = () => {
               transition={{ ease: "easeOut", duration: 0.3 }}
               className="form-step image"
             >
-              <InputLabel className="form-step-label">
-                Select an image and you're done!
-              </InputLabel>
+              <label className="form-step-label-last">
+                <p>Select an image. Done!</p>
+              </label>
 
               <div className="image-container">
                 {images.map((image, index) => (
@@ -359,15 +385,28 @@ const Form = () => {
                 sx={{
                   display: "flex",
                   flexDirection: "row",
-                  justifyContent: "space-between",
+                  justifyContent: "center",
                   gap: "4rem",
-                  marginBottom: "10rem",
+                  marginBottom: "8rem",
                 }}
               >
                 <Button className="back-btn" type="button" onClick={handleBack}>
                   Back
                 </Button>
-                <Button type="submit" onClick={handleSubmit}>
+                <Button
+                  className="create-event-btn"
+                  type="submit"
+                  onClick={handleSubmit}
+                  sx={{
+                    animation: "pulse 2s infinite",
+
+                    backgroundColor: "var(--headingBG-color)",
+                    color: "black",
+                    "&:hover": {
+                      backgroundColor: "var(--headingBG-color)",
+                    },
+                  }}
+                >
                   Create Event
                 </Button>
               </Box>
