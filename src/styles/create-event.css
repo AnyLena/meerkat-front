@@ -9,7 +9,7 @@
   display: flex;
   flex-direction: row;
   gap: 1rem;
-  padding: 1rem;
+  justify-content: space-between;
   h2 {
     color: var(--primary-color);
     font-family: var(--header-font);
@@ -33,6 +33,7 @@
 
 .form-step-label {
   text-align: center;
+  height: 30px;
   margin-bottom: 1rem;
 }
 
