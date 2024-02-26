@@ -1,9 +1,10 @@
 // General
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import "../styles/create-event.css";
 import axios from "axios";
+import { useAuth } from "../context/useAuth";
 
 // MUI
 import Box from "@mui/material/Box";
@@ -51,6 +52,7 @@ const Form = () => {
   const [personName, setPersonName] = useState([]);
   const navigate = useNavigate();
   const SERVER = import.meta.env.VITE_SERVER;
+  const { user } = useAuth();
 
   const names = [
     { id: "65d8b08c0806ca2aca3837d9", name: "John Doe" },
@@ -130,6 +132,7 @@ const Form = () => {
   };
 
   const handleSubmit = async () => {
+    console.log(user);
     // format date and time
     const date = new Date(formData.date);
     const time = new Date(formData.time);
@@ -147,7 +150,7 @@ const Form = () => {
       location: { description: formData.location, lat: 0, long: 0 },
       participants: formData.participants,
       picture: formData.image,
-      owner: "65d8ac4a8dc48aae7b4e86e0",
+      owner: user.user._id,
     };
 
     try {
@@ -172,8 +175,9 @@ const Form = () => {
             <Button className="back-btn" onClick={() => navigate(-1)}>
               <IoIosArrowBack />
             </Button>
-            <h2>Create an event</h2>
-            <span> </span>
+            <div className="title-container">
+              <h2>Create an event</h2>
+            </div>
           </motion.div>
 
           {/* STEP 1 */}
