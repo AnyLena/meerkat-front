@@ -1,5 +1,5 @@
 // General
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import "../styles/create-event.css";
@@ -20,6 +20,7 @@ import Select from "@mui/material/Select";
 import { ThemeProvider } from "@mui/material/styles";
 import { theme } from "../context/theme";
 import { renderTimeViewClock } from "@mui/x-date-pickers/timeViewRenderers";
+import OutlinedInput from "@mui/material/OutlinedInput";
 
 // Icons
 import { CiLocationOn } from "react-icons/ci";
@@ -91,16 +92,12 @@ const Form = () => {
     const {
       target: { value },
     } = event;
-    const uniqueParticipants = value.filter(
-      (participant, index, self) =>
-        index === self.findIndex((p) => p.id === participant.id)
+    setPersonName(
+      typeof value === "string" ? value.split(",") : value
     );
-    setPersonName(uniqueParticipants);
-    console.log(personName);
-    setFormData({
-      ...formData,
-      participants: uniqueParticipants.map((v) => v.id),
-    });
+    let participantsIds = names.filter((name) => value.includes(name.name));
+    participantsIds = participantsIds.map((participant) => participant.id);
+    setFormData({ ...formData, participants: participantsIds });
   };
 
   const handleSelectImage = (key, value) => {
@@ -111,8 +108,6 @@ const Form = () => {
     });
     const selectedImage = document.querySelector(`[style*="${value}"]`);
     selectedImage.classList.add("selected");
-
-    console.log(formData);
   };
 
   const handleChange = (key, value) => {
@@ -323,16 +318,20 @@ const Form = () => {
                 multiple
                 value={personName}
                 onChange={handleChipChange}
+                input={<OutlinedInput id="select-multiple-chip" label="Participants" />}
                 renderValue={(selected) => (
                   <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
                     {selected.map((value) => (
-                      <Chip key={value.id} label={value.name} />
+                      <Chip key={value} label={value} />
                     ))}
                   </Box>
                 )}
               >
                 {names.map((name) => (
-                  <MenuItem key={name.id} value={name}>
+                  <MenuItem
+                    key={name.id}
+                    value={name.name}
+                  >
                     {name.name}
                   </MenuItem>
                 ))}
