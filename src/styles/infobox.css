@@ -1,8 +1,9 @@
 .time-infobox {
   background-color: var(--headingBG-color);
   border-radius: 30px;
-  font-size: 1.2rem;
-  
+  /* font-size: 1.2rem; */
+  font-size: 20px;
+
   .time-grid-container {
     padding: 30px 10px;
     display: grid;
@@ -12,7 +13,7 @@
   .time-grid-container > div {
     padding: 0 30px;
   }
-  
+
   .time-date {
     display: flex;
     flex-direction: column;
@@ -20,7 +21,7 @@
     align-items: center;
 
     .day {
-      font-size: 3.3rem;
+      font-size: 2.8em;
       font-family: "Oswald";
       line-height: 1.2;
     }
@@ -32,7 +33,7 @@
     flex-direction: column;
     justify-content: center;
     .day {
-      font-size: 2rem;
+      font-size: 1.4em;
       text-transform: uppercase;
       font-family: "Oswald";
       line-height: 1.5;
@@ -65,15 +66,51 @@
       text-align: center;
     }
   }
-.description {
-    background-color:rgba(255, 255, 255, 0.5);
+  .description {
+    background-color: rgba(255, 255, 255, 0.5);
     padding: 10px 30px 20px 30px;
     margin-bottom: 40px;
 
     .title {
-        text-transform: uppercase;
-        font-family: 'Oswald';
+      text-transform: uppercase;
+      font-family: "Oswald";
+      font-size: 1.4em;
     }
-}
+  }
 }
 
+@media screen and (max-width: 550px) {
+  .time-infobox {
+    font-size: 16px;
+    /* width: 90vw; */
+
+    .time-grid-container {
+      padding: 25px 0px;
+      grid-template-columns: repeat(3, auto);
+    }
+
+    .time-grid-container > div {
+      padding: 0 15px;
+    }
+
+    .time-envelope {
+      min-width: auto;
+      img {
+        max-width: 50px;
+      }
+    }
+
+    .red-circle {
+      p {
+        padding: 3px 6px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .time-infobox {
+    font-size: 14px;
+    /* width: 90vw; */
+  }
+}
