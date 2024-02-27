@@ -1,0 +1,41 @@
+.dashboard {
+    margin: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    button {
+        background-color: rgb(241, 241, 241);
+        color: #222;
+        padding: 1rem;
+        border: none;
+        cursor: pointer;
+        transition: 0.3s;
+        align-self: flex-end;
+
+        &:hover {
+          background-color: var(--secondary-color);
+        }
+        &:active {
+          background-color: var(--secondary-color);
+        }
+      }
+
+  .user-picture {
+    width: 60%;
+    border: 1px lightgrey solid;
+    border-radius: 1000px;
+  }  
+  
+  .upcoming-events {
+    h2 {
+        text-align: center;
+        margin: 30px;
+    }
+  }
+  a {
+    text-decoration: none;
+  }
+
+
+}

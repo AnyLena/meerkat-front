@@ -6,6 +6,8 @@ import Todolist from "../components/Todolist";
 import Infobox from "../components/Infobox.jsx";
 import Location from "../components/Location.jsx";
 import Participantslist from "../components/Participantslist.jsx";
+import { motion } from "framer-motion";
+
 
 const Event = () => {
   const SERVER = import.meta.env.VITE_DB;
@@ -54,8 +56,14 @@ const Event = () => {
 
   return (
     <>
+    <motion.div
+   initial={{ opacity: 0, y: 100 }} 
+   animate={{ opacity: 1, y: 0 }} 
+   transition={{ duration: 0.7 }}
+    >
+
       {Object.keys(eventData).length > 0 ? (
-        <section className="event">
+          <section className="event">
           <div className="header">
             <h1>{eventData.title}</h1>
           </div>
@@ -75,6 +83,7 @@ const Event = () => {
           </section>
         </section>
       ) : null}
+            </motion.div>
     </>
   );
 };

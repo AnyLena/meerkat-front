@@ -24,6 +24,7 @@
     margin-top: -40px;
   }
 
+  /*
   .time-infobox {
     background-color: var(--headingBG-color);
     display: grid;
@@ -87,7 +88,7 @@
   }
   .time-infobox div {
     padding: 0 30px;
-  }
+  } */
 
   .text {
     font-size: 1.2rem;
@@ -141,7 +142,8 @@
       border: none;
     }
   }
-  .profile-img, .profile-img img {
+  .profile-img,
+  .profile-img img {
     height: 30px;
     width: 30px;
     background-color: var(--headingBG-color);
@@ -173,11 +175,11 @@
     }
 
     img {
-        height: 40px;
-        width: 40px;
-        border-radius: 30px;
-        border: 2px solid var(--background-color);
-        margin: 5px;
-      }
+      height: 40px;
+      width: 40px;
+      border-radius: 30px;
+      border: 2px solid var(--background-color);
+      margin: 5px;
+    }
   }
 }
