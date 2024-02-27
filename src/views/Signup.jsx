@@ -1,9 +1,8 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/useAuth";
-import "../styles/login.css";
+import "../styles/signup.css";
 import { motion } from "framer-motion";
-import image from "../assets/decorations/traveler.jpg";
 
 // MUI
 import TextField from "@mui/material/TextField";
@@ -14,9 +13,6 @@ import { ThemeProvider } from "@mui/material/styles";
 import { theme } from "../context/theme";
 
 const Login = () => {
-  const navigate = useNavigate();
-  const { login, user } = useAuth();
-
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [userData, setUserData] = useState({
@@ -26,10 +22,6 @@ const Login = () => {
     picture: "",
   });
   const [message, setMessage] = useState("");
-
-  useEffect(() => {
-    if (user) navigate("/");
-  }, [user]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -79,9 +71,6 @@ const Login = () => {
       >
         <div className="signup-header">
           <h2>Signup</h2>
-        </div>
-        <div className="signup-image">
-          <img src={image} alt="traveler" />
         </div>
         <div className="signup-form">
           <form onSubmit={handleSubmit}>

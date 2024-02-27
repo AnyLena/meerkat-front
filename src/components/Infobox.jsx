@@ -19,7 +19,7 @@ const Infobox = ({ date, title, location }) => {
       "July",
       "August",
       "September",
-      "Oktober",
+      "October",
       "November",
       "December",
     ];
