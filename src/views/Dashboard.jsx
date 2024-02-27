@@ -33,20 +33,30 @@ const Dashboard = () => {
       transition={{ duration: 1.5 }}
     >
       <section className="dashboard">
-        <button onClick={logout}>Logout</button>
+        
         {user.user ? (
           <>
+          <div className="logo">
+          <button onClick={logout}>Logout</button>
             <h1>Hello {user.user.name}</h1>
             <p className="welcome-message">{welcomeMessages[randomMessage]}</p>
             <img
               className="user-picture"
               src={user.user.picture == 1 ? ProfilePicture : user.user.picture}
               alt=""
-            />
+              />
+              </div>
 
             {user.events.length > 0 ? (
-              <section className="upcoming-events">
+               <motion.div
+               initial={{ opacity: 0, y: 100 }}
+               animate={{ opacity: 1, y: 0 }}
+               transition={{ duration: 0.7 }}
+             >
+              <section className="dashboard-events top-div">
                 <h2>Your Upcoming Events</h2>
+                <div className="white-background">
+
                 {user.events.map((event) =>
                   new Date(event.date.start) > today ? (
                     <div key={event._id}>
@@ -56,15 +66,19 @@ const Dashboard = () => {
                           title={event.title}
                           location={event.location}
                           messages={event.messages}
-                        />
+                          picture={event.picture}
+                          host={event.owner}
+                          />
                       </Link>
                     </div>
                   ) : null
-                )}
+                  )}
+                  </div>
               </section>
+              </motion.div>
             ) : null}
             {user.events.length > 0 ? (
-              <section className="upcoming-events">
+              <section className="dashboard-events">
                 <h2>Past Events</h2>
                 {user.events.map((event) =>
                   new Date(event.date.start) < today ? (
@@ -74,11 +88,12 @@ const Dashboard = () => {
                           date={event.date}
                           title={event.title}
                           location={event.location}
-                        />
+                          picture={event.picture}
+                          />
                       </Link>
                     </div>
                   ) : null
-                )}
+                  )}
               </section>
             ) : null}
           </>

@@ -41,19 +41,18 @@ const Event = () => {
 
   useEffect(() => {
     getEvent();
-    console.log(token);
   }, []);
 
-  useEffect(() => {
-    console.log(eventData);
-  }, [eventData]);
+//   useEffect(() => {
+//     console.log(eventData);
+//   }, [eventData]);
 
   useEffect(() => {
     const body = document.querySelector("body");
     body.style.backgroundImage = `url(${backgroundImage})`;
     body.style.backgroundRepeat = "no-repeat";
     body.style.backgroundAttachment = "fixed";
-    body.style.backgroundSize = "1000px auto";
+    body.style.backgroundSize = "800px auto";
     body.style.backgroundPosition = "center top";
 
     return () => {

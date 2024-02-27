@@ -3,6 +3,7 @@
   border-radius: 30px;
   /* font-size: 1.2rem; */
   font-size: 20px;
+  margin-top: 40px;
 
   .time-grid-container {
     padding: 30px 10px;
@@ -66,15 +67,30 @@
       text-align: center;
     }
   }
-  .description {
-    background-color: rgba(255, 255, 255, 0.5);
-    padding: 10px 30px 20px 30px;
-    margin-bottom: 40px;
 
+  .event-image {
+    background-size: 150%;
+    background-position: center;
+    border-radius: 0px 0px 30px 30px;
+  }
+
+  .description {
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 10px 30px 20px 30px;
+    border-radius: 0px 0px 30px 30px;
+    margin-bottom: 0px;
+    
     .title {
       text-transform: uppercase;
       font-family: "Oswald";
       font-size: 1.4em;
+      opacity: 1;
+    }
+
+    .host {
+      font-size: 1.1rem;
+      margin-top: 10px;
+      font-family: "oswald";
     }
   }
 }
@@ -82,11 +98,11 @@
 @media screen and (max-width: 550px) {
   .time-infobox {
     font-size: 16px;
-    /* width: 90vw; */
-
+    
     .time-grid-container {
       padding: 25px 0px;
       grid-template-columns: repeat(3, auto);
+      /* margin: 0 1rem; */
     }
 
     .time-grid-container > div {
