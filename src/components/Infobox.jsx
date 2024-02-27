@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import Envelope from "../assets/envelope.png";
 import "../styles/infobox.css";
 
-const Infobox = ({ date, title, location }) => {
+const Infobox = ({ date, title, location, messages }) => {
   const [start, setStart] = useState({});
   const [end, setEnd] = useState({});
 
@@ -44,6 +44,7 @@ const Infobox = ({ date, title, location }) => {
   useEffect(() => {
     setStart(convertDate(date.start));
     setEnd(convertDate(date.end));
+    console.log(messages)
   }, []);
 
   return (
@@ -63,9 +64,11 @@ const Infobox = ({ date, title, location }) => {
           <div className="time-envelope">
             <img src={Envelope} alt="" />
 
+             
             <div className="red-circle">
               <p>10</p>
             </div>
+          
           </div>
         </div>
         {location && title ? (
