@@ -10,11 +10,16 @@ import Box from "@mui/material/Box";
 import CircularProgress from "@mui/material/CircularProgress";
 import { inputStyle, buttonStyle } from "../styles/MUI";
 
-const createUser = async (userData, setLoading, setMessage, setErrorMessage) => {
+
+const createUser = async (userData, setLoading, setMessage, setErrorMessage, setShowLogin) => {
   const SERVER = import.meta.env.VITE_SERVER;
   try {
     const response = await axios.post(`${SERVER}/users/`, userData);
-    setMessage("User created successfully");
+
+    setMessage("User created successfully.");
+    setTimeout(() => {
+      setShowLogin(true);
+    }, 3000);
   } catch (error) {
     setErrorMessage(error.response.data.message);
     console.log(error.response.data.message);
@@ -46,7 +51,7 @@ const Signup = ({setShowLogin, setMessage, setErrorMessage}) => {
     setLoading(true);
     setMessage("");
     setErrorMessage("");
-    createUser(userData, setLoading, setMessage, setErrorMessage);
+    createUser(userData, setLoading, setMessage, setErrorMessage, setShowLogin);
   };
 
   return (
