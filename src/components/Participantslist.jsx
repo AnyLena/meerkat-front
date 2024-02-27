@@ -8,7 +8,7 @@ const Participantslist = ({ participants }) => {
           <div className="grid-container">
             {participants.slice(0, 4).map((participant, index) => (
            
-           participant.picture ? 
+           participant.picture != 1 ? 
            <img src={participant.picture} alt="" /> :
            <img src={Profile} alt="" />
            

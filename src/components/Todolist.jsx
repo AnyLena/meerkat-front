@@ -1,4 +1,5 @@
 import Profile from "../assets/decorations/traveler.jpg";
+import { Box, Button, TextField } from "@mui/material";
 
 const Todolist = ({ todos }) => {
   return (
@@ -20,6 +21,30 @@ const Todolist = ({ todos }) => {
             <button>edit</button>
           </div>
         ))}
+        <section className="todo-owner">
+          <Box
+            component="form"
+            sx={{
+              "& > :not(style)": { width: "100%" },
+            }}
+            noValidate
+            autoComplete="off"
+          >
+            <TextField
+              id="outlined-basic"
+              label="Add new To-Do"
+              required
+              variant="outlined"
+            />
+          </Box>
+          <Button
+            type="button"
+            className="next-btn"
+            sx={{ width: "60px", margin: "2rem auto" }}
+          >
+            ADD
+          </Button>
+        </section>
       </div>
     </section>
   );
