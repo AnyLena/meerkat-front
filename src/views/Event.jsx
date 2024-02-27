@@ -53,7 +53,7 @@ const Event = () => {
     body.style.backgroundImage = `url(${backgroundImage})`;
     body.style.backgroundRepeat = "no-repeat";
     body.style.backgroundAttachment = "fixed";
-    body.style.backgroundSize = "auto 500px";
+    body.style.backgroundSize = "1000px auto";
     body.style.backgroundPosition = "center top";
 
     return () => {

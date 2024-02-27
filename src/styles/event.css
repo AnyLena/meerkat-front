@@ -2,6 +2,8 @@
   margin: 0;
   height: 100dvh;
   padding-bottom: 250px;
+  max-width: 1000px;
+  margin: auto;
 
   h1 {
     position: relative;
@@ -22,73 +24,8 @@
     border-radius: 35px 35px 0px 0px;
     padding: 20px;
     margin-top: -40px;
+    min-height: 110vh
   }
-
-  /*
-  .time-infobox {
-    background-color: var(--headingBG-color);
-    display: grid;
-    grid-template-columns: 1fr 3fr 1fr;
-    padding: 30px 10px;
-    border-radius: 30px;
-    font-size: 1.2rem;
-
-    .time-date {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-
-      .day {
-        font-size: 3.3rem;
-        font-family: "Oswald";
-        line-height: 1.2;
-      }
-    }
-    .time-center {
-      border-right: 3px solid var(--secondary-color);
-      border-left: 3px solid var(--secondary-color);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      .day {
-        font-size: 2rem;
-        text-transform: uppercase;
-        font-family: "Oswald";
-        line-height: 1.5;
-      }
-    }
-    .time-envelope {
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      min-width: 90px;
-
-      img {
-        max-width: 70px;
-      }
-    }
-
-    .red-circle {
-      position: absolute;
-      top: 0;
-      right: 0;
-
-      p {
-        background-color: var(--alert-color);
-        border-radius: 15px;
-        padding: 3px 8px;
-        color: white;
-        font-family: "Oswald";
-        text-align: center;
-      }
-    }
-  }
-  .time-infobox div {
-    padding: 0 30px;
-  } */
 
   .text {
     font-size: 1.2rem;
