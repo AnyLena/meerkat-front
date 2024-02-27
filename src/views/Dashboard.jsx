@@ -9,6 +9,7 @@ import "../styles/dashboard.css";
 
 const Dashboard = () => {
   const { user, logout } = useAuth();
+  const today = new Date();
 
   const welcomeMessages = [
     "Welcome to your event planning dashboard! Let's bring your vision to life.",
@@ -23,7 +24,7 @@ const Dashboard = () => {
     "Welcome home – this is where the magic happens in creating unforgettable events!",
   ];
 
-  const randomMessage = Math.floor(Math.random() * welcomeMessages.length)
+  const randomMessage = Math.floor(Math.random() * welcomeMessages.length);
 
   return (
     <motion.div
@@ -46,17 +47,38 @@ const Dashboard = () => {
             {user.events.length > 0 ? (
               <section className="upcoming-events">
                 <h2>Your Upcoming Events</h2>
-                {user.events.map((event) => (
-                  <div key={event._id}>
-                    <Link to={`/event/${event._id}`}>
-                      <Infobox
-                        date={event.date}
-                        title={event.title}
-                        location={event.location}
-                      />
-                    </Link>
-                  </div>
-                ))}
+                {user.events.map((event) =>
+                  new Date(event.date.start) > today ? (
+                    <div key={event._id}>
+                      <Link to={`/event/${event._id}`}>
+                        <Infobox
+                          date={event.date}
+                          title={event.title}
+                          location={event.location}
+                          messages={event.messages}
+                        />
+                      </Link>
+                    </div>
+                  ) : null
+                )}
+              </section>
+            ) : null}
+            {user.events.length > 0 ? (
+              <section className="upcoming-events">
+                <h2>Past Events</h2>
+                {user.events.map((event) =>
+                  new Date(event.date.start) < today ? (
+                    <div key={event._id}>
+                      <Link to={`/event/${event._id}`}>
+                        <Infobox
+                          date={event.date}
+                          title={event.title}
+                          location={event.location}
+                        />
+                      </Link>
+                    </div>
+                  ) : null
+                )}
               </section>
             ) : null}
           </>
