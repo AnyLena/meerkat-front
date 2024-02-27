@@ -398,7 +398,6 @@ const Form = () => {
                   onClick={handleSubmit}
                   sx={{
                     animation: "pulse 2s infinite",
-
                     backgroundColor: "var(--headingBG-color)",
                     color: "black",
                     "&:hover": {

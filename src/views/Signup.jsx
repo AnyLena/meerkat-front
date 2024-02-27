@@ -1,35 +1,41 @@
-import { useState, useEffect, useRef } from "react";
-import { useNavigate } from "react-router-dom";
-import { useAuth } from "../context/useAuth";
-import "../styles/login.css";
+import { useState } from "react";
 import { motion } from "framer-motion";
-import image from "../assets/decorations/traveler.jpg";
+import ProfileSelector from "../components/ProfileSelector";
+import axios from "axios";
 
 // MUI
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import CircularProgress from "@mui/material/CircularProgress";
-import { ThemeProvider } from "@mui/material/styles";
-import { theme } from "../context/theme";
+import { inputStyle, buttonStyle } from "../styles/MUI";
 
-const Login = () => {
-  const navigate = useNavigate();
-  const { login, user } = useAuth();
 
+const createUser = async (userData, setLoading, setMessage, setErrorMessage, setShowLogin) => {
+  const SERVER = import.meta.env.VITE_SERVER;
+  try {
+    const response = await axios.post(`${SERVER}/users/`, userData);
+
+    setMessage("User created successfully.");
+    setTimeout(() => {
+      setShowLogin(true);
+    }, 3000);
+  } catch (error) {
+    setErrorMessage(error.response.data.message);
+    console.log(error.response.data.message);
+  } finally {
+    setLoading(false);
+  }
+};
+
+const Signup = ({setShowLogin, setMessage, setErrorMessage}) => {
   const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState(false);
   const [userData, setUserData] = useState({
     name: "",
     email: "",
     password: "",
-    picture: "",
+    picture: "/src/assets/profile_pictures/1.png",
   });
-  const [message, setMessage] = useState("");
-
-  useEffect(() => {
-    if (user) navigate("/");
-  }, [user]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -40,107 +46,75 @@ const Login = () => {
     console.log(userData);
   };
 
-  const timer = useRef();
-
-  const buttonSx = {
-    ...(success && {
-      bgcolor: "var(--quaternary-color)",
-      "&:hover": {
-        bgcolor: "var(--quaternary-color)",
-      },
-    }),
-  };
-
-  useEffect(() => {
-    return () => {
-      clearTimeout(timer.current);
-    };
-  }, []);
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!loading) {
-      setSuccess(false);
-      setLoading(true);
-      timer.current = setTimeout(async () => {
-        setSuccess(true);
-        await login(userData, setMessage);
-        setLoading(false);
-      }, 2000);
-    }
+    setLoading(true);
+    setMessage("");
+    setErrorMessage("");
+    createUser(userData, setLoading, setMessage, setErrorMessage, setShowLogin);
   };
 
   return (
-    <ThemeProvider theme={theme}>
-      <motion.div
-        initial={{ opacity: 0, y: -300 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="signup"
-      >
-        <div className="signup-header">
-          <h2>Signup</h2>
-        </div>
-        <div className="signup-image">
-          <img src={image} alt="traveler" />
-        </div>
-        <div className="signup-form">
-          <form onSubmit={handleSubmit}>
-            <TextField
-              id="outlined-basic"
-              label="Name"
-              variant="outlined"
-              name="name"
-              required
-              onChange={handleChange}
-            />
-            <TextField
-              id="outlined-basic"
-              label="Email"
-              variant="outlined"
-              name="email"
-              required
-              onChange={handleChange}
-            />
-            <TextField
-              onChange={handleChange}
-              required
-              name="password"
-              id="outlined-basic"
-              label="Password"
-              variant="outlined"
-            />
-            {/* select profile picture */}
+    <motion.div
+      initial={{ opacity: 0, y: -300 }}
+      animate={{ opacity: 1, y: 0 }}
+      className="signup"
+    >
+      <div className="signup-header">
+        <h2>Sign Up</h2>
+        <Button onClick={()=>setShowLogin(true)}>Log In?</Button>
+      </div>
 
+      <div className="signup-form">
+        <form onSubmit={handleSubmit}>
+          <TextField
+            id="outlined-basic"
+            label="Name"
+            variant="outlined"
+            name="name"
+            required
+            onChange={handleChange}
+            sx={inputStyle}
+          />
+          <TextField
+            id="outlined-basic"
+            label="Email"
+            variant="outlined"
+            name="email"
+            type="email"
+            required
+            onChange={handleChange}
+            sx={inputStyle}
+          />
+          <TextField
+            onChange={handleChange}
+            required
+            type="password"
+            name="password"
+            id="outlined-basic"
+            label="Password"
+            variant="outlined"
+            sx={inputStyle}
+          />
 
-            <Box sx={{ position: "relative" }}>
-              <Button
-                variant="contained"
-                sx={buttonSx}
-                disabled={loading}
-                type="submit"
-              >
-                Login
-              </Button>
-              {loading && (
-                <CircularProgress
-                  size={24}
-                  sx={{
-                    color: "var(--primary-color)",
-                    position: "absolute",
-                    top: "50%",
-                    left: "50%",
-                    marginTop: "-12px",
-                    marginLeft: "-12px",
-                  }}
-                />
-              )}
-            </Box>
-          </form>
-        </div>
-        {message && <p>{message}</p>}
-      </motion.div>
-    </ThemeProvider>
+          <ProfileSelector setUserData={setUserData} />
+
+          <Box sx={{ position: "relative" }}>
+            <Button
+              variant="contained"
+              disabled={loading}
+              type="submit"
+              sx={buttonStyle}
+              className="signup-btn"
+            >
+              Sign Up
+            </Button>
+          </Box>
+          <div className="loading">{loading && <CircularProgress />}</div>
+        </form>
+      </div>
+    </motion.div>
   );
 };
 
-export default Login;
+export default Signup;
