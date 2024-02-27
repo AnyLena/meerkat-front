@@ -1,0 +1,79 @@
+.time-infobox {
+  background-color: var(--headingBG-color);
+  border-radius: 30px;
+  font-size: 1.2rem;
+  
+  .time-grid-container {
+    padding: 30px 10px;
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+  }
+
+  .time-grid-container > div {
+    padding: 0 30px;
+  }
+  
+  .time-date {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .day {
+      font-size: 3.3rem;
+      font-family: "Oswald";
+      line-height: 1.2;
+    }
+  }
+  .time-center {
+    border-right: 3px solid var(--secondary-color);
+    border-left: 3px solid var(--secondary-color);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    .day {
+      font-size: 2rem;
+      text-transform: uppercase;
+      font-family: "Oswald";
+      line-height: 1.5;
+    }
+  }
+  .time-envelope {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-width: 90px;
+
+    img {
+      max-width: 70px;
+    }
+  }
+
+  .red-circle {
+    position: absolute;
+    top: 0;
+    right: 20%;
+
+    p {
+      background-color: var(--alert-color);
+      border-radius: 15px;
+      padding: 3px 8px;
+      color: white;
+      font-family: "Oswald";
+      text-align: center;
+    }
+  }
+.description {
+    background-color:rgba(255, 255, 255, 0.5);
+    padding: 10px 30px 20px 30px;
+    margin-bottom: 40px;
+
+    .title {
+        text-transform: uppercase;
+        font-family: 'Oswald';
+    }
+}
+}
+
