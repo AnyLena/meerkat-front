@@ -5,6 +5,13 @@ export const theme = createTheme({
     fontFamily: "var(--body-font)",
   },
   components: {
+    MuiSnackbarContent: {
+      styleOverrides: {
+        root: {
+          backgroundColor: "var(--primary-color)",          
+        },
+      },
+    },
     MuiPickersDay: {
       styleOverrides: {
         daySelected: {
@@ -30,19 +37,6 @@ export const theme = createTheme({
         },
       },
     },
-    MuiButton: {
-      styleOverrides: {
-        root: {
-          color: "white",
-          backgroundColor: "var(--primary-color)", 
-          "&:hover": {
-            backgroundColor: "var(--secondary-color)",
-          },
-          "&:disabled": {
-            backgroundColor: "lightgrey", 
-          },
-        },
-      },
-    },
+  
   },
 });

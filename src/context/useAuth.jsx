@@ -10,21 +10,23 @@ export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
   const [token, setToken] = useState(localStorage.getItem("jwt") || null);
   const [user, setUser] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
 
-  const login = async (userData, setMessage) => {
+  const login = async (userData, setLoading, setMessage, setErrorMessage) => {
     try {
       const response = await axios.post(`${SERVER}/users/login`, userData);
       const { token, user } = response.data;
-      localStorage.setItem("jwt", token);
-      setToken(token);
-      setUser(user);
-      navigate("/");
+      setMessage("Login successful");
+      setTimeout(() => {
+        localStorage.setItem("jwt", token);
+        setToken(token);
+        setUser(user);
+        navigate("/");
+      }, 3000);
     } catch (error) {
       console.log(error);
-      setMessage(error.response.data.message);
+      setErrorMessage(error.response.data.message);
     } finally {
-      setIsLoading(false);
+      setLoading(false);
     }
   };
 
@@ -32,7 +34,7 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem("jwt");
     setToken(null);
     setUser(null);
-    navigate("/login");
+    navigate("/");
   };
 
   const fetchUser = async () => {
