@@ -34,12 +34,12 @@ export const theme = createTheme({
       styleOverrides: {
         root: {
           color: "white",
-          backgroundColor: "var(--primary-color)", // Replace with your desired color
+          backgroundColor: "var(--primary-color)", 
           "&:hover": {
-            backgroundColor: "var(--secondary-color)", // Replace with your desired hover color
+            backgroundColor: "var(--secondary-color)",
           },
           "&:disabled": {
-            backgroundColor: "lightgrey", // Replace with your desired disabled color
+            backgroundColor: "lightgrey", 
           },
         },
       },

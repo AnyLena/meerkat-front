@@ -45,6 +45,7 @@ export const AuthProvider = ({ children }) => {
           },
         });
         setUser(response.data);
+        console.log(response.data);
       } catch (e) {
         console.log(e);
         logout();
