@@ -9,8 +9,8 @@ const Participantslist = ({ participants }) => {
             {participants.slice(0, 4).map((participant, index) => (
            
            participant.picture != 1 ? 
-           <img src={participant.picture} alt="" /> :
-           <img src={Profile} alt="" />
+           <img src={participant.picture} alt="" key={index}/> :
+           <img src={Profile} alt="" key={index}/>
            
             ))}
             {participants.length > 4 ? (
