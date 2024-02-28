@@ -21,3 +21,11 @@ export const buttonStyle = {
     backgroundColor: "lightgrey",
   },
 };
+
+export const backButtonStyle = {
+  color: "var(--primary-color)",
+  "&:hover": {
+    backgroundColor: "var(--primary-color)",
+    color: "white",
+  },
+};
