@@ -4,14 +4,39 @@ import { Box, Button } from "@mui/material";
 import { buttonStyle } from "../../styles/MUI";
 import "../../styles/create-event.css";
 
+import bg1 from "../../assets/backgrounds/1.webp";
+import bg2 from "../../assets/backgrounds/2.webp";
+import bg3 from "../../assets/backgrounds/3.webp";
+import bg4 from "../../assets/backgrounds/4.webp";
+import bg5 from "../../assets/backgrounds/5.webp";
+import bg6 from "../../assets/backgrounds/6.webp";
+import bg7 from "../../assets/backgrounds/7.webp";
+import bg8 from "../../assets/backgrounds/8.webp";
+import bg9 from "../../assets/backgrounds/9.webp";
+import bg10 from "../../assets/backgrounds/10.webp";
+import bg11 from "../../assets/backgrounds/11.webp";
+import bg12 from "../../assets/backgrounds/12.webp";
+
 const ImageStep = ({
   formStep,
-  handleNext,
   handleBack,
-  images,
   handleSelectImage,
   handleSubmit,
 }) => {
+  const images = [
+    bg1,
+    bg2,
+    bg3,
+    bg4,
+    bg5,
+    bg6,
+    bg7,
+    bg8,
+    bg9,
+    bg10,
+    bg11,
+    bg12,
+  ];
   return (
     <motion.div
       initial={{ x: -100 * formStep + "%" }}
