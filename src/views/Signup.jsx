@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import ProfileSelector from "../components/ProfileSelector";
-import axios from "axios";
+import { createUser } from "../api/users";
 
 // MUI
 import TextField from "@mui/material/TextField";
@@ -10,25 +10,7 @@ import Box from "@mui/material/Box";
 import CircularProgress from "@mui/material/CircularProgress";
 import { inputStyle, buttonStyle } from "../styles/MUI";
 
-
-const createUser = async (userData, setLoading, setMessage, setErrorMessage, setShowLogin) => {
-  const SERVER = import.meta.env.VITE_SERVER;
-  try {
-    const response = await axios.post(`${SERVER}/users/`, userData);
-
-    setMessage("User created successfully.");
-    setTimeout(() => {
-      setShowLogin(true);
-    }, 3000);
-  } catch (error) {
-    setErrorMessage(error.response.data.message);
-    console.log(error.response.data.message);
-  } finally {
-    setLoading(false);
-  }
-};
-
-const Signup = ({setShowLogin, setMessage, setErrorMessage}) => {
+const Signup = ({ setShowLogin, setMessage, setErrorMessage }) => {
   const [loading, setLoading] = useState(false);
   const [userData, setUserData] = useState({
     name: "",
@@ -62,7 +44,7 @@ const Signup = ({setShowLogin, setMessage, setErrorMessage}) => {
     >
       <div className="signup-header">
         <h2>Sign Up</h2>
-        <Button onClick={()=>setShowLogin(true)}>Log In?</Button>
+        <Button onClick={() => setShowLogin(true)}>Log In?</Button>
       </div>
 
       <div className="signup-form">
