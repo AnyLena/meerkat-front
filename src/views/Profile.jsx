@@ -22,7 +22,9 @@ const Profile = () => {
 
   const handleSearch = (e) => {
     e.preventDefault();
+    if (searchQuery.trim() === "") return;
     setSearchResults([]);
+    setSearchQuery("");
     searchUsers(searchQuery, token, setSearchResults);
   };
 

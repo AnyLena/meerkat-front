@@ -36,6 +36,7 @@ const Form = () => {
   const [personName, setPersonName] = useState([]);
   const navigate = useNavigate();
   const { user } = useAuth();
+  window.scrollTo(0, 0);
 
   const names = user.user.contacts.map((user) => {
     return { id: user._id, name: user.name };
@@ -61,9 +62,9 @@ const Form = () => {
     setFormData({ ...formData, participants: participantsIds });
   };
 
-  const handleSelectImage = (key, value) => {
+  const handleSelectImage = (key, value) => { 
     setFormData({ ...formData, [key]: value });
-    const images = document.querySelectorAll(".image");
+    const images = document.querySelectorAll(".image"); // FIX THIS: use refs
     images.forEach((image) => {
       image.classList.remove("selected");
     });
