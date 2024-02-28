@@ -67,7 +67,7 @@ const Dashboard = () => {
                           location={event.location}
                           messages={event.messages}
                           picture={event.picture}
-                          host={event.owner}
+                          host={event.owner.name}
                           />
                       </Link>
                     </div>

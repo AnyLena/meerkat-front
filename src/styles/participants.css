@@ -1,0 +1,104 @@
+.participant-modal {
+    max-width: 800px;
+    padding: 1rem;
+    
+    h2 {
+        background-color: var(--headingBG-color);
+        padding: 6px 30px;
+        border-radius: 30px;
+        font-size: 1.4rem;
+        margin-top: 10px;
+        
+    }
+
+    img {
+        height: 30px;
+        width: 30px;
+        background-color: var(--headingBG-color);
+        border-radius: 30px;
+        border: 2px solid var(--background-color);
+        margin: 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .participant-container {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 1.2rem;
+        margin: 5px 0;
+        width: 100%
+    }
+    .button-container {
+        display: flex;
+        justify-content: flex-end;
+    }
+    .all-invited {
+      
+        margin: 30px
+    }
+}
+
+
+
+#participants-btn, #invite-btn {
+    background-color: rgb(241, 241, 241);
+    color: #222;
+    padding: 1rem;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+
+    &:hover {
+      background-color: var(--secondary-color);
+    }
+    &:active {
+      background-color: var(--secondary-color);
+    }
+  }
+
+#show-participants-btn {
+    background-color: rgb(241, 241, 241);
+    color: #222;
+    padding: 1rem;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 1.1rem;
+    &:hover {
+        background-color: var(--secondary-color);
+      }
+      &:active {
+        background-color: var(--secondary-color);
+      }
+}
+
+#remove-btn {
+    background-color: rgb(241, 241, 241);
+    color: #222;
+    padding: 0.5rem;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-left: auto;
+
+    &:hover {
+      background-color: var(--alert-color);
+    }
+    &:active {
+      background-color: var(--secondary-color);
+    }
+}
+
+.participants div.MuiInputBase-root {
+    min-width: 100%;
+}
+@media screen and (max-width: 420px) {
+    #show-participants-btn {
+ max-width: 90px;
+ padding: 0.5rem;
+ font-size: 1rem;
+}} 
+
