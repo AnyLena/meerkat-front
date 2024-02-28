@@ -8,7 +8,7 @@ export const theme = createTheme({
     MuiSnackbarContent: {
       styleOverrides: {
         root: {
-          backgroundColor: "var(--primary-color)",          
+          backgroundColor: "var(--primary-color)",
         },
       },
     },
@@ -37,6 +37,5 @@ export const theme = createTheme({
         },
       },
     },
-  
   },
 });

@@ -10,6 +10,7 @@ export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
   const [token, setToken] = useState(localStorage.getItem("jwt") || null);
   const [user, setUser] = useState(null);
+  const [globalLoading, setGlobalLoading] = useState(true);
 
   const login = async (userData, setLoading, setMessage, setErrorMessage) => {
     try {
@@ -51,15 +52,18 @@ export const AuthProvider = ({ children }) => {
       } catch (e) {
         console.log(e);
         logout();
+      } finally {
+        setGlobalLoading(false);
       }
     }
+    setGlobalLoading(false);
   };
 
   useEffect(() => {
     fetchUser();
   }, [token]);
 
-  const value = { user, token, login, logout };
+  const value = { user, token, login, logout, globalLoading };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

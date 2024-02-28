@@ -5,6 +5,9 @@ import image3 from "../assets/profile_pictures/3.png";
 import image4 from "../assets/profile_pictures/4.png";
 import image5 from "../assets/profile_pictures/5.png";
 import image6 from "../assets/profile_pictures/6.png";
+import image7 from "../assets/profile_pictures/7.png";
+import image8 from "../assets/profile_pictures/8.png";
+
 import {
   FaRegArrowAltCircleLeft,
   FaRegArrowAltCircleRight,
@@ -13,7 +16,7 @@ import {
 const ProfileSelector = ({ setUserData }) => {
   const [imageIndex, setImageIndex] = useState(0);
 
-  const images = [image1, image2, image3, image4, image5, image6];
+  const images = [image1, image2, image3, image4, image5, image6, image7, image8];
 
 const handleNext = () => {
     setImageIndex((index) => {
