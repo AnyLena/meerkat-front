@@ -63,7 +63,7 @@ export const AuthProvider = ({ children }) => {
     fetchUser();
   }, [token]);
 
-  const value = { user, token, login, logout, globalLoading };
+  const value = { user, setUser, token, login, logout, globalLoading };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

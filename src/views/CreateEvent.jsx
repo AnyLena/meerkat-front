@@ -1,9 +1,10 @@
 // General
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useAuth } from "../context/useAuth";
 import { createEvent } from "../api/events";
+import { getUserNames } from "../api/users";
 import "../styles/create-event.css";
 
 // MUI
@@ -35,12 +36,13 @@ const Form = () => {
   });
   const [personName, setPersonName] = useState([]);
   const navigate = useNavigate();
-  const { user } = useAuth();
-  window.scrollTo(0, 0);
+  const { user, token } = useAuth();
+  const [names, setNames] = useState([]);
 
-  const names = user.user.contacts.map((user) => {
-    return { id: user._id, name: user.name };
-  });
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    getUserNames(user.contacts, token, setNames);
+  }, []);
 
   const handleNext = () => {
     setFormStep((step) => step + 1);
@@ -58,11 +60,11 @@ const Form = () => {
     } = event;
     setPersonName(typeof value === "string" ? value.split(",") : value);
     let participantsIds = names.filter((name) => value.includes(name.name));
-    participantsIds = participantsIds.map((participant) => participant.id);
+    participantsIds = participantsIds.map((participant) => participant._id);
     setFormData({ ...formData, participants: participantsIds });
   };
 
-  const handleSelectImage = (key, value) => { 
+  const handleSelectImage = (key, value) => {
     setFormData({ ...formData, [key]: value });
     const images = document.querySelectorAll(".image"); // FIX THIS: use refs
     images.forEach((image) => {
@@ -74,6 +76,7 @@ const Form = () => {
 
   const handleChange = (key, value) => {
     setFormData({ ...formData, [key]: value });
+    console.log(formData);
   };
 
   const handleSubmit = () => {

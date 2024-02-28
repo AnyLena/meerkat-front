@@ -42,7 +42,7 @@ const Participants = ({ open, setOpen, participants, ownerId }) => {
   };
 
   const filterContacts = () => {
-    const filteredContacts = user.user.contacts.filter(
+    const filteredContacts = user.contacts.filter(
       (contact) =>
         !participants.some((participant) => participant._id === contact._id)
     );
@@ -96,7 +96,7 @@ const Participants = ({ open, setOpen, participants, ownerId }) => {
                     >
                       <img src={participant.picture} alt="" />
                       <div>{participant.name}</div>
-                      {ownerId === user.user._id ? (
+                      {ownerId === user._id ? (
                         <button onClick={handleUpdate} id="remove-btn">
                           remove
                         </button>
@@ -105,7 +105,7 @@ const Participants = ({ open, setOpen, participants, ownerId }) => {
                   ))}
                 </section>
 
-                {ownerId === user.user._id ? (
+                {ownerId === user._id ? (
                   <>
                     <h2>Invite Meerkats</h2>
                     {contacts.length > 0 ? (

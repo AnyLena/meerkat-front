@@ -31,7 +31,9 @@ const Event = () => {
         },
       });
       setEventData(data.data);
-      data.data.picture == 1 ? setBackgroundImage(BG1) : setBackgroundImage(data.data.picture)
+      data.data.picture == 1
+        ? setBackgroundImage(BG1)
+        : setBackgroundImage(data.data.picture);
     } catch (error) {
       console.log(error);
     } finally {
@@ -40,12 +42,10 @@ const Event = () => {
   };
 
   useEffect(() => {
-    getEvent();
+    getEvent().then(() => {
+      console.log(eventData);
+    });
   }, []);
-
-//   useEffect(() => {
-//     console.log(eventData);
-//   }, [eventData]);
 
   useEffect(() => {
     const body = document.querySelector("body");
@@ -74,12 +74,15 @@ const Event = () => {
             </div>
             <section className="info">
               <Infobox date={eventData.date} />
-              <Participantslist participants={eventData.participants} ownerId={eventData.owner}/>
+              <Participantslist
+                participants={eventData.participants}
+                ownerId={eventData.owner}
+              />
 
               <div className="text">
                 <p>{eventData.description}</p>
               </div>
-              
+
               <Todolist todos={eventData.todos} />
 
               <Location location={eventData.location} />

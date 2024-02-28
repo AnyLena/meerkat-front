@@ -47,12 +47,7 @@ const Infobox = ({ date, title, location, messages, picture, host }) => {
   useEffect(() => {
     setStart(convertDate(date.start));
     setEnd(convertDate(date.end));
-    // console.log(messages)
   }, []);
-
-  // useEffect(() => {
-  //   console.log(timestamp)
-  // }, [timestamp]);
 
   return (
     <>
@@ -85,7 +80,7 @@ const Infobox = ({ date, title, location, messages, picture, host }) => {
             <div className="description">
               <p className="title">{title}</p>
               <p>{location.description}</p>
-              {user.user._id === host ? 
+              {user._id === host ? 
               <p className="host">You are the host!</p>
               :
               <p className="host">Host: {host}</p>

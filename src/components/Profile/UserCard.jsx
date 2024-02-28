@@ -1,12 +1,17 @@
 import React from "react";
-import { addContact } from "../../api/users";
+import { addContact, removeContact } from "../../api/users";
 import { useAuth } from "../../context/useAuth";
 
 const UserCard = ({ contact }) => {
-  const { user, token } = useAuth();
+  const { user, token, setUser } = useAuth();
+  console.log(user.contacts.includes(contact._id), contact._id);
 
   const handleAdd = (contactId) => {
-    addContact(contactId, user.user._id, token);
+    addContact(contactId, user._id, token, setUser);
+  };
+
+  const handleRemove = (contactId) => {
+    removeContact(contactId, user._id, token, setUser);
   };
 
   return (
@@ -20,9 +25,17 @@ const UserCard = ({ contact }) => {
       </div>
 
       <div className="buttons">
-        <button className="btn" onClick={() => handleAdd(contact._id)}>
-          Add to Contacts
-        </button>
+
+        {!user.contacts.includes(contact._id) ? (
+          <button className="btn" onClick={() => handleAdd(contact._id)}>
+            Add to Contacts
+          </button>
+        ) : (
+          <button className="btn" onClick={() => handleRemove(contact._id)}>
+            Remove from Contacts
+          </button>
+        )}
+
       </div>
     </div>
   );
