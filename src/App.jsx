@@ -8,12 +8,16 @@ import Dashboard from "./views/Dashboard";
 import Event from "./views/Event";
 import CreateEvent from "./views/CreateEvent";
 import Profile from "./views/Profile";
+import Loader from './components/Loader';
 
 function App() {
-  const { user } = useAuth();
+  const { token, globalLoading } = useAuth();
+
   return (
     <>
-      {!user ? (
+      {globalLoading ? (
+        <Loader />
+      ) : !token ? (
         <Landing />
       ) : (
         <>

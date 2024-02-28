@@ -40,6 +40,36 @@ import bg10 from "../assets/backgrounds/10.webp";
 import bg11 from "../assets/backgrounds/11.webp";
 import bg12 from "../assets/backgrounds/12.webp";
 
+const createUser = async (formData, user, ) => {
+  const SERVER = import.meta.env.VITE_SERVER;
+  const date = new Date(formData.date);
+  const time = new Date(formData.time);
+  const dateTime = new Date(
+    date.getFullYear(),
+    date.getMonth(),
+    date.getDate(),
+    time.getHours(),
+    time.getMinutes()
+  );
+  const data = {
+    title: formData.title,
+    description: formData.description,
+    date: { start: dateTime, end: "" },
+    location: { description: formData.location, lat: 0, long: 0 },
+    participants: formData.participants,
+    picture: formData.image,
+    owner: user.user._id,
+  };
+
+  try {
+    const response = await axios.post(`${SERVER}/events`, data);
+    console.log(response);
+    navigate("/");
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 const Form = () => {
   const [formStep, setFormStep] = useState(-2);
   const [formData, setFormData] = useState({
@@ -53,8 +83,8 @@ const Form = () => {
   });
   const [personName, setPersonName] = useState([]);
   const navigate = useNavigate();
-  const SERVER = import.meta.env.VITE_SERVER;
   const { user } = useAuth();
+  console.log(user);
 
   const names = [
     { id: "65d8b08c0806ca2aca3837d9", name: "John Doe" },
@@ -114,33 +144,8 @@ const Form = () => {
     setFormData({ ...formData, [key]: value });
   };
 
-  const handleSubmit = async () => {
-    const date = new Date(formData.date);
-    const time = new Date(formData.time);
-    const dateTime = new Date(
-      date.getFullYear(),
-      date.getMonth(),
-      date.getDate(),
-      time.getHours(),
-      time.getMinutes()
-    );
-    const data = {
-      title: formData.title,
-      description: formData.description,
-      date: { start: dateTime, end: "" },
-      location: { description: formData.location, lat: 0, long: 0 },
-      participants: formData.participants,
-      picture: formData.image,
-      owner: user.user._id,
-    };
-
-    try {
-      const response = await axios.post(`${SERVER}/events`, data);
-      console.log(response);
-      navigate("/");
-    } catch (error) {
-      console.error(error);
-    }
+  const handleSubmit = () => {
+    createUser(formData, user);
   };
 
   return (
