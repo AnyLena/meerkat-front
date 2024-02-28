@@ -18,7 +18,7 @@ export const createEvent = async (formData, user) => {
     location: { description: formData.location, lat: 0, long: 0 },
     participants: formData.participants,
     picture: formData.image,
-    owner: user.user._id,
+    owner: user._id,
   };
 
   try {

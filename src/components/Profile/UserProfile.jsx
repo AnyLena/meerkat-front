@@ -10,14 +10,14 @@ const UserProfile = ({ user }) => {
       transition={{ ease: "easeInOut", duration: 0.5 }}
     >
       <div className="profile-image">
-        <img src={user.user.picture} alt="profile" />
+        <img src={user.picture} alt="profile" />
       </div>
 
       <div className="profile-details">
-        <h2>{user.user.name}</h2>
-        <p>{user.user.email}</p>
+        <h2>{user.name}</h2>
+        <p>{user.email}</p>
         <div className="separator"></div>
-        <h3>{user.user.contacts.length}</h3>
+        <h3>{user.contacts.length}</h3>
         <p>Contacts</p>
       </div>
 

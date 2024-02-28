@@ -37,7 +37,7 @@ export const searchUsers = async (searchQuery, token, setSearchResults) => {
   }
 };
 
-export const addContact = async (contactId, userId, token) => {
+export const addContact = async (contactId, userId, token, setUser) => {
   try {
     const response = await axios.put(
       `${SERVER}/users/${userId}/contacts/add`,
@@ -50,7 +50,46 @@ export const addContact = async (contactId, userId, token) => {
       }
     );
     console.log(response.data);
+    setUser(response.data);
   } catch (error) {
     console.log(error);
+  }
+};
+
+export const removeContact = async (contactId, userId, token, setUser) => {
+  try {
+    const response = await axios.put(
+      `${SERVER}/users/${userId}/contacts/remove`,
+      { contact: contactId },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    console.log(response.data);
+    setUser(response.data);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getUserNames = async (contacts, token, setNames) => {
+  try {
+    console.log("contacts in api", contacts);
+    const response = await axios.get(`${SERVER}/users/names`, {
+      params: {
+        arrayOfIds: contacts,
+      },
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    console.log(response.data);
+    setNames(response.data);
+  } catch (error) {
+    console.error(error);
   }
 };

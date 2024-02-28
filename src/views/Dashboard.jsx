@@ -4,12 +4,35 @@ import { motion } from "framer-motion";
 import Infobox from "../components/Infobox";
 import { Link } from "react-router-dom";
 import ProfilePicture from "../assets/decorations/traveler.jpg";
+import axios from 'axios';
 
 import "../styles/dashboard.css";
 
+const fetchUserEvents = async (setUserEvents, token) => {
+  const SERVER = import.meta.env.VITE_SERVER;
+  try {
+    const response = await axios.get(`${SERVER}/events`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    setUserEvents(response.data);
+    console.log(response.data);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 const Dashboard = () => {
-  const { user, logout } = useAuth();
+  const { user, token, logout } = useAuth();
   const today = new Date();
+
+  const [userEvents, setUserEvents] = useState([]);
+
+  useEffect(() => {
+    fetchUserEvents(setUserEvents, token);
+  }, []);
 
   const welcomeMessages = [
     "Welcome to your event planning dashboard! Let's bring your vision to life.",
@@ -34,20 +57,20 @@ const Dashboard = () => {
     >
       <section className="dashboard">
         
-        {user.user ? (
+        {user ? (
           <>
           <div className="logo">
           <button onClick={logout}>Logout</button>
-            <h1>Hello {user.user.name}</h1>
+            <h1>Hello {user.name}</h1>
             <p className="welcome-message">{welcomeMessages[randomMessage]}</p>
             <img
               className="user-picture"
-              src={user.user.picture == 1 ? ProfilePicture : user.user.picture}
+              src={user.picture == 1 ? ProfilePicture : user.picture}
               alt=""
               />
               </div>
 
-            {user.events.length > 0 ? (
+            {userEvents.length > 0 ? (
                <motion.div
                initial={{ opacity: 0, y: 100 }}
                animate={{ opacity: 1, y: 0 }}
@@ -57,7 +80,7 @@ const Dashboard = () => {
                 <h2>Your Upcoming Events</h2>
                 <div className="white-background">
 
-                {user.events.map((event) =>
+                {userEvents.map((event) =>
                   new Date(event.date.start) > today ? (
                     <div key={event._id}>
                       <Link to={`/event/${event._id}`}>
@@ -77,10 +100,10 @@ const Dashboard = () => {
               </section>
               </motion.div>
             ) : null}
-            {user.events.length > 0 ? (
+            {userEvents.length > 0 ? (
               <section className="dashboard-events">
                 <h2>Past Events</h2>
-                {user.events.map((event) =>
+                {userEvents.map((event) =>
                   new Date(event.date.start) < today ? (
                     <div key={event._id}>
                       <Link to={`/event/${event._id}`}>

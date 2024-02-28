@@ -11,6 +11,7 @@ const ParticipantsStep = ({
   handleChipChange,
   names,
 }) => {
+
   return (
     <motion.div
       initial={{ x: -100 * formStep + "%" }}
