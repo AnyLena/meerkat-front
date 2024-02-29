@@ -4,7 +4,6 @@ import { useAuth } from "../../context/useAuth";
 
 const UserCard = ({ contact }) => {
   const { user, token, setUser } = useAuth();
-  console.log(user.contacts.includes(contact._id), contact._id);
 
   const handleAdd = (contactId) => {
     addContact(contactId, user._id, token, setUser);
@@ -28,11 +27,11 @@ const UserCard = ({ contact }) => {
 
         {!user.contacts.includes(contact._id) ? (
           <button className="btn" onClick={() => handleAdd(contact._id)}>
-            Add to Contacts
+            Add
           </button>
         ) : (
-          <button className="btn" onClick={() => handleRemove(contact._id)}>
-            Remove from Contacts
+          <button className="btn red" onClick={() => handleRemove(contact._id)}>
+            Remove
           </button>
         )}
 

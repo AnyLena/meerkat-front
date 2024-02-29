@@ -2,6 +2,9 @@ import React from "react";
 import { motion } from "framer-motion";
 
 const UserProfile = ({ user }) => {
+
+  const { name, email, contacts, picture } = user;
+  
   return (
     <motion.div
       className="profile-content"
@@ -10,15 +13,15 @@ const UserProfile = ({ user }) => {
       transition={{ ease: "easeInOut", duration: 0.5 }}
     >
       <div className="profile-image">
-        <img src={user.picture} alt="profile" />
+        <img src={picture} alt={name} />
       </div>
 
       <div className="profile-details">
-        <h2>{user.name}</h2>
-        <p>{user.email}</p>
+        <h2>{name}</h2>
+        <p>{email}</p>
         <div className="separator"></div>
-        <h3>{user.contacts.length}</h3>
-        <p>Contacts</p>
+        <h3>{contacts.length}</h3>
+        <p>{contacts.length === 1 ? "contact" : "contacts"}</p>
       </div>
 
     </motion.div>

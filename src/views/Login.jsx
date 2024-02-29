@@ -11,8 +11,7 @@ import Box from "@mui/material/Box";
 import CircularProgress from "@mui/material/CircularProgress";
 import { buttonStyle, inputStyle } from "../styles/MUI";
 
-const Login = ({ setShowLogin, setMessage, setErrorMessage }) => {
-  const [loading, setLoading] = useState(false);
+const Login = ({ setShowLogin, setMessage, setErrorMessage, setLoading, loading }) => {
   const { login, user } = useAuth();
   const [userData, setUserData] = useState({
     email: "",

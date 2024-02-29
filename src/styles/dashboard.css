@@ -1,6 +1,8 @@
 .dashboard {
   margin: 1rem;
   max-width: 800px;
+  border-radius: 20px;
+
 
   .logo {
     display: flex;
@@ -38,15 +40,13 @@
   }
 
   .user-picture {
-    width: 200px;
-    height: 200px;
-    border: 1px lightgrey solid;
-    border-radius: 1000px;
-    margin: 20px;
+    width: 250px;
+    height: 250px;
   }
 
   .dashboard-events {
     width: 100%;
+    margin-bottom: 6rem;
     background-color: rgba(255, 255, 255);
     
     &.top-div {

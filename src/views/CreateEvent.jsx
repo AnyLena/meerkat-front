@@ -38,6 +38,7 @@ const Form = () => {
   const navigate = useNavigate();
   const { user, token } = useAuth();
   const [names, setNames] = useState([]);
+  const [isExploding, setIsExploding] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -81,6 +82,11 @@ const Form = () => {
 
   const handleSubmit = () => {
     createEvent(formData, user);
+    setIsExploding(true);
+    setTimeout(() => {
+      setIsExploding(false);
+      navigate("/");
+    }, 3000);
   };
 
   return (
@@ -147,6 +153,7 @@ const Form = () => {
               handleBack={handleBack}
               handleSelectImage={handleSelectImage}
               handleSubmit={handleSubmit}
+              isExploding={isExploding}
             />
 
             {/* extra step. DO NOT DELETE */}
