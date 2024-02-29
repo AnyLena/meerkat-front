@@ -1,23 +1,14 @@
-import {
-  Modal,
-  Box,
-  Typography,
-  MenuItem,
-  Chip,
-  Select,
-  OutlinedInput,
-} from "@mui/material";
+import { Modal, Box, Typography } from "@mui/material";
 import { motion } from "framer-motion";
 import "../styles/participants.css";
 import { useAuth } from "../context/useAuth";
 import { useEffect, useState } from "react";
+import { getUserNames } from "../api/users.js";
+import { addParticipant, removeParticipant } from "../api/events.js";
 
-const Participants = ({ open, setOpen, participants, ownerId }) => {
-  const { user } = useAuth();
-  const [participantsId, setParticipantsId] = useState([]);
-  const [selectedUser, setSelectedUser] = useState({});
-  const [selected, setSelected] = useState([]);
-  const [names, setNames] = useState([]);
+const Participants = ({ open, setOpen, setEventData, eventData }) => {
+  const { user, token } = useAuth();
+  const [contactsFilter, setContactsFilter] = useState({});
   const [contacts, setContacts] = useState({});
 
   const style = {
@@ -30,41 +21,33 @@ const Participants = ({ open, setOpen, participants, ownerId }) => {
     setOpen(false);
   };
 
-  const handleChipChange = (event) => {
-    const {
-      target: { value },
-    } = event;
-    setSelected(typeof value === "string" ? value.split(",") : value);
+  const handleAdd = (e) => {
+    const participantId = e.target.id;
+    addParticipant(participantId, token, eventData._id, setEventData);
   };
 
-  const handleUpdate = () => {
-    //  const response = await axios.pur(`${SERVER}/events/${event._id}`, data);
+  const handleRemove = async (e) => {
+    const participantId = e.target.id;
+    removeParticipant(participantId, token, eventData._id, setEventData);
   };
 
   const filterContacts = () => {
     const filteredContacts = user.contacts.filter(
       (contact) =>
-        !participants.some((participant) => participant._id === contact._id)
+        !eventData.participants.some(
+          (participant) => participant._id === contact
+        )
     );
-    setContacts(filteredContacts);
+    setContactsFilter(filteredContacts);
   };
-
-  const getParticipantsId = () => {
-    const ids = participants.map((participant) => participant._id);
-    setParticipantsId(ids);
-  };
-
-  useEffect(() => {
-    // console.log("selected", selected);
-    // console.log("contacts", contacts);
-    // console.log("participants", participants);
-    console.log("participantsID", participantsId);
-  }, [selected, contacts]);
 
   useEffect(() => {
     filterContacts();
-    getParticipantsId();
-  }, []);
+  }, [eventData]);
+
+  useEffect(() => {
+    getUserNames(contactsFilter, token, setContacts);
+  }, [contactsFilter]);
 
   return (
     <>
@@ -89,15 +72,19 @@ const Participants = ({ open, setOpen, participants, ownerId }) => {
               <Typography id="modal-modal-description" sx={{ mt: 2 }}>
                 <h2>Participants</h2>
                 <section className="participant-modal">
-                  {participants.map((participant) => (
+                  {eventData.participants.map((participant) => (
                     <div
                       className="participant-container"
                       key={participant._id}
                     >
                       <img src={participant.picture} alt="" />
                       <div>{participant.name}</div>
-                      {ownerId === user._id ? (
-                        <button onClick={handleUpdate} id="remove-btn">
+                      {eventData.owner === user._id ? (
+                        <button
+                          onClick={handleRemove}
+                          id={participant._id}
+                          className="remove-btn"
+                        >
                           remove
                         </button>
                       ) : null}
@@ -105,53 +92,31 @@ const Participants = ({ open, setOpen, participants, ownerId }) => {
                   ))}
                 </section>
 
-                {ownerId === user._id ? (
+                {eventData.owner === user._id ? (
                   <>
                     <h2>Invite Meerkats</h2>
-                    {contacts.length > 0 ? (
-                      <section className="participants">
-                        <Select
-                          labelId="demo-multiple-chip-label"
-                          id="invite-multiple-chip"
-                          multiple
-                          value={selected}
-                          onChange={handleChipChange}
-                          input={
-                            <OutlinedInput
-                              id="select-multiple-chip"
-                              label="Participants"
-                            />
-                          }
-                          renderValue={(selected) => (
-                            <Box
-                              sx={{
-                                display: "flex",
-                                flexWrap: "wrap",
-                                gap: 0.5,
-                                width: "100%",
-                              }}
+                    <section className="participant-modal">
+                      {Object.keys(contacts).length > 0
+                        ? contacts.map((participant) => (
+                            <div
+                              className="participant-container"
+                              key={participant._id}
                             >
-                              {selected.map((value) => (
-                                <Chip key={value} label={value} />
-                              ))}
-                            </Box>
-                          )}
-                        >
-                          {contacts.map((contact) => (
-                            <MenuItem key={contact._id} value={contact.name}>
-                              {contact.name}
-                            </MenuItem>
-                          ))}
-                        </Select>
-                        <button id="invite-btn" onClick={handleUpdate}>
-                          Invite
-                        </button>
-                      </section>
-                    ) : (
-                      <p className="all-invited">
-                        You have invited the whole pack!
-                      </p>
-                    )}
+                              <img src={participant.picture} alt="" />
+                              <div>{participant.name}</div>
+                              {eventData.owner === user._id ? (
+                                <button
+                                  onClick={handleAdd}
+                                  id={participant._id}
+                                  className="remove-btn"
+                                >
+                                  add
+                                </button>
+                              ) : null}
+                            </div>
+                          ))
+                        : null}
+                    </section>
                   </>
                 ) : null}
               </Typography>
