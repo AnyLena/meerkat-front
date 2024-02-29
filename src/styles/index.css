@@ -5,6 +5,7 @@
   color: #222;
 }
 
+/* COLORS */
 :root {
   --alert-color: #fe7f2d;
   --headingBG-color: #fcca46;
@@ -16,16 +17,7 @@
   --header-font: "Oswald", sans-serif;
 }
 
-a {
-}
-a:hover {
-}
-
-body {
-  /* padding-bottom: 120px;
-    */
-}
-
+/* HEADINGS */
 h1,
 h2,
 h3 {
@@ -33,7 +25,87 @@ h3 {
   text-transform: uppercase;
 }
 
-button {
+h2.event-heading {
+  background-color: var(--headingBG-color);
+  padding: 6px 30px;
+  border-radius: 30px;
+  font-size: 1.4rem;
 }
-button:hover {
+
+/* DEFAULT FONT FOR MUI */
+
+.MuiBox-root {
+  .MuiFormControl-root * {
+    font-family: "Gafata";
+  }
+}
+
+button.MuiButtonBase-root {
+  font-family: "Gafata";
+}
+
+div.MuiFormControl-root * {
+  font-family: "Gafata"; 
+}
+
+/* STANDARD BUTTONS */
+button {
+  &.btn-grey {
+    background-color: rgb(241, 241, 241);
+    color: #222;
+    padding: 1rem;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+
+    &:hover {
+      background-color: var(--secondary-color);
+    }
+    &:active {
+      background-color: var(--secondary-color);
+    }
+  }
+
+  &.btn-red {
+    background-color: rgb(241, 241, 241);
+    color: #222;
+    padding: 1rem;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+
+    &:hover {
+      background-color: var(--alert-color);
+    }
+    &:active {
+      background-color: var(--alert-color);
+    }
+  }
+
+  &.btn-green {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 1rem;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+
+    &:hover {
+      background-color: var(--secondary-color);
+    }
+    &:active {
+      background-color: var(--secondary-color);
+    }
+  }
+}
+
+img {
+  &.profile-small {
+    background-color: white;
+    height: 40px;
+    width: 40px;
+    border-radius: 30px;
+    border: 2px solid var(--background-color);
+    margin: 5px;
+  }
 }

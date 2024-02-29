@@ -6,6 +6,7 @@ import Todolist from "../components/Todolist";
 import Infobox from "../components/Infobox.jsx";
 import Location from "../components/Location.jsx";
 import Participantslist from "../components/Participantslist.jsx";
+import Loader from "../components/Loader.jsx";
 import { motion } from "framer-motion";
 import { useParams } from "react-router-dom";
 import { useAuth } from "../context/useAuth.jsx";
@@ -65,6 +66,7 @@ const Event = () => {
 
   return (
     <>
+    {loading ? <Loader/> : null}
       <motion.div
         initial={{ opacity: 0, y: 100 }}
         animate={{ opacity: 1, y: 0 }}
@@ -78,7 +80,7 @@ const Event = () => {
               onClick={() => navigate(-1)}
               sx={{
                 borderRadius: "50%",
-                backgroundColor: "rgba(0, 0, 0, 0.1)",
+                backgroundColor: "rgba(255, 255, 255, 0.8)",
                 position: "sticky",
                 top: "1rem",
                 left: "1rem",
