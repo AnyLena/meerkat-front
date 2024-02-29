@@ -1,6 +1,7 @@
 .participant-modal {
     max-width: 800px;
     padding: 1rem;
+    margin: 0 auto;
     
     h2 {
         background-color: var(--headingBG-color);
@@ -75,7 +76,7 @@
       }
 }
 
-#remove-btn {
+.remove-btn {
     background-color: rgb(241, 241, 241);
     color: #222;
     padding: 0.5rem;
@@ -88,8 +89,25 @@
       background-color: var(--alert-color);
     }
     &:active {
-      background-color: var(--secondary-color);
+      background-color: var(--alert-color);
     }
+}
+
+.add-btn {
+  background-color: rgb(241, 241, 241);
+  color: #222;
+  padding: 0.5rem;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+  margin-left: auto;
+
+  &:hover {
+    background-color: var(--primary-color);
+  }
+  &:active {
+    background-color: var(--primary-color);
+  }
 }
 
 .participants div.MuiInputBase-root {

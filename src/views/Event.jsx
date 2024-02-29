@@ -75,8 +75,8 @@ const Event = () => {
             <section className="info">
               <Infobox date={eventData.date} />
               <Participantslist
-                participants={eventData.participants}
-                ownerId={eventData.owner}
+                setEventData={setEventData}
+                eventData={eventData}
               />
 
               <div className="text">

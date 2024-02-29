@@ -28,3 +28,52 @@ export const createEvent = async (formData, user) => {
     console.error(error);
   }
 };
+
+export const addParticipant = async (
+  participantId,
+  token,
+  eventId,
+  setEventData
+) => {
+  const SERVER = import.meta.env.VITE_SERVER;
+  try {
+    const response = await axios.put(
+      `${SERVER}/events/${eventId}/participants/add`,
+      { participant: participantId },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    setEventData(response.data);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const removeParticipant = async (
+  participantId,
+  token,
+  eventId,
+  setEventData
+) => {
+  const SERVER = import.meta.env.VITE_SERVER;
+  try {
+    const response = await axios.put(
+      `${SERVER}/events/${eventId}/participants/remove`,
+      { participant: participantId },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    console.log(response.data);
+    setEventData(response.data);
+  } catch (error) {
+    console.log(error);
+  }
+};
