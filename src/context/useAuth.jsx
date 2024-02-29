@@ -27,7 +27,9 @@ export const AuthProvider = ({ children }) => {
       console.log(error);
       setErrorMessage(error.response.data.message);
     } finally {
-      setLoading(false);
+      setTimeout(() => {
+        setLoading(false);
+      }, 3000);
     }
   };
 

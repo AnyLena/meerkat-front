@@ -8,6 +8,7 @@ const Landing = () => {
   const [showLogin, setShowLogin] = useState(true);
   const [message, setMessage] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   return (
     <>
@@ -16,6 +17,8 @@ const Landing = () => {
           setShowLogin={setShowLogin}
           setMessage={setMessage}
           setErrorMessage={setErrorMessage}
+          setLoading={setLoading}
+          loading={loading}
         />
       ) : (
         <Signup

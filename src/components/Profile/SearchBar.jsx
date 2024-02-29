@@ -1,10 +1,10 @@
-const SearchBar = ({handleSearch, setSearch, search}) => {
+const SearchBar = ({handleSearch, setSearchQuery, searchQuery}) => {
   return (
     <div className="search-bar">
     <form onSubmit={handleSearch}>
       <input
-        onChange={(e) => setSearch(e.target.value)}
-        value={search}
+        onChange={(e) => setSearchQuery(e.target.value)}
+        value={searchQuery}
         type="text"
         placeholder="Search"
       />

@@ -60,7 +60,7 @@ const Profile = () => {
       <div className="search">
         <SearchBar
           handleSearch={handleSearch}
-          setSearch={setSearchQuery}
+          setSearchQuery={setSearchQuery}
           searchQuery={searchQuery}
         />
         <SearchResults searchResults={searchResults} />
