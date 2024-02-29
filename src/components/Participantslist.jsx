@@ -16,6 +16,8 @@ const Participantslist = ({ setEventData, eventData }) => {
         styleOverrides: {
           tooltip: {
             fontSize: "1.25rem", // Increase the font size
+            fontFamily: "Gafata",
+            margin: "1rem"
           },
         },
       },
@@ -37,20 +39,20 @@ const Participantslist = ({ setEventData, eventData }) => {
                   .slice(0, 4)
                   .map((participant, index) =>
                     participant.picture != 1 ? (
-                      <img src={participant.picture} alt="" key={index} />
+                      <img className="profile-small" src={participant.picture} alt="" key={index} />
                     ) : (
-                      <img src={Profile} alt="" key={index} />
+                      <img className="profile-small" src={Profile} alt="" key={index} />
                     )
                   )}
                 {eventData.participants.length > 4 ? (
-                  <div className="profile-img">
+                  <div className="profile-circle">
                     +{eventData.participants.length - 4}{" "}
                   </div>
                 ) : null}
               </div>
             </Tooltip>
           </ThemeProvider>
-          <button id="show-participants-btn" onClick={handleOpen}>
+          <button className="btn-grey" id="show-participants-btn" onClick={handleOpen}>
             see all participants
           </button>
           <Participants

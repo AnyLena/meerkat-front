@@ -1,0 +1,36 @@
+.todo-list {
+    .circle {
+      height: 20px;
+      width: 20px;
+      border-radius: 20px;
+      border: 4px solid var(--primary-color);
+      margin: 5px;
+    }
+
+    .circle:hover {
+      cursor: pointer;
+      border: 4px solid var(--alert-color);
+    }
+
+    .todo-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 5px 10px;
+      border-bottom: 1px solid var(--headingBG-color);
+    }
+    p {
+      width: 60%;
+    }
+  }
+
+  .todo-owner {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 30px;
+    margin: 30px;
+
+    * {
+      font-family: "Gafata";
+    }
+  }

@@ -1,10 +1,10 @@
 import Profile from "../assets/decorations/traveler.jpg";
 import { Box, Button, TextField } from "@mui/material";
-
+import "../styles/todolist.css";
 const Todolist = ({ todos }) => {
   return (
     <section>
-      <h2>TO-DO-List</h2>
+      <h2 className="event-heading">TO-DO-List</h2>
       <div className="todo-list">
         {todos.map((todo, index) => (
           <div className="todo-item" key={index}>
@@ -37,13 +37,7 @@ const Todolist = ({ todos }) => {
               variant="outlined"
             />
           </Box>
-          <Button
-            type="button"
-            className="next-btn"
-            sx={{ width: "60px", margin: "2rem auto" }}
-          >
-            ADD
-          </Button>
+          <button className="btn-green">ADD</button>
         </section>
       </div>
     </section>
