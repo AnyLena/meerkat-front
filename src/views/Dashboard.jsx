@@ -5,6 +5,7 @@ import Infobox from "../components/Infobox";
 import { Link } from "react-router-dom";
 import ProfilePicture from "../assets/decorations/traveler.jpg";
 import axios from 'axios';
+import { Button } from "@mui/material";
 
 import "../styles/dashboard.css";
 
@@ -60,7 +61,7 @@ const Dashboard = () => {
         {user ? (
           <>
           <div className="logo">
-          <button onClick={logout}>Logout</button>
+          <Button onClick={logout}>Logout</Button>
             <h1>Hello {user.name}</h1>
             <p className="welcome-message">{welcomeMessages[randomMessage]}</p>
             <img
@@ -82,7 +83,7 @@ const Dashboard = () => {
 
                 {userEvents.map((event) =>
                   new Date(event.date.start) > today ? (
-                    <div key={event._id}>
+                    <div className="event-card"key={event._id}>
                       <Link to={`/event/${event._id}`}>
                         <Infobox
                           date={event.date}

@@ -10,10 +10,13 @@ import { motion } from "framer-motion";
 import { useParams } from "react-router-dom";
 import { useAuth } from "../context/useAuth.jsx";
 import axios from "axios";
+import { Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import { IoIosArrowBack } from "react-icons/io";
 
 const Event = () => {
   const SERVER = import.meta.env.VITE_SERVER;
-
+  const navigate = useNavigate();
   const { token, user } = useAuth();
   const [loading, setLoading] = useState(false);
   const [eventData, setEventData] = useState({});
@@ -69,6 +72,25 @@ const Event = () => {
       >
         {Object.keys(eventData).length > 0 ? (
           <section className="event">
+
+            <Button
+              className="back-btn"
+              onClick={() => navigate(-1)}
+              sx={{
+                borderRadius: "50%",
+                backgroundColor: "rgba(0, 0, 0, 0.1)",
+                position: "sticky",
+                top: "1rem",
+                left: "1rem",
+                color: "white",
+                width: "40px",
+                height: "40px",
+                minWidth: "0 !important",
+              }}
+            >
+              <IoIosArrowBack style={{ fontSize: "1.25rem"}} />
+            </Button>
+
             <div className="header">
               <h1>{eventData.title}</h1>
             </div>

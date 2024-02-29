@@ -25,14 +25,20 @@
     transform: translate(-50%);
   }
   button {
-    background-color: lightgray;
-    color: white;
+    background-color: rgb(241, 241, 241);
+    color: black;
     border-radius: 0;
     align-self: flex-end;
     margin-left: auto;
     font-size: 0.75rem;
+    font-weight: normal;
+    text-transform: none;
     &:hover {
-      background-color: rgb(192, 192, 192);
+      background-color: rgb(233, 233, 233);
+    }
+    &:active {
+      background-color: rgb(233, 233, 233);
+      transform: scale(0.95);
     }
   }
 }

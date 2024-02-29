@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Box, Button } from "@mui/material";
 import { buttonStyle } from "../../styles/MUI";
 import ConfettiExplosion from "react-confetti-explosion";
+import CircularProgress from "@mui/material/CircularProgress";
 
 import "../../styles/create-event.css";
 
@@ -24,7 +25,7 @@ const ImageStep = ({
   handleBack,
   handleSelectImage,
   handleSubmit,
-  isExploding
+  isExploding,
 }) => {
   const images = [
     bg1,
@@ -93,9 +94,21 @@ const ImageStep = ({
           }}
         >
           Create Event
+          {isExploding && (
+            <CircularProgress
+              size={24}
+              sx={{
+                color: "var(--primary-color)",
+                position: "absolute",
+                top: "50%",
+                left: "50%",
+                marginTop: "-12px",
+                marginLeft: "-12px",
+              }}
+            />
+          )}
         </Button>
         <div className="explosion">{isExploding && <ConfettiExplosion />}</div>
-
       </Box>
     </motion.div>
   );
