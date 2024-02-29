@@ -16,7 +16,6 @@ const TitleStep = ({ formStep, handleNext, formData, handleChange }) => {
       <label className="form-step-label">
         <p>What is it about?</p>
       </label>
-
       <Box
         component="form"
         sx={{
@@ -43,7 +42,6 @@ const TitleStep = ({ formStep, handleNext, formData, handleChange }) => {
           onChange={(e) => handleChange("description", e.target.value)}
         />
       </Box>
-
       <Button
         disabled={!formData.title}
         type="button"
