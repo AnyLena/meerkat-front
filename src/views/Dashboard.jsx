@@ -11,10 +11,9 @@ import "../styles/dashboard.css";
 import ProfilePicture from "../assets/decorations/traveler.jpg";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Button } from "@mui/material";
 
 const Dashboard = () => {
-  const { user, token, logout } = useAuth();
+  const { user, token } = useAuth();
   const [userEvents, setUserEvents] = useState([]);
   const today = new Date();
   const randomMessage = Math.floor(Math.random() * welcomeMessages.length);
@@ -33,8 +32,8 @@ const Dashboard = () => {
         {user ? (
           <>
             <div className="logo">
-              <Button onClick={logout}>Logout</Button>
-              <h1>Hello {user.name}</h1>
+              
+              <h1>Hello, {user.name}!</h1>
               <p className="welcome-message">
                 {welcomeMessages[randomMessage]}
               </p>
