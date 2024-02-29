@@ -1,18 +1,21 @@
 import { useEffect, useState } from "react";
-// import { data } from "../data.js";
-import BG1 from "../assets/backgrounds/1.webp";
-import "../styles/event.css";
+import { useParams } from "react-router-dom";
+import { getEvent } from "../api/events.js";
+import { useAuth } from "../context/useAuth.jsx";
+import { useNavigate } from "react-router-dom";
+
+//COMPONENTS
 import Todolist from "../components/Todolist";
 import Infobox from "../components/Infobox.jsx";
 import Location from "../components/Location.jsx";
 import Participantslist from "../components/Participantslist.jsx";
 import Loader from "../components/Loader.jsx";
+
+//STYLES
+import BG1 from "../assets/backgrounds/1.webp";
+import "../styles/event.css";
 import { motion } from "framer-motion";
-import { useParams } from "react-router-dom";
-import { useAuth } from "../context/useAuth.jsx";
-import axios from "axios";
 import { Button } from "@mui/material";
-import { useNavigate } from "react-router-dom";
 import { IoIosArrowBack } from "react-icons/io";
 
 const Event = () => {
@@ -21,34 +24,11 @@ const Event = () => {
   const { token, user } = useAuth();
   const [loading, setLoading] = useState(false);
   const [eventData, setEventData] = useState({});
-
   const [backgroundImage, setBackgroundImage] = useState();
   const { id } = useParams();
 
-  const getEvent = async () => {
-    try {
-      setLoading(true);
-      const data = await axios.get(`${SERVER}/events/${id}`, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      setEventData(data.data);
-      data.data.picture == 1
-        ? setBackgroundImage(BG1)
-        : setBackgroundImage(data.data.picture);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
   useEffect(() => {
-    getEvent().then(() => {
-      console.log(eventData);
-    });
+    getEvent(id, token, setEventData, setLoading, setBackgroundImage);
   }, []);
 
   useEffect(() => {
@@ -66,7 +46,7 @@ const Event = () => {
 
   return (
     <>
-    {loading ? <Loader/> : null}
+      {loading ? <Loader /> : null}
       <motion.div
         initial={{ opacity: 0, y: 100 }}
         animate={{ opacity: 1, y: 0 }}
@@ -74,7 +54,6 @@ const Event = () => {
       >
         {Object.keys(eventData).length > 0 ? (
           <section className="event">
-
             <Button
               className="back-btn"
               onClick={() => navigate(-1)}
@@ -90,25 +69,23 @@ const Event = () => {
                 minWidth: "0 !important",
               }}
             >
-              <IoIosArrowBack style={{ fontSize: "1.25rem"}} />
+              <IoIosArrowBack style={{ fontSize: "1.25rem" }} />
             </Button>
 
             <div className="header">
               <h1>{eventData.title}</h1>
             </div>
+
             <section className="info">
               <Infobox date={eventData.date} />
               <Participantslist
                 setEventData={setEventData}
                 eventData={eventData}
               />
-
               <div className="text">
                 <p>{eventData.description}</p>
               </div>
-
               <Todolist todos={eventData.todos} />
-
               <Location location={eventData.location} />
             </section>
           </section>
