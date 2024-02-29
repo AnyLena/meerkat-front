@@ -29,6 +29,43 @@ export const createEvent = async (formData, user) => {
   }
 };
 
+export const fetchUserEvents = async (setUserEvents, token) => {
+  const SERVER = import.meta.env.VITE_SERVER;
+  try {
+    const response = await axios.get(`${SERVER}/events`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    setUserEvents(response.data);
+    console.log(response.data);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export   const getEvent = async (eventId, token, setEventData, setLoading, setBackgroundImage) => {
+  const SERVER = import.meta.env.VITE_SERVER;
+  try {
+    setLoading(true);
+    const data = await axios.get(`${SERVER}/events/${eventId}`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    setEventData(data.data);
+    data.data.picture == 1
+      ? setBackgroundImage(BG1)
+      : setBackgroundImage(data.data.picture);
+  } catch (error) {
+    console.log(error);
+  } finally {
+    setLoading(false);
+  }
+};
+
 export const addParticipant = async (
   participantId,
   token,
