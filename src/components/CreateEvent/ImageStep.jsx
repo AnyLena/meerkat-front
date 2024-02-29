@@ -2,6 +2,8 @@ import React from "react";
 import { motion } from "framer-motion";
 import { Box, Button } from "@mui/material";
 import { buttonStyle } from "../../styles/MUI";
+import ConfettiExplosion from "react-confetti-explosion";
+
 import "../../styles/create-event.css";
 
 import bg1 from "../../assets/backgrounds/1.webp";
@@ -22,6 +24,7 @@ const ImageStep = ({
   handleBack,
   handleSelectImage,
   handleSubmit,
+  isExploding
 }) => {
   const images = [
     bg1,
@@ -79,6 +82,7 @@ const ImageStep = ({
           className="create-event-btn"
           type="submit"
           onClick={handleSubmit}
+          disabled={isExploding}
           sx={{
             animation: "pulse 2s infinite",
             backgroundColor: "var(--headingBG-color)",
@@ -90,6 +94,8 @@ const ImageStep = ({
         >
           Create Event
         </Button>
+        <div className="explosion">{isExploding && <ConfettiExplosion />}</div>
+
       </Box>
     </motion.div>
   );

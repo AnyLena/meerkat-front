@@ -105,6 +105,14 @@
   border: 4px solid var(--primary-color);
 }
 
+.create-event-btn {
+  position: relative;
+}
+.explosion {
+  position: absolute;
+  left: 57%;
+}
+
 @keyframes pulse {
   0% {
     background-color: var(--headingBG-color);
