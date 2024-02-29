@@ -3,7 +3,6 @@
   max-width: 800px;
   border-radius: 20px;
 
-
   .logo {
     display: flex;
     align-items: center;
@@ -23,20 +22,22 @@
   }
   button {
     background-color: rgb(241, 241, 241);
-    color: #222;
-    padding: 1rem;
-    border: none;
-    cursor: pointer;
-    transition: 0.3s;
+    color: black;
+    border-radius: 0;
     align-self: flex-end;
+    margin-left: auto;
+    font-size: 0.75rem;
+    font-weight: normal;
+    text-transform: none;
     margin-right: 1rem;
-
     &:hover {
-      background-color: var(--secondary-color);
+      background-color: rgb(233, 233, 233);
     }
     &:active {
-      background-color: var(--secondary-color);
+      background-color: rgb(233, 233, 233);
+      transform: scale(0.95);
     }
+  }
   }
 
   .user-picture {
@@ -48,19 +49,27 @@
     width: 100%;
     margin-bottom: 6rem;
     background-color: rgba(255, 255, 255);
-    
+
     &.top-div {
-        margin-top: 350px;
-        background: rgba(255, 255, 255, 0.7);
+      margin-top: 350px;
+      background: rgba(255, 255, 255, 0.7);
     }
 
     h2 {
       text-align: center;
       padding-top: 40px;
-
     }
     .white-background {
-        background-color: white;
+      background-color: white;
+    }
+    .event-card {
+      transition: all 0.1s ease-in-out;
+      &:hover {
+        cursor: pointer;
+      }
+      &:active {
+        transform: scale(0.98);
+      }
     }
   }
 
@@ -72,7 +81,6 @@
     margin: 0;
   }
 }
-
 
 @media screen and (max-width: 550px) {
   .dashboard .time-infobox {
