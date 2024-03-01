@@ -12,7 +12,6 @@ import Participantslist from "../components/Participantslist.jsx";
 import Loader from "../components/Loader.jsx";
 
 //STYLES
-import BG1 from "../assets/backgrounds/1.webp";
 import "../styles/event.css";
 import { motion } from "framer-motion";
 import { Button } from "@mui/material";
@@ -29,6 +28,7 @@ const Event = () => {
 
   useEffect(() => {
     getEvent(id, token, setEventData, setLoading, setBackgroundImage);
+    scrollTo(0,0);
   }, []);
 
   useEffect(() => {

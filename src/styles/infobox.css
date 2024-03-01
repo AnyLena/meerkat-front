@@ -47,9 +47,12 @@
     justify-content: center;
     align-items: center;
     min-width: 90px;
-
+    transition: all 0.2s ease-in-out;
     img {
       max-width: 70px;
+    }
+    &:active {
+      transform: scale(0.95);
     }
   }
 
@@ -79,7 +82,7 @@
     padding: 10px 30px 20px 30px;
     border-radius: 0px 0px 30px 30px;
     margin-bottom: 0px;
-    
+
     .title {
       text-transform: uppercase;
       font-family: "Oswald";
@@ -98,7 +101,7 @@
 @media screen and (max-width: 550px) {
   .time-infobox {
     font-size: 16px;
-    
+
     .time-grid-container {
       padding: 25px 0px;
       grid-template-columns: repeat(3, auto);
