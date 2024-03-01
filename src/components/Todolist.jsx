@@ -16,7 +16,7 @@ import "../styles/todolist.css";
 import axios from "axios";
 import { useAuth } from "../context/useAuth";
 import Zoom from "@mui/material/Zoom";
-import { createTheme } from "@mui/material/styles";
+import { toggleTodo } from "../api/todos.js";
 
 const Todolist = ({ eventData, setEventData }) => {
   const { token, user } = useAuth();
@@ -24,13 +24,8 @@ const Todolist = ({ eventData, setEventData }) => {
     assignee: user._id,
     title: "",
   });
-  const handleEdit = () => {
-    console.log("edit");
-  };
-
-  const [participantList, setParticipantList] = useState(
-    eventData.participants
-  );
+  const [participantList, setParticipantList] = useState(eventData.participants);
+  const [todoList, setTodoList] = useState(eventData.todos);
 
   const handleAdd = async () => {
     const SERVER = import.meta.env.VITE_SERVER;
@@ -57,27 +52,18 @@ const Todolist = ({ eventData, setEventData }) => {
     }
   };
 
-  const [todoId, setTodoId] = useState("");
+  const handleToggle = (event) => {
+    const todoId = !event.target.id
+      ? !event.target.parentNode.id
+        ? event.target.parentNode.parentNode.id
+        : event.target.parentNode.id
+      : event.target.id;
+    toggleTodo(eventData._id, todoId, token, formData, setEventData);
+  };
 
-  const toggleTodo = async (event) => {
-    const SERVER = import.meta.env.VITE_SERVER;
-    const todoId = !event.target.id ? event.target.parentNode.id : event.target.id;
-    try {
-      const response = await axios.put(
-        `${SERVER}/events/${eventData._id}/todos/${todoId}/toggle`,
-        formData,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      setEventData(response.data);
-    } catch (error) {
-      console.error(error);
-    }
-    };
+  const handleEdit = () => {
+    console.log("edit");
+  };
 
   const handleChange = (event) => {
     const data = { assignee: event.target.value };
@@ -89,32 +75,41 @@ const Todolist = ({ eventData, setEventData }) => {
     setFormData((prev) => ({ ...prev, ...data }));
   };
 
+  const getAssigned = (todo, value) => {
+    if (user._id === todo.assignee) {
+      return user[value];
+    } else if (
+      participantList.find(
+        (participant) => participant._id === todo.assignee
+      )?.[value]
+    ) {
+      return participantList.find(
+        (participant) => participant._id === todo.assignee
+      )?.[value];
+    } else {
+      return "Assign Task";
+    }
+  };
+
   useEffect(() => {
-    console.log(eventData);
+    setParticipantList(eventData.participants);
+    setTodoList(eventData.todos);
   }, [eventData]);
 
   return (
-    <section>
-      <h2 className="event-heading">TO-DO-List</h2>
-      <div className="todo-list">
-        {eventData.todos.map((todo, index) => (
+    <>
+      {user._id === eventData.owner || eventData.todos.length > 0 ? (
+        <h2 className="event-heading">TO-DO-List</h2>
+      ) : null}
+      <section className="todo-list">
+        {todoList.map((todo, index) => (
           <div className="todo-item" key={index}>
-            <Button onClick={toggleTodo} id={todo._id} className="btn-check">
+            <Button onClick={handleToggle} id={todo._id} className="btn-check">
               {todo.done ? <FaRegCircleCheck /> : <FaRegCircle />}
             </Button>
             <p>{todo.title}</p>
             <Tooltip
-              title={
-                user._id === todo.assignee
-                  ? "You"
-                  : participantList.find(
-                      (participant) => participant._id === todo.assignee
-                    )?.name
-                  ? participantList.find(
-                      (participant) => participant._id === todo.assignee
-                    )?.name
-                  : ""
-              }
+              title={getAssigned(todo, "name")}
               TransitionComponent={Zoom}
               arrow={false}
               placement="top"
@@ -124,7 +119,7 @@ const Todolist = ({ eventData, setEventData }) => {
                     {
                       name: "offset",
                       options: {
-                        offset: [0, -50], // Adjust the position of the Tooltip
+                        offset: [0, -50],
                       },
                     },
                   ],
@@ -134,17 +129,7 @@ const Todolist = ({ eventData, setEventData }) => {
               <div className="center-item">
                 <img
                   className="profile-small"
-                  src={
-                    user._id === todo.assignee
-                      ? user.picture
-                      : participantList.find(
-                          (participant) => participant._id === todo.assignee
-                        )?.picture
-                      ? participantList.find(
-                          (participant) => participant._id === todo.assignee
-                        )?.picture
-                      : Profile
-                  }
+                  src={getAssigned(todo, "picture")}
                   alt=""
                 />
               </div>
@@ -157,7 +142,9 @@ const Todolist = ({ eventData, setEventData }) => {
             </div>
           </div>
         ))}
+      </section>
 
+      {user._id === eventData.owner ? (
         <section className="todo-owner">
           <Box
             component="form"
@@ -184,6 +171,14 @@ const Todolist = ({ eventData, setEventData }) => {
                 label="Assign"
                 onChange={handleChange}
               >
+                <MenuItem key={user._id} value={user._id}>
+                  <img
+                    className="profile-small assign-img"
+                    src={user.picture}
+                    alt=""
+                  />
+                  {user.name}
+                </MenuItem>
                 {participantList.map((participant) => (
                   <MenuItem key={participant._id} value={participant._id}>
                     <img
@@ -202,8 +197,8 @@ const Todolist = ({ eventData, setEventData }) => {
             </Button>
           </Box>
         </section>
-      </div>
-    </section>
+      ) : null}
+    </>
   );
 };
 
