@@ -18,9 +18,8 @@ import { Button } from "@mui/material";
 import { IoIosArrowBack } from "react-icons/io";
 
 const Event = () => {
-  const SERVER = import.meta.env.VITE_SERVER;
   const navigate = useNavigate();
-  const { token, user } = useAuth();
+  const { token } = useAuth();
   const [loading, setLoading] = useState(false);
   const [eventData, setEventData] = useState({});
   const [backgroundImage, setBackgroundImage] = useState();

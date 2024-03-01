@@ -21,8 +21,6 @@ const Messages = ({ open, setOpen }) => {
     },
   });
 
-  console.log("user", user._id, "event", id);
-
   const sendMessageData = (e) => {
     e.preventDefault();
     sendMessage(id, message, token, setMessages);

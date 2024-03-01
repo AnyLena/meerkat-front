@@ -91,7 +91,7 @@ const Participants = ({ open, setOpen, setEventData, eventData }) => {
                     >
                       <img
                         className="profile-small"
-                        src={participant.picture}
+                        src={participant.picture.url}
                         alt=""
                       />
                       <div>{participant.name}</div>
@@ -120,7 +120,7 @@ const Participants = ({ open, setOpen, setEventData, eventData }) => {
                           >
                             <img
                               className="profile-small"
-                              src={participant.picture}
+                              src={participant.picture.url}
                               alt=""
                             />
                             <div>{participant.name}</div>

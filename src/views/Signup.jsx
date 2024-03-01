@@ -16,7 +16,7 @@ const Signup = ({ setShowLogin, setMessage, setErrorMessage }) => {
     name: "",
     email: "",
     password: "",
-    picture: "/src/assets/profile_pictures/1.png",
+    picture: "65e237b101b8715758b7236f",
   });
 
   const handleChange = (e) => {

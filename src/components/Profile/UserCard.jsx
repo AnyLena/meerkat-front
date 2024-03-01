@@ -16,7 +16,7 @@ const UserCard = ({ contact }) => {
   return (
     <div className="user-card">
       <div className="user-image">
-        <img src={contact.picture} alt="profile" />
+        <img src={contact.picture?.url} alt="profile" />
       </div>
       <div className="user-details">
         <h2>{contact.name}</h2>

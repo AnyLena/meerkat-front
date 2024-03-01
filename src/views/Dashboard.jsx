@@ -32,16 +32,13 @@ const Dashboard = () => {
         {user ? (
           <>
             <div className="logo">
-              
               <h1>Hello, {user.name}!</h1>
               <p className="welcome-message">
                 {welcomeMessages[randomMessage]}
               </p>
-              <img
-                className="user-picture"
-                src={user.picture == 1 ? ProfilePicture : user.picture}
-                alt=""
-              />
+              {user.picture ? (
+                <img className="user-picture" src={user.picture.url} alt="" />
+              ) : null}
             </div>
 
             {userEvents.length > 0 ? (

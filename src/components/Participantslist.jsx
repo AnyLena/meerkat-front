@@ -39,7 +39,7 @@ const Participantslist = ({ setEventData, eventData }) => {
                   .slice(0, 4)
                   .map((participant, index) =>
                     participant.picture != 1 ? (
-                      <img className="profile-small" src={participant.picture} alt="" key={index} />
+                      <img className="profile-small" src={participant.picture.url} alt="" key={index} />
                     ) : (
                       <img className="profile-small" src={Profile} alt="" key={index} />
                     )

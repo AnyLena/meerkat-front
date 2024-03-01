@@ -7,7 +7,7 @@ import MailboxIcon from "./MailboxIcon";
 //STYLES
 import "../styles/infobox.css";
 
-const Infobox = ({ date, title, location, messages, picture, host, eventId }) => {
+const Infobox = ({ date, title, location, picture, host, eventId }) => {
   const [start, setStart] = useState({});
   const [end, setEnd] = useState({});
   const [open, setOpen] = useState(false);
