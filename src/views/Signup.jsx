@@ -44,7 +44,6 @@ const Signup = ({ setShowLogin, setMessage, setErrorMessage }) => {
     >
       <div className="signup-header">
         <h2>Sign Up</h2>
-        <Button onClick={() => setShowLogin(true)}>Log In?</Button>
       </div>
 
       <div className="signup-form">
@@ -95,6 +94,20 @@ const Signup = ({ setShowLogin, setMessage, setErrorMessage }) => {
           <div className="loading">{loading && <CircularProgress />}</div>
         </form>
       </div>
+      <Button
+        onClick={() => setShowLogin(true)}
+        sx={{
+          color: "var(--secondary-color)",
+          fontSize: "1rem",
+          textTransform: "none",
+          marginTop: "1rem",
+          ":hover": {
+            backgroundColor: "rgba(0, 0, 0, 0.1)",
+          },
+        }}
+      >
+        Do you have an account?
+      </Button>
     </motion.div>
   );
 };

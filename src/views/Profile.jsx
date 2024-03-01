@@ -17,7 +17,7 @@ const Profile = () => {
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
-  const { user, token } = useAuth();
+  const { user, token, logout } = useAuth();
   console.log(user);
 
   const handleSearch = (e) => {
@@ -53,6 +53,17 @@ const Profile = () => {
         <div className="title-container">
           <h2>Profile</h2>
         </div>
+        <Button
+          onClick={logout}
+          sx={{
+            backgroundColor: "rgba(0, 0, 0, 0.1)",
+            color: "grey",
+            borderRadius: 0,
+            textTransform: "none",
+          }}
+        >
+          Logout
+        </Button>
       </motion.div>
 
       <UserProfile user={user} />

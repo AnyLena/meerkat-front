@@ -11,7 +11,13 @@ import Box from "@mui/material/Box";
 import CircularProgress from "@mui/material/CircularProgress";
 import { buttonStyle, inputStyle } from "../styles/MUI";
 
-const Login = ({ setShowLogin, setMessage, setErrorMessage, setLoading, loading }) => {
+const Login = ({
+  setShowLogin,
+  setMessage,
+  setErrorMessage,
+  setLoading,
+  loading,
+}) => {
   const { login, user } = useAuth();
   const [userData, setUserData] = useState({
     email: "",
@@ -48,13 +54,12 @@ const Login = ({ setShowLogin, setMessage, setErrorMessage, setLoading, loading 
     >
       <div className="login-header">
         <h2>Login</h2>
-        <Button onClick={() => setShowLogin(false)}>Sign Up ?</Button>
       </div>
 
       <div className="login-image">
         <img src={image} alt="traveler" />
       </div>
-      
+
       <div className="login-form">
         <form onSubmit={handleSubmit}>
           <TextField
@@ -101,6 +106,20 @@ const Login = ({ setShowLogin, setMessage, setErrorMessage, setLoading, loading 
           </Box>
         </form>
       </div>
+      <Button
+        onClick={() => setShowLogin(false)}
+        sx={{
+          color: "var(--secondary-color)",
+          fontSize: "1rem",
+          marginTop: "1rem",
+          textTransform: "none",
+          ":hover": {
+            backgroundColor: "rgba(0, 0, 0, 0.1)",
+          },
+        }}
+      >
+        Create a new account{" "}
+      </Button>
     </motion.div>
   );
 };

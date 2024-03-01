@@ -47,6 +47,29 @@ const Event = () => {
   return (
     <>
       {loading ? <Loader /> : null}
+      <motion.div 
+        initial={{ opacity: 0, y: -100 }}
+        animate={{ opacity: 1, y: "1rem" }}
+        transition={{ duration: 0.7 }}
+      >
+      <Button
+        className="back-btn"
+        onClick={() => navigate(-1)}
+        sx={{
+          borderRadius: "50%",
+          backgroundColor: "rgba(255, 255, 255, 0.8)",
+          position: "sticky",
+          top: "1rem",
+          left: "1rem",
+          color: "white",
+          width: "40px",
+          height: "40px",
+          minWidth: "0 !important",
+        }}
+      >
+        <IoIosArrowBack style={{ fontSize: "1.25rem" }} />
+      </Button>
+      </motion.div>
       <motion.div
         initial={{ opacity: 0, y: 100 }}
         animate={{ opacity: 1, y: 0 }}
@@ -54,24 +77,6 @@ const Event = () => {
       >
         {Object.keys(eventData).length > 0 ? (
           <section className="event">
-            <Button
-              className="back-btn"
-              onClick={() => navigate(-1)}
-              sx={{
-                borderRadius: "50%",
-                backgroundColor: "rgba(255, 255, 255, 0.8)",
-                position: "sticky",
-                top: "1rem",
-                left: "1rem",
-                color: "white",
-                width: "40px",
-                height: "40px",
-                minWidth: "0 !important",
-              }}
-            >
-              <IoIosArrowBack style={{ fontSize: "1.25rem" }} />
-            </Button>
-
             <div className="header">
               <h1>{eventData.title}</h1>
             </div>
