@@ -90,7 +90,7 @@ const Event = () => {
               <div className="text">
                 <p>{eventData.description}</p>
               </div>
-              <Todolist todos={eventData.todos} />
+              <Todolist eventData={eventData} setEventData={setEventData}/>
               <Location location={eventData.location} />
             </section>
           </section>
