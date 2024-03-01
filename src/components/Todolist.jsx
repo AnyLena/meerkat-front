@@ -19,7 +19,6 @@ import Zoom from "@mui/material/Zoom";
 import { createTheme } from "@mui/material/styles";
 
 const Todolist = ({ eventData, setEventData }) => {
-
   const { token, user } = useAuth();
   const [formData, setFormData] = useState({
     assignee: user._id,
@@ -29,7 +28,9 @@ const Todolist = ({ eventData, setEventData }) => {
     console.log("edit");
   };
 
-  const [participantList, setParticipantList] = useState(eventData.participants)
+  const [participantList, setParticipantList] = useState(
+    eventData.participants
+  );
 
   const handleAdd = async () => {
     const SERVER = import.meta.env.VITE_SERVER;
@@ -56,6 +57,28 @@ const Todolist = ({ eventData, setEventData }) => {
     }
   };
 
+  const [todoId, setTodoId] = useState("");
+
+  const toggleTodo = async (event) => {
+    const SERVER = import.meta.env.VITE_SERVER;
+    const todoId = !event.target.id ? event.target.parentNode.id : event.target.id;
+    try {
+      const response = await axios.put(
+        `${SERVER}/events/${eventData._id}/todos/${todoId}/toggle`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setEventData(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+    };
+
   const handleChange = (event) => {
     const data = { assignee: event.target.value };
     setFormData((prev) => ({ ...prev, ...data }));
@@ -76,7 +99,7 @@ const Todolist = ({ eventData, setEventData }) => {
       <div className="todo-list">
         {eventData.todos.map((todo, index) => (
           <div className="todo-item" key={index}>
-            <Button className="btn-check">
+            <Button onClick={toggleTodo} id={todo._id} className="btn-check">
               {todo.done ? <FaRegCircleCheck /> : <FaRegCircle />}
             </Button>
             <p>{todo.title}</p>
@@ -84,10 +107,10 @@ const Todolist = ({ eventData, setEventData }) => {
               title={
                 user._id === todo.assignee
                   ? "You"
-                  : eventData.participants.find(
+                  : participantList.find(
                       (participant) => participant._id === todo.assignee
                     )?.name
-                  ? eventData.participants.find(
+                  ? participantList.find(
                       (participant) => participant._id === todo.assignee
                     )?.name
                   : ""
@@ -114,10 +137,10 @@ const Todolist = ({ eventData, setEventData }) => {
                   src={
                     user._id === todo.assignee
                       ? user.picture
-                      : eventData.participants.find(
+                      : participantList.find(
                           (participant) => participant._id === todo.assignee
                         )?.picture
-                      ? eventData.participants.find(
+                      ? participantList.find(
                           (participant) => participant._id === todo.assignee
                         )?.picture
                       : Profile
