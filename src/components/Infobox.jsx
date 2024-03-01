@@ -2,12 +2,12 @@ import { useState, useEffect } from "react";
 import { useAuth } from "../context/useAuth";
 import { convertDate } from "../utils/convertDate.js";
 import Messages from "./Messages/Messages";
+import MailboxIcon from "./MailboxIcon";
 
 //STYLES
-import Envelope from "../assets/envelope.png";
 import "../styles/infobox.css";
 
-const Infobox = ({ date, title, location, messages, picture, host }) => {
+const Infobox = ({ date, title, location, messages, picture, host, eventId }) => {
   const [start, setStart] = useState({});
   const [end, setEnd] = useState({});
   const [open, setOpen] = useState(false);
@@ -34,19 +34,7 @@ const Infobox = ({ date, title, location, messages, picture, host }) => {
               {date.end ? ` – ${end.hours}:${end.minutes}` : null}
             </p>
           </div>
-
-          <div
-            style={{ cursor: "pointer"  }}
-            onClick={() => {
-              setOpen(true);
-            }}
-            className="time-envelope"
-          >
-            <img src={Envelope} alt="" />
-            <div className="red-circle">
-              <p>10</p>
-            </div>
-          </div>
+          <MailboxIcon eventId={eventId} setOpen={setOpen}/>
         </div>
         {location && title ? (
           <div
