@@ -9,7 +9,6 @@ export const fetchMessages = async (eventId, token, setMessages) => {
         Authorization: `Bearer ${token}`,
       },
     });
-    console.log(response.data);
     setMessages(response.data);
   } catch (error) {
     console.error(error);
@@ -28,8 +27,43 @@ export const sendMessage = async (eventId, message, token, setMessages) => {
         },
       }
     );
-    console.log(response.data);
     setMessages((prevMessages) => [...prevMessages, response.data]);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const getUnreadMessagesNumber = async (
+  setUnreadMessages,
+  token,
+  eventId
+) => {
+  try {
+    const response = await axios.get(`${SERVER}/messages/${eventId}/unread`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    setUnreadMessages(response.data.unreadMessages);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const markMessagesAsRead = async (setUnreadMessages, eventId, token) => {
+  try {
+    await axios.put(
+      `${SERVER}/messages/${eventId}/read`,
+      {},
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    setUnreadMessages(0);
   } catch (error) {
     console.error(error);
   }

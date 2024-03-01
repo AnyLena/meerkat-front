@@ -1,5 +1,4 @@
 import { LuSendHorizonal } from "react-icons/lu";
-import { useEffect, useRef } from "react";
 
 const MessageInput = ({ setMessage, sendMessageData, message }) => {
   const handleChange = (e) => {
