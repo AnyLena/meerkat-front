@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useAuth } from "../context/useAuth";
 import { convertDate } from "../utils/convertDate.js";
+import Messages from "./Messages/Messages";
 
 //STYLES
 import Envelope from "../assets/envelope.png";
@@ -9,8 +10,9 @@ import "../styles/infobox.css";
 const Infobox = ({ date, title, location, messages, picture, host }) => {
   const [start, setStart] = useState({});
   const [end, setEnd] = useState({});
+  const [open, setOpen] = useState(false);
 
-  const {user} = useAuth()
+  const { user } = useAuth();
 
   useEffect(() => {
     setStart(convertDate(date.start));
@@ -32,9 +34,15 @@ const Infobox = ({ date, title, location, messages, picture, host }) => {
               {date.end ? ` – ${end.hours}:${end.minutes}` : null}
             </p>
           </div>
-          <div className="time-envelope">
-            <img src={Envelope} alt="" />
 
+          <div
+            style={{ cursor: "pointer"  }}
+            onClick={() => {
+              setOpen(true);
+            }}
+            className="time-envelope"
+          >
+            <img src={Envelope} alt="" />
             <div className="red-circle">
               <p>10</p>
             </div>
@@ -48,15 +56,15 @@ const Infobox = ({ date, title, location, messages, picture, host }) => {
             <div className="description">
               <p className="title">{title}</p>
               <p>{location.description}</p>
-              {user._id === host ? 
-              <p className="host">You are the host!</p>
-              :
-              <p className="host">Host: {host}</p>
-              }
-
+              {user._id === host ? (
+                <p className="host">You are the host!</p>
+              ) : (
+                <p className="host">Host: {host}</p>
+              )}
             </div>
           </div>
         ) : null}
+        <Messages open={open} setOpen={setOpen} />
       </div>
     </>
   );
