@@ -67,11 +67,12 @@ const Event = () => {
         >
           <IoIosArrowBack style={{ fontSize: "1.25rem" }} />
         </Button>
+
         {Object.keys(eventData).length > 0 && (
           <div className="owner">
             <img src={eventData.owner.picture.url} alt="" />
             <p>
-              {!eventData.owner.name === user.name ? (
+              {eventData.owner.name !== user.name ? (
                 <>
                   <span>{eventData.owner.name}</span> is the host
                 </>
@@ -83,6 +84,7 @@ const Event = () => {
             </p>
           </div>
         )}
+
       </motion.div>
       <motion.div
         initial={{ opacity: 0, y: 100 }}
