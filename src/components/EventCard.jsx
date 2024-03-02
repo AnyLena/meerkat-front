@@ -1,15 +1,16 @@
 import { useState, useEffect } from "react";
+import { useAuth } from "../context/useAuth";
 import { convertDate } from "../utils/convertDate.js";
-import Messages from "./Messages/Messages";
 import MailboxIcon from "./MailboxIcon";
 
 //STYLES
 import "../styles/infobox.css";
 
-const Infobox = ({ date, eventId }) => {
+const EventCard = ({ date, title, location, picture, host, eventId }) => {
   const [start, setStart] = useState({});
   const [end, setEnd] = useState({});
-  const [open, setOpen] = useState(false);
+
+  const { user } = useAuth();
 
   useEffect(() => {
     setStart(convertDate(date.start));
@@ -31,12 +32,27 @@ const Infobox = ({ date, eventId }) => {
               {date.end ? ` – ${end.hours}:${end.minutes}` : null}
             </p>
           </div>
-          <MailboxIcon eventId={eventId} setOpen={setOpen} />
+          <MailboxIcon eventId={eventId} />
         </div>
-        <Messages open={open} setOpen={setOpen} />
+        {location && title ? (
+          <div
+            className="event-image"
+            style={{ backgroundImage: `url(${picture})` }}
+          >
+            <div className="description">
+              <p className="title">{title}</p>
+              <p>{location.description}</p>
+              {user.name === host ? (
+                <p className="host">You are the host!</p>
+              ) : (
+                <p className="host">Host: {host}</p>
+              )}
+            </div>
+          </div>
+        ) : null}
       </div>
     </>
   );
 };
 
-export default Infobox;
+export default EventCard;

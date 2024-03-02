@@ -39,6 +39,7 @@ const Form = () => {
   const { user, token } = useAuth();
   const [names, setNames] = useState([]);
   const [isExploding, setIsExploding] = useState(false);
+  const [selectedImage, setSelectedImage] = useState("");
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -67,12 +68,7 @@ const Form = () => {
 
   const handleSelectImage = (key, value) => {
     setFormData({ ...formData, [key]: value });
-    const images = document.querySelectorAll(".image"); // FIX THIS: use refs
-    images.forEach((image) => {
-      image.classList.remove("selected");
-    });
-    const selectedImage = document.querySelector(`[style*="${value}"]`);
-    selectedImage.classList.add("selected");
+    setSelectedImage(value);
   };
 
   const handleChange = (key, value) => {
@@ -154,6 +150,7 @@ const Form = () => {
               handleSelectImage={handleSelectImage}
               handleSubmit={handleSubmit}
               isExploding={isExploding}
+              selectedImage={selectedImage}
             />
 
             {/* extra step. DO NOT DELETE */}

@@ -13,7 +13,7 @@ const UserProfile = ({ user }) => {
       transition={{ ease: "easeInOut", duration: 0.5 }}
     >
       <div className="profile-image">
-        <img src={picture} alt={name} />
+        <img src={picture.url} alt={name} />
       </div>
 
       <div className="profile-details">

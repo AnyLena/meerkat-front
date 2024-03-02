@@ -4,11 +4,10 @@ import { fetchUserEvents } from "../api/events.js";
 import { welcomeMessages } from "../utils/welcomeMessages.js";
 
 //COMPONENTS
-import Infobox from "../components/Infobox";
+import EventCard from "../components/EventCard";
 
 //STYLES
 import "../styles/dashboard.css";
-import ProfilePicture from "../assets/decorations/traveler.jpg";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
@@ -32,16 +31,13 @@ const Dashboard = () => {
         {user ? (
           <>
             <div className="logo">
-              
               <h1>Hello, {user.name}!</h1>
               <p className="welcome-message">
                 {welcomeMessages[randomMessage]}
               </p>
-              <img
-                className="user-picture"
-                src={user.picture == 1 ? ProfilePicture : user.picture}
-                alt=""
-              />
+              {user.picture ? (
+                <img className="user-picture" src={user.picture.url} alt="" />
+              ) : null}
             </div>
 
             {userEvents.length > 0 ? (
@@ -57,12 +53,12 @@ const Dashboard = () => {
                       new Date(event.date.start) > today ? (
                         <div className="event-card" key={event._id}>
                           <Link to={`/event/${event._id}`}>
-                            <Infobox
+                            <EventCard
                               date={event.date}
                               title={event.title}
                               location={event.location}
                               messages={event.messages}
-                              picture={event.picture}
+                              picture={event.picture.url}
                               host={event.owner.name}
                             />
                           </Link>
@@ -80,11 +76,11 @@ const Dashboard = () => {
                   new Date(event.date.start) < today ? (
                     <div key={event._id}>
                       <Link to={`/event/${event._id}`}>
-                        <Infobox
+                        <EventCard
                           date={event.date}
                           title={event.title}
                           location={event.location}
-                          picture={event.picture}
+                          picture={event.picture.url}
                         />
                       </Link>
                     </div>

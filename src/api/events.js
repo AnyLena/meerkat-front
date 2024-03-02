@@ -23,7 +23,6 @@ export const createEvent = async (formData, user) => {
 
   try {
     const response = await axios.post(`${SERVER}/events`, data);
-    console.log(response);
   } catch (error) {
     console.error(error);
   }
@@ -39,26 +38,29 @@ export const fetchUserEvents = async (setUserEvents, token) => {
       },
     });
     setUserEvents(response.data);
-    console.log(response.data);
   } catch (error) {
     console.log(error);
   }
 };
 
-export   const getEvent = async (eventId, token, setEventData, setLoading, setBackgroundImage) => {
+export const getEvent = async (
+  eventId,
+  token,
+  setEventData,
+  setLoading,
+  setBackgroundImage
+) => {
   const SERVER = import.meta.env.VITE_SERVER;
   try {
     setLoading(true);
-    const data = await axios.get(`${SERVER}/events/${eventId}`, {
+    const response = await axios.get(`${SERVER}/events/${eventId}`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
     });
-    setEventData(data.data);
-    data.data.picture == 1
-      ? setBackgroundImage(BG1)
-      : setBackgroundImage(data.data.picture);
+    setEventData(response.data);
+    setBackgroundImage(response.data.picture.url);
   } catch (error) {
     console.log(error);
   } finally {
@@ -73,6 +75,7 @@ export const addParticipant = async (
   setEventData
 ) => {
   const SERVER = import.meta.env.VITE_SERVER;
+  console.log("addParticipant", participantId, token, eventId);
   try {
     const response = await axios.put(
       `${SERVER}/events/${eventId}/participants/add`,
@@ -84,7 +87,8 @@ export const addParticipant = async (
         },
       }
     );
-    setEventData(response.data);
+    console.log("participants", response.data);
+    setEventData((prev) => ({ ...prev, participants: response.data }));
   } catch (error) {
     console.log(error);
   }
@@ -108,8 +112,8 @@ export const removeParticipant = async (
         },
       }
     );
-    console.log(response.data);
-    setEventData(response.data);
+    console.log("participants", response.data);
+    setEventData((prev) => ({ ...prev, participants: response.data }));
   } catch (error) {
     console.log(error);
   }

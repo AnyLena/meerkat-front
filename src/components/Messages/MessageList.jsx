@@ -24,7 +24,7 @@ const MessageList = ({ messages, userId }) => {
             >
               <img
                 className="profile-small"
-                src={message.sender.picture}
+                src={message.sender.picture.url}
                 alt=""
               />
               <div className="message-content">

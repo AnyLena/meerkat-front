@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { motion } from "framer-motion";
 import { useAuth } from "../../context/useAuth";
+import { fetchMessages, sendMessage } from "../../api/messages";
 import "../../styles/messages.css";
+
+// Components
 import Header from "./Header";
 import MessageList from "./MessageList";
 import MessageInput from "./MessageInput";
-import { motion } from "framer-motion";
-import { fetchMessages, sendMessage } from "../../api/messages";
-import { useParams } from "react-router-dom";
 
 const Messages = ({ open, setOpen }) => {
   const { user, token } = useAuth();
@@ -20,8 +22,6 @@ const Messages = ({ open, setOpen }) => {
       file: "",
     },
   });
-
-  console.log("user", user._id, "event", id);
 
   const sendMessageData = (e) => {
     e.preventDefault();

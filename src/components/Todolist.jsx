@@ -13,10 +13,10 @@ import {
 import { FaRegEdit } from "react-icons/fa";
 import { FaRegCircleCheck, FaRegCircle } from "react-icons/fa6";
 import "../styles/todolist.css";
-import axios from "axios";
 import { useAuth } from "../context/useAuth";
 import Zoom from "@mui/material/Zoom";
 import { toggleTodo } from "../api/todos.js";
+import { addTodo } from "../api/todos.js";
 
 const Todolist = ({ eventData, setEventData }) => {
   const { token, user } = useAuth();
@@ -24,32 +24,18 @@ const Todolist = ({ eventData, setEventData }) => {
     assignee: user._id,
     title: "",
   });
-  const [participantList, setParticipantList] = useState(eventData.participants);
+  const [participantList, setParticipantList] = useState(
+    eventData.participants
+  );
   const [todoList, setTodoList] = useState(eventData.todos);
 
   const handleAdd = async () => {
-    const SERVER = import.meta.env.VITE_SERVER;
+    addTodo(eventData._id, formData, token, setEventData);
 
-    try {
-      const response = await axios.post(
-        `${SERVER}/events/${eventData._id}/todos/add`,
-        formData,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      setEventData(response.data);
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setFormData({
-        assignee: user._id,
-        title: "",
-      });
-    }
+    setFormData({
+      assignee: user._id,
+      title: "",
+    });
   };
 
   const handleToggle = (event) => {
@@ -76,19 +62,25 @@ const Todolist = ({ eventData, setEventData }) => {
   };
 
   const getAssigned = (todo, value) => {
+    let assignee;
+
     if (user._id === todo.assignee) {
-      return user[value];
-    } else if (
-      participantList.find(
-        (participant) => participant._id === todo.assignee
-      )?.[value]
-    ) {
-      return participantList.find(
-        (participant) => participant._id === todo.assignee
-      )?.[value];
+      assignee = user;
     } else {
-      return "Assign Task";
+      assignee = participantList.find(
+        (participant) => participant._id === todo.assignee
+      );
     }
+
+    if (assignee && value === "name") {
+      return assignee.name;
+    }
+
+    if (assignee && value === "picture" && assignee.picture) {
+      return assignee.picture.url;
+    }
+
+    return "Assign Task";
   };
 
   useEffect(() => {
@@ -144,7 +136,7 @@ const Todolist = ({ eventData, setEventData }) => {
         ))}
       </section>
 
-      {user._id === eventData.owner ? (
+      {user._id === eventData.owner._id ? (
         <section className="todo-owner">
           <Box
             component="form"
@@ -174,7 +166,7 @@ const Todolist = ({ eventData, setEventData }) => {
                 <MenuItem key={user._id} value={user._id}>
                   <img
                     className="profile-small assign-img"
-                    src={user.picture}
+                    src={user.picture.url}
                     alt=""
                   />
                   {user.name}
@@ -183,7 +175,7 @@ const Todolist = ({ eventData, setEventData }) => {
                   <MenuItem key={participant._id} value={participant._id}>
                     <img
                       className="profile-small assign-img"
-                      src={participant.picture}
+                      src={participant.picture.url}
                       alt=""
                     />
                     {participant.name}
