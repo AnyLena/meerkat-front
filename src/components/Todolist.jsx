@@ -67,9 +67,16 @@ const Todolist = ({ eventData, setEventData }) => {
     if (user._id === todo.assignee) {
       assignee = user;
     } else {
-      assignee = participantList.find(
+      const participant = participantList.find(
         (participant) => participant._id === todo.assignee
       );
+
+      if (participant) {
+        assignee = participant;
+      } else {
+        // owner
+        assignee = eventData.owner;
+      }
     }
 
     if (assignee && value === "name") {
