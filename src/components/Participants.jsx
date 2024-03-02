@@ -95,7 +95,7 @@ const Participants = ({ open, setOpen, setEventData, eventData }) => {
                         alt=""
                       />
                       <div>{participant.name}</div>
-                      {eventData.owner === user._id ? (
+                      {eventData.owner._id === user._id ? (
                         <button
                           onClick={handleRemove}
                           id={participant._id}
@@ -108,7 +108,7 @@ const Participants = ({ open, setOpen, setEventData, eventData }) => {
                   ))}
                 </section>
 
-                {eventData.owner === user._id ? (
+                {eventData.owner._id === user._id ? (
                   <>
                     <h2 className="event-heading">Invite Meerkats</h2>
                     <section className="participant-modal">
@@ -124,7 +124,7 @@ const Participants = ({ open, setOpen, setEventData, eventData }) => {
                               alt=""
                             />
                             <div>{participant.name}</div>
-                            {eventData.owner === user._id ? (
+                            {eventData.owner._id === user._id ? (
                               <button
                                 onClick={handleAdd}
                                 id={participant._id}

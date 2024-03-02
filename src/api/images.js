@@ -10,3 +10,14 @@ export const getProfileImages = async (setImages) => {
     console.log(error);
   }
 };
+
+export const getEventImages = async (setImages) => {
+  const SERVER = import.meta.env.VITE_SERVER;
+  try {
+    const response = await axios.get(`${SERVER}/images/event`);
+    setImages(response.data);
+    console.log(response.data);
+  } catch (error) {
+    console.log(error);
+  }
+};

@@ -14,8 +14,7 @@ export const addTodo = async (eventId, formData, token, setEventData) => {
         },
       }
     );
-    console.log("hey", response.data);
-    setEventData(response.data);
+    setEventData((prev) => ({ ...prev, todos: response.data }));
   } catch (error) {
     console.error(error);
   }
@@ -39,7 +38,7 @@ export const toggleTodo = async (
         },
       }
     );
-    setEventData(response.data);
+    setEventData((prev) => ({ ...prev, todos: response.data }));
   } catch (error) {
     console.error(error);
   }

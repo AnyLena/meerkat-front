@@ -19,7 +19,7 @@ import { IoIosArrowBack } from "react-icons/io";
 
 const Event = () => {
   const navigate = useNavigate();
-  const { token } = useAuth();
+  const { token, user } = useAuth();
   const [loading, setLoading] = useState(false);
   const [eventData, setEventData] = useState({});
   const [backgroundImage, setBackgroundImage] = useState();
@@ -27,7 +27,7 @@ const Event = () => {
 
   useEffect(() => {
     getEvent(id, token, setEventData, setLoading, setBackgroundImage);
-    scrollTo(0,0);
+    scrollTo(0, 0);
   }, []);
 
   useEffect(() => {
@@ -45,29 +45,44 @@ const Event = () => {
 
   return (
     <>
-      {loading ? <Loader /> : null}
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0, y: -100 }}
         animate={{ opacity: 1, y: "1rem" }}
         transition={{ duration: 0.7 }}
       >
-      <Button
-        className="back-btn"
-        onClick={() => navigate(-1)}
-        sx={{
-          borderRadius: "50%",
-          backgroundColor: "rgba(255, 255, 255, 0.8)",
-          position: "sticky",
-          top: "1rem",
-          left: "1rem",
-          color: "white",
-          width: "40px",
-          height: "40px",
-          minWidth: "0 !important",
-        }}
-      >
-        <IoIosArrowBack style={{ fontSize: "1.25rem" }} />
-      </Button>
+        <Button
+          className="back-btn"
+          onClick={() => navigate(-1)}
+          sx={{
+            borderRadius: "50%",
+            backgroundColor: "rgba(255, 255, 255, 0.8)",
+            position: "sticky",
+            top: "1rem",
+            left: "1rem",
+            color: "white",
+            width: "40px",
+            height: "40px",
+            minWidth: "0 !important",
+          }}
+        >
+          <IoIosArrowBack style={{ fontSize: "1.25rem" }} />
+        </Button>
+        {Object.keys(eventData).length > 0 && (
+          <div className="owner">
+            <img src={eventData.owner.picture.url} alt="" />
+            <p>
+              {!eventData.owner.name === user.name ? (
+                <>
+                  <span>{eventData.owner.name}</span> is the host
+                </>
+              ) : (
+                <>
+                  <span>You</span> are the host
+                </>
+              )}
+            </p>
+          </div>
+        )}
       </motion.div>
       <motion.div
         initial={{ opacity: 0, y: 100 }}
@@ -82,6 +97,7 @@ const Event = () => {
 
             <section className="info">
               <Infobox eventId={eventData._id} date={eventData.date} />
+
               <Participantslist
                 setEventData={setEventData}
                 eventData={eventData}
@@ -89,7 +105,7 @@ const Event = () => {
               <div className="text">
                 <p>{eventData.description}</p>
               </div>
-              <Todolist eventData={eventData} setEventData={setEventData}/>
+              <Todolist eventData={eventData} setEventData={setEventData} />
               <Location location={eventData.location} />
             </section>
           </section>

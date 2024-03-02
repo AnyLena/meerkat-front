@@ -49,7 +49,6 @@ export const addContact = async (contactId, userId, token, setUser) => {
         },
       }
     );
-    console.log(response.data);
     setUser(response.data);
   } catch (error) {
     console.log(error);
@@ -77,7 +76,6 @@ export const removeContact = async (contactId, userId, token, setUser) => {
 
 export const getUserNames = async (contacts, token, setNames) => {
   try {
-    console.log("contacts in api", contacts);
     const response = await axios.get(`${SERVER}/users/names`, {
       params: {
         arrayOfIds: contacts,

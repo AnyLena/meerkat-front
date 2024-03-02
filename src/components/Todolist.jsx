@@ -62,19 +62,23 @@ const Todolist = ({ eventData, setEventData }) => {
   };
 
   const getAssigned = (todo, value) => {
-    if (user._id === todo.assignee) return user[value].url;
+    let assignee;
 
-    if (
-      participantList.find(
+    if (user._id === todo.assignee) {
+      assignee = user;
+    } else {
+      assignee = participantList.find(
         (participant) => participant._id === todo.assignee
-      )?.[value].url
-    )
-      return participantList.find(
-        (participant) => participant._id === todo.assignee
-      )?.[value].url;
+      );
+    }
 
-    if (todo.assignee === eventData.owner._id)
-      return eventData.owner[value].url;
+    if (assignee && value === "name") {
+      return assignee.name;
+    }
+
+    if (assignee && value === "picture" && assignee.picture) {
+      return assignee.picture.url;
+    }
 
     return "Assign Task";
   };
