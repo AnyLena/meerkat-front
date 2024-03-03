@@ -12,7 +12,7 @@
 .back-btn-container {
   margin: 0 auto;
   max-width: 800px;
-  button{
+  button {
     margin-left: 1rem;
   }
 }
@@ -109,6 +109,15 @@
       border-radius: 30px;
       border: 2px solid var(--background-color);
       margin: 5px;
+    }
+  }
+  .location {
+    .map {
+      padding: 1rem;
+      width: calc(100% - 2rem);
+      height: 300px;
+      border-radius: 10px;
+      margin-bottom: 6rem;
     }
   }
 }

@@ -128,3 +128,7 @@ img {
     margin: 5px;
   }
 }
+
+body {
+  min-height: 100vh;
+}

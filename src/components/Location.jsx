@@ -1,10 +1,32 @@
-const Location = ({location}) => {
+import React from "react";
+import { GoogleMap, Marker, useLoadScript } from "@react-google-maps/api";
+
+const Location = ({ location }) => {
+  const { isLoaded } = useLoadScript({
+    googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY,
+  });
+
+  console.log(location);
+
   return (
     <section className="location">
       <h2 className="event-heading">Location</h2>
       <div className="text">
         <p>{location.description}</p>
       </div>
+
+      {isLoaded && location.map ? (
+        <div className="map">
+          <GoogleMap
+            mapContainerClassName="map-container"
+            center={{ lat: location.lat, lng: location.lng }}
+            zoom={10}
+            options={{ disableDefaultUI: true, zoomControl: true }}
+          >
+            <Marker position={{ lat: location.lat, lng: location.lng }} />
+          </GoogleMap>
+        </div>
+      ) : null}
     </section>
   );
 };
