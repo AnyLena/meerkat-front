@@ -9,7 +9,6 @@ import Todolist from "../components/Todolist";
 import Infobox from "../components/Infobox.jsx";
 import Location from "../components/Location.jsx";
 import Participantslist from "../components/Participantslist.jsx";
-import Loader from "../components/Loader.jsx";
 
 //STYLES
 import "../styles/event.css";
@@ -30,25 +29,18 @@ const Event = () => {
     scrollTo(0, 0);
   }, []);
 
-  useEffect(() => {
-    const body = document.querySelector("body");
-    body.style.backgroundImage = `url(${backgroundImage})`;
-    body.style.backgroundRepeat = "no-repeat";
-    body.style.backgroundAttachment = "fixed";
-    body.style.backgroundSize = "800px auto";
-    body.style.backgroundPosition = "center top";
-
-    return () => {
-      body.style.backgroundImage = "";
-    };
-  }, [eventData]);
-
   return (
-    <>
+    <div
+      className="event-container"
+      style={{
+        backgroundImage: `url(${backgroundImage})`,
+      }}
+    >
       <motion.div
         initial={{ opacity: 0, y: -100 }}
         animate={{ opacity: 1, y: "1rem" }}
         transition={{ duration: 0.7 }}
+        className="back-btn-container"
       >
         <Button
           className="back-btn"
@@ -69,22 +61,23 @@ const Event = () => {
         </Button>
 
         {Object.keys(eventData).length > 0 && (
-          <div className="owner">
-            <img src={eventData.owner.picture.url} alt="" />
-            <p>
-              {eventData.owner.name !== user.name ? (
-                <>
-                  <span>{eventData.owner.name}</span> is the host
-                </>
-              ) : (
-                <>
-                  <span>You</span> are the host
-                </>
-              )}
-            </p>
+          <div className="top-container">
+            <div className="owner">
+              <img src={eventData.owner.picture.url} alt="" />
+              <p>
+                {eventData.owner.name !== user.name ? (
+                  <>
+                    <span>{eventData.owner.name}</span> is the host
+                  </>
+                ) : (
+                  <>
+                    <span>You</span> are the host
+                  </>
+                )}
+              </p>
+            </div>
           </div>
         )}
-
       </motion.div>
       <motion.div
         initial={{ opacity: 0, y: 100 }}
@@ -113,7 +106,7 @@ const Event = () => {
           </section>
         ) : null}
       </motion.div>
-    </>
+    </div>
   );
 };
 

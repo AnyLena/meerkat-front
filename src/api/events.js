@@ -1,7 +1,8 @@
 import axios from "axios";
 
+const SERVER = import.meta.env.VITE_SERVER;
+
 export const createEvent = async (formData, user) => {
-  const SERVER = import.meta.env.VITE_SERVER;
   const date = new Date(formData.date);
   const time = new Date(formData.time);
   const dateTime = new Date(
@@ -15,7 +16,12 @@ export const createEvent = async (formData, user) => {
     title: formData.title,
     description: formData.description,
     date: { start: dateTime, end: "" },
-    location: { description: formData.location, lat: 0, long: 0 },
+    location: {
+      description: formData.location,
+      map: formData.map,
+      lat: formData.position.lat,
+      lng: formData.position.lng,
+    },
     participants: formData.participants,
     picture: formData.image,
     owner: user._id,
@@ -29,7 +35,6 @@ export const createEvent = async (formData, user) => {
 };
 
 export const fetchUserEvents = async (setUserEvents, token) => {
-  const SERVER = import.meta.env.VITE_SERVER;
   try {
     const response = await axios.get(`${SERVER}/events`, {
       headers: {
@@ -50,7 +55,6 @@ export const getEvent = async (
   setLoading,
   setBackgroundImage
 ) => {
-  const SERVER = import.meta.env.VITE_SERVER;
   try {
     setLoading(true);
     const response = await axios.get(`${SERVER}/events/${eventId}`, {
@@ -74,7 +78,6 @@ export const addParticipant = async (
   eventId,
   setEventData
 ) => {
-  const SERVER = import.meta.env.VITE_SERVER;
   console.log("addParticipant", participantId, token, eventId);
   try {
     const response = await axios.put(
@@ -100,7 +103,6 @@ export const removeParticipant = async (
   eventId,
   setEventData
 ) => {
-  const SERVER = import.meta.env.VITE_SERVER;
   try {
     const response = await axios.put(
       `${SERVER}/events/${eventId}/participants/remove`,

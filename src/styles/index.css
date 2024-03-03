@@ -21,6 +21,7 @@
 h1,
 h2,
 h3 {
+  color: var(--background-color);
   font-family: "Oswald", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   text-transform: uppercase;
 }
@@ -126,4 +127,8 @@ img {
     border: 2px solid var(--background-color);
     margin: 5px;
   }
+}
+
+body {
+  min-height: 100vh;
 }

@@ -1,4 +1,3 @@
-import Profile from "../assets/decorations/traveler.jpg";
 import { useEffect, useState } from "react";
 import {
   Box,

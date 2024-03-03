@@ -118,7 +118,7 @@ const Login = ({
           },
         }}
       >
-        Create a new account{" "}
+        Create a new account
       </Button>
     </motion.div>
   );

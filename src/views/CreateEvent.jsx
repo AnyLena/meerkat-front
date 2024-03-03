@@ -31,6 +31,7 @@ const Form = () => {
     date: "",
     time: "",
     location: "",
+    map: false,
     participants: [],
     image: "",
   });
