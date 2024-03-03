@@ -105,7 +105,7 @@ const DateStep = ({
               },
               // track color when checked
               "& .Mui-checked + .MuiSwitch-track": {
-                backgroundColor: "black",
+                backgroundColor: "#000",
               },
             }}
           />
@@ -115,11 +115,12 @@ const DateStep = ({
         <div className="map">
           <GoogleMap
             mapContainerClassName="map-container"
-            center={center}
+            center={formData.map ? markerPosition : center}
             zoom={10}
             options={{
               disableDefaultUI: true,
               zoomControl: true,
+              gestureHandling: formData.map === false ? "none" : "greedy",
               styles:
                 formData.map === false
                   ? [
@@ -169,3 +170,5 @@ const DateStep = ({
 };
 
 export default DateStep;
+
+
