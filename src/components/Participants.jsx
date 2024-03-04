@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { getUserNames } from "../api/users.js";
 import { addParticipant, removeParticipant } from "../api/events.js";
 import { IoIosClose } from "react-icons/io";
+import { Link } from "react-router-dom";
 
 const Participants = ({ open, setOpen, setEventData, eventData }) => {
   const { user, token } = useAuth();
@@ -81,69 +82,91 @@ const Participants = ({ open, setOpen, setEventData, eventData }) => {
                   <IoIosClose style={{ fontSize: "1.25rem" }} />
                 </Button>
               </div>
-              <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                <h2 className="event-heading">Participants</h2>
-                <section className="participant-modal">
-                  {eventData.participants.map((participant) => (
-                    <div
-                      className="participant-container"
-                      key={participant._id}
-                    >
-                      <img
-                        className="profile-small"
-                        src={participant.picture.url}
-                        alt=""
-                      />
-                      <div>{participant.name}</div>
-                      {eventData.owner._id === user._id ? (
-                        <button
-                          onClick={handleRemove}
-                          id={participant._id}
-                          className="btn-red"
+              {eventData.participants.length === 0 &&
+              Object.keys(contacts).length === 0 ? (
+                <>
+                  <h2 className="event-heading">No friends to add</h2>
+                  <p className="all-invited">
+                    Add friends from your Profile view, then invite them to the
+                    event.
+                  </p>
+                  <div className="btn-center">
+                    <Button class="btn-grey ">
+                      <Link to="/profile">To Your Profile</Link>
+                    </Button>
+                  </div>
+                </>
+              ) : (
+                <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                  <h2 className="event-heading">Participants</h2>
+                  <section className="participant-modal">
+                    {eventData.participants.length > 0 ? (
+                      eventData.participants.map((participant) => (
+                        <div
+                          className="participant-container"
+                          key={participant._id}
                         >
-                          remove
-                        </button>
-                      ) : null}
-                    </div>
-                  ))}
-                </section>
-
-                {eventData.owner._id === user._id ? (
-                  <>
-                    <h2 className="event-heading">Invite Meerkats</h2>
-                    <section className="participant-modal">
-                      {Object.keys(contacts).length > 0 ? (
-                        contacts.map((participant) => (
-                          <div
-                            className="participant-container"
-                            key={participant._id}
-                          >
-                            <img
-                              className="profile-small"
-                              src={participant.picture.url}
-                              alt=""
-                            />
-                            <div>{participant.name}</div>
-                            {eventData.owner._id === user._id ? (
-                              <button
-                                onClick={handleAdd}
-                                id={participant._id}
-                                className="btn-grey"
-                              >
-                                add
-                              </button>
-                            ) : null}
-                          </div>
-                        ))
-                      ) : (
-                        <div className="all-invited">
-                          You have invited the whole pack!
+                          <img
+                            className="profile-small"
+                            src={participant.picture.url}
+                            alt=""
+                          />
+                          <div>{participant.name}</div>
+                          {eventData.owner._id === user._id ? (
+                            <button
+                              onClick={handleRemove}
+                              id={participant._id}
+                              className="btn-red"
+                            >
+                              remove
+                            </button>
+                          ) : null}
                         </div>
-                      )}
-                    </section>
-                  </>
-                ) : null}
-              </Typography>
+                      ))
+                    ) : (
+                      <div className="all-invited">
+                        You can add your friends to this event!
+                      </div>
+                    )}
+                  </section>
+
+                  {eventData.owner._id === user._id ? (
+                    <>
+                      <h2 className="event-heading">Invite Meerkats</h2>
+                      <section className="participant-modal">
+                        {Object.keys(contacts).length > 0 ? (
+                          contacts.map((participant) => (
+                            <div
+                              className="participant-container"
+                              key={participant._id}
+                            >
+                              <img
+                                className="profile-small"
+                                src={participant.picture.url}
+                                alt=""
+                              />
+                              <div>{participant.name}</div>
+                              {eventData.owner._id === user._id ? (
+                                <button
+                                  onClick={handleAdd}
+                                  id={participant._id}
+                                  className="btn-grey"
+                                >
+                                  add
+                                </button>
+                              ) : null}
+                            </div>
+                          ))
+                        ) : (
+                          <div className="all-invited">
+                            You have invited the whole pack!
+                          </div>
+                        )}
+                      </section>
+                    </>
+                  ) : null}
+                </Typography>
+              )}
             </div>
           </Box>
         </motion.div>
