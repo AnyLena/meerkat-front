@@ -25,6 +25,7 @@ const MessageInput = ({ setMessage, sendMessageData, message }) => {
         </label>
         <input
           onChange={(e) => handleChange("text", e.target.value)}
+          value={message.text}
           type="text"
           className="inputtext"
           name="text"

@@ -23,6 +23,7 @@ const Messages = ({ open, setOpen }) => {
 
   const sendMessageData = (e) => {
     e.preventDefault();
+    if (!message.text && !message.file) return;
   
     const formData = new FormData();
     formData.append('event', message.event);
