@@ -20,10 +20,9 @@ export const sendMessage = async (eventId, message, token, setMessages) => {
   try {
     const response = await axios.post(
       `${SERVER}/messages/${eventId}`,
-      { message },
+      message,
       {
         headers: {
-          "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
       }

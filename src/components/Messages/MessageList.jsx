@@ -1,8 +1,11 @@
 import { timeAgo } from "../../utils/timeAgo";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
+import ImageModal from "./ImageModal";
 
 const MessageList = ({ messages, userId }) => {
   const messagesEndRef = useRef(null);
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [open, setOpen] = useState(false);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -28,12 +31,28 @@ const MessageList = ({ messages, userId }) => {
                 alt=""
               />
               <div className="message-content">
-                <div className="message-header">
-                  <div className="message-sender">{message.sender.name}</div>
-                  <div className="message-date">{timeAgo(message.created)}</div>
-                </div>
-                <div className="message-text">{message.message.text}</div>
+                <div className="message-sender">{message.sender.name}</div>
+                <div className="message-text">{message.text}</div>
               </div>
+              <div className="file">
+                {message.file && (
+                  <>
+                    <div
+                      onClick={() => setSelectedImage(message.file)}
+                      className="file-container"
+                    >
+                      <img src={message.file} alt="" />
+                    </div>
+                    {selectedImage && (
+                      <ImageModal
+                        onClose={() => setSelectedImage(null)}
+                        src={selectedImage}
+                      />
+                    )}
+                  </>
+                )}
+              </div>
+              <div className="message-date">{timeAgo(message.created)}</div>
             </div>
           </li>
         ))}
