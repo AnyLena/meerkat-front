@@ -3,12 +3,14 @@
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
-
+  height: auto;
+  
   @media screen and (max-width: 768px) {
     background-size: 800px auto;
     background-position: center top;
   }
 }
+
 .back-btn-container {
   margin: 0 auto;
   max-width: 800px;
@@ -47,11 +49,9 @@
 
 .event {
   margin: 0;
-  height: 100dvh;
-  padding-bottom: 250px;
   max-width: 800px;
   margin: auto;
-
+  
   h1 {
     position: relative;
     top: 50%;
@@ -60,10 +60,17 @@
     text-align: center;
     padding: 20px 0 60px 0;
   }
-
+  
   .header {
     margin-top: 40vh;
     background-color: rgba(255, 255, 255, 0.7);
+  }
+
+  @media screen and (min-width: 800px) {
+    .header {
+      border-top-left-radius: 30px;
+      border-top-right-radius: 30px;
+    }
   }
 
   .info {
@@ -78,14 +85,14 @@
     font-size: 1.2rem;
     margin: 1rem;
   }
-
+  
   h2 {
     margin-top: 50px;
   }
 
   .participants {
     margin: 30px 5px;
-
+    
     .flex-container {
       display: flex;
       justify-content: space-between;
@@ -96,7 +103,7 @@
       display: grid;
       grid-template-columns: repeat(5, 30px);
     }
-
+    
     .profile-img {
       height: 40px;
       width: 40px;
@@ -120,4 +127,4 @@
       margin-bottom: 6rem;
     }
   }
-}
+} 

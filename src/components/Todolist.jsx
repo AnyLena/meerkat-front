@@ -92,11 +92,13 @@ const Todolist = ({ eventData, setEventData }) => {
   useEffect(() => {
     setParticipantList(eventData.participants);
     setTodoList(eventData.todos);
+    console.log(eventData)
+    console.log(user)
   }, [eventData]);
 
   return (
     <>
-      {user._id === eventData.owner || eventData.todos.length > 0 ? (
+      {user._id === eventData.owner._id || eventData.todos.length > 0 ? (
         <h2 className="event-heading">TO-DO-List</h2>
       ) : null}
       <section className="todo-list">
