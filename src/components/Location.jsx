@@ -20,7 +20,7 @@ const Location = ({ location }) => {
           <GoogleMap
             mapContainerClassName="map-container"
             center={{ lat: location.lat, lng: location.lng }}
-            zoom={10}
+            zoom={15}
             options={{ disableDefaultUI: true, zoomControl: true }}
           >
             <Marker position={{ lat: location.lat, lng: location.lng }} />
