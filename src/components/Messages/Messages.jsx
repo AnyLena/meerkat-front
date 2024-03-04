@@ -17,21 +17,28 @@ const Messages = ({ open, setOpen }) => {
   const [message, setMessage] = useState({
     event: id,
     sender: user._id,
-    message: {
-      text: "",
-      file: "",
-    },
+    text: "",
+    file: "",
   });
 
   const sendMessageData = (e) => {
     e.preventDefault();
-    sendMessage(id, message, token, setMessages);
+    if (!message.text && !message.file) return;
+  
+    const formData = new FormData();
+    formData.append('event', message.event);
+    formData.append('sender', message.sender);
+    formData.append('text', message.text);
+    if (message.file) {
+      formData.append('file', message.file);
+    }
+  
+    console.log("sending", formData);
+    sendMessage(id, formData, token, setMessages);
     setMessage({
       ...message,
-      message: {
-        text: "",
-        file: "",
-      },
+      text: "",
+      file: "",
     });
   };
 
