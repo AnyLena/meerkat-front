@@ -59,6 +59,7 @@
       align-items: center;
       border-radius: 10px;
       img {
+        align-self: flex-start;
         width: 50px;
         height: 50px;
       }
@@ -83,7 +84,7 @@
         align-items: baseline;
 
         .file-container {
-          margin: 0 1rem;
+          margin-left: .5rem;
           transition: 0.2s ease-in-out;
           cursor: pointer;
           &:hover {
@@ -93,7 +94,7 @@
             transform: scale(0.95);
           }
           img {
-            width: 100px;
+            width: 60px;
             height: auto;
             aspect-ratio: 1/1;
             object-fit: cover;
@@ -105,7 +106,9 @@
         flex: 0 1 auto;
         font-size: 0.8rem;
         color: rgb(80, 80, 80);
+        margin-left: .5rem;
         white-space: nowrap;
+        align-self: flex-start;
       }
     }
     .sender {

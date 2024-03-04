@@ -1,6 +1,7 @@
 import { timeAgo } from "../../utils/timeAgo";
 import { useRef, useEffect, useState } from "react";
 import ImageModal from "./ImageModal";
+import { IoDocumentTextOutline } from "react-icons/io5";
 
 const MessageList = ({ messages, userId }) => {
   const messagesEndRef = useRef(null);
@@ -37,11 +38,25 @@ const MessageList = ({ messages, userId }) => {
               <div className="file">
                 {message.file && (
                   <>
-                    <div
-                      onClick={() => setSelectedImage(message.file)}
-                      className="file-container"
-                    >
-                      <img src={message.file} alt="" />
+                    <div className="file-container">
+                      {message.file.match(/\.(jpeg|jpg|gif|png)$/) != null ? (
+                        <img
+                          onClick={() => setSelectedImage(message.file)}
+                          src={message.file}
+                          alt=""
+                        />
+                      ) : (
+                        <IoDocumentTextOutline
+                          onClick={() => window.open(message.file, "_blank")}
+                          style={{
+                            fontSize: "2.5rem",
+                            backgroundColor: "var(--secondary-color)",
+                            color: "white",
+                            borderRadius: "50%",
+                            padding: "0.5rem",
+                          }}
+                        />
+                      )}
                     </div>
                     {selectedImage && (
                       <ImageModal
