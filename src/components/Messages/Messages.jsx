@@ -10,10 +10,10 @@ import Header from "./Header";
 import MessageList from "./MessageList";
 import MessageInput from "./MessageInput";
 
-const Messages = ({ open, setOpen }) => {
+const Messages = ({ open, setOpen, messages, setMessages }) => {
   const { user, token } = useAuth();
   const { id } = useParams();
-  const [messages, setMessages] = useState([]);
+
   const [message, setMessage] = useState({
     event: id,
     sender: user._id,

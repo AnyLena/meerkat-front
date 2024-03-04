@@ -1,0 +1,48 @@
+/* <div className="event-heading">
+            <h2>Shared files</h2>
+          </div> */
+
+.event-heading {
+  margin-top: 1rem;
+  h2 {
+    padding: 0.25rem 0;
+    padding-left: 1.5rem;
+    color: var(--background-color);
+    background-color: var(--headingBG-color);
+    font-family: var(--header-font);
+    border-radius: 30px;
+  }
+}
+.shared-files {
+    margin-bottom: 5rem;
+}
+.files {
+  padding: 1rem;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  img {
+    width: 100%;
+    max-width: 200px;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+  .file-icon {
+    max-width: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+    background-color: rgb(244, 244, 244);
+    padding: 1rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: .25rem;
+    p span {
+        font-weight: bold;
+    }
+  }
+}

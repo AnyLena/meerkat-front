@@ -6,7 +6,7 @@ import MailboxIcon from "./MailboxIcon";
 //STYLES
 import "../styles/infobox.css";
 
-const Infobox = ({ date, eventId }) => {
+const Infobox = ({ date, eventId, messages, setMessages }) => {
   const [start, setStart] = useState({});
   const [end, setEnd] = useState({});
   const [open, setOpen] = useState(false);
@@ -33,7 +33,7 @@ const Infobox = ({ date, eventId }) => {
           </div>
           <MailboxIcon eventId={eventId} setOpen={setOpen} />
         </div>
-        <Messages open={open} setOpen={setOpen} />
+        <Messages open={open} setOpen={setOpen} messages={messages} setMessages={setMessages} />
       </div>
     </>
   );
