@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getEvent } from "../api/events.js";
+import { fetchMessages } from "../api/messages.js";
 import { useAuth } from "../context/useAuth.jsx";
 import { useNavigate } from "react-router-dom";
 
@@ -9,6 +10,7 @@ import Todolist from "../components/Todolist";
 import Infobox from "../components/Infobox.jsx";
 import Location from "../components/Location.jsx";
 import Participantslist from "../components/Participantslist.jsx";
+import SharedFiles from "../components/SharedFiles.jsx";
 
 //STYLES
 import "../styles/event.css";
@@ -20,12 +22,14 @@ const Event = () => {
   const navigate = useNavigate();
   const { token, user } = useAuth();
   const [loading, setLoading] = useState(false);
+  const [messages, setMessages] = useState([]);
   const [eventData, setEventData] = useState({});
   const [backgroundImage, setBackgroundImage] = useState();
   const { id } = useParams();
 
   useEffect(() => {
     getEvent(id, token, setEventData, setLoading, setBackgroundImage);
+    fetchMessages(id, token, setMessages);
     scrollTo(0, 0);
   }, []);
 
@@ -91,7 +95,7 @@ const Event = () => {
             </div>
 
             <section className="info">
-              <Infobox eventId={eventData._id} date={eventData.date} />
+              <Infobox eventId={eventData._id} date={eventData.date} messages={messages} setMessages={setMessages} />
 
               <Participantslist
                 setEventData={setEventData}
@@ -102,6 +106,7 @@ const Event = () => {
               </div>
               <Todolist eventData={eventData} setEventData={setEventData} />
               <Location location={eventData.location} />
+              <SharedFiles messages={messages}/>
             </section>
           </section>
         ) : null}

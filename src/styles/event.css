@@ -4,6 +4,7 @@
   background-position: center;
   background-attachment: fixed;
   height: auto;
+  margin-bottom: 4rem;
   
   @media screen and (max-width: 768px) {
     background-size: 800px auto;
@@ -124,7 +125,6 @@
       width: calc(100% - 2rem);
       height: 300px;
       border-radius: 10px;
-      margin-bottom: 6rem;
     }
   }
 } 

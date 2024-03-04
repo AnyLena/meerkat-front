@@ -15,19 +15,22 @@
         font-size: 1.5rem;
         width: 30px;
         height: 30px;
+        margin-left: 1rem;
+        margin-bottom: .5rem;
     }
 }
 .modal-content {
-    margin: 5% auto;
+    margin: 2rem auto;
     display: block;
-    width: 80%;
-    max-width: 700px;
+    width: 90%;
+
     .modal-body {
         padding: 2px 16px;
         text-align: center;
         img {
             width: 100% !important;
             height: auto !important;
+            aspect-ratio: auto !important;
         }
     }
 }
