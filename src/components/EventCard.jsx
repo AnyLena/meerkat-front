@@ -32,7 +32,7 @@ const EventCard = ({ date, title, location, picture, host, eventId }) => {
               {date.end ? ` – ${end.hours}:${end.minutes}` : null}
             </p>
           </div>
-          <MailboxIcon eventId={eventId} />
+          <MailboxIcon eventId={eventId}/>
         </div>
         {location && title ? (
           <div
