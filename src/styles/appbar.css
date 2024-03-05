@@ -1,0 +1,10 @@
+.appbar {
+    .burger-icon {
+        stroke: white;
+    }
+
+    button {
+       font-family: "Oswald"
+    }
+}
+

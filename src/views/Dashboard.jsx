@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useAuth } from "../context/useAuth";
 import { fetchUserEvents } from "../api/events.js";
 import { welcomeMessages } from "../utils/welcomeMessages.js";
+import DashboardMenu from "../components/DashboardMenu.jsx";
 
 //COMPONENTS
 import EventCard from "../components/EventCard";
@@ -27,10 +28,11 @@ const Dashboard = () => {
       animate={{ opacity: 1 }}
       transition={{ duration: 1.5 }}
     >
+      <DashboardMenu/>
       <section className="dashboard">
         {user ? (
           <>
-            <div className="logo">
+            {/* <div className="logo">
               <h1>Hello, {user.name}!</h1>
               <p className="welcome-message">
                 {welcomeMessages[randomMessage]}
@@ -38,6 +40,13 @@ const Dashboard = () => {
               {user.picture ? (
                 <img className="user-picture" src={user.picture.url} alt="" />
               ) : null}
+            </div> */}
+
+            <div className="logo">
+              <h1>Hello, {user.name}!</h1>
+              <p className="welcome-message">
+                {welcomeMessages[randomMessage]}
+              </p>
             </div>
 
             {userEvents.length > 0 ? (
@@ -68,25 +77,6 @@ const Dashboard = () => {
                   </div>
                 </section>
               </motion.div>
-            ) : null}
-            {userEvents.length > 0 ? (
-              <section className="dashboard-events">
-                <h2>Past Events</h2>
-                {userEvents.map((event) =>
-                  new Date(event.date.start) < today ? (
-                    <div key={event._id}>
-                      <Link to={`/event/${event._id}`}>
-                        <EventCard
-                          date={event.date}
-                          title={event.title}
-                          location={event.location}
-                          picture={event.picture.url}
-                        />
-                      </Link>
-                    </div>
-                  ) : null
-                )}
-              </section>
             ) : null}
           </>
         ) : null}
