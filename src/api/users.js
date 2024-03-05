@@ -91,3 +91,4 @@ export const getUserNames = async (contacts, token, setNames) => {
     console.error(error);
   }
 };
+

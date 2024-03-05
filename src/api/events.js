@@ -72,31 +72,6 @@ export const getEvent = async (
   }
 };
 
-export const addParticipant = async (
-  participantId,
-  token,
-  eventId,
-  setEventData
-) => {
-  console.log("addParticipant", participantId, token, eventId);
-  try {
-    const response = await axios.put(
-      `${SERVER}/events/${eventId}/participants/add`,
-      { participant: participantId },
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
-    console.log("participants", response.data);
-    setEventData((prev) => ({ ...prev, participants: response.data }));
-  } catch (error) {
-    console.log(error);
-  }
-};
-
 export const removeParticipant = async (
   participantId,
   token,
@@ -120,3 +95,70 @@ export const removeParticipant = async (
     console.log(error);
   }
 };
+export const getInvitations = async (eventId, token, setInvitations) => {
+  try {
+    const response = await axios.get(`${SERVER}/invitations/event/${eventId}`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    console.log(response.data, "INVITED");
+    setInvitations(response.data);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+// export const addParticipant = async (
+//   participantId,
+//   token,
+//   eventId,
+//   setEventData
+// ) => {
+//   console.log("addParticipant", participantId, token, eventId);
+//   try {
+//     const response = await axios.put(
+//       `${SERVER}/events/${eventId}/participants/add`,
+//       { participant: participantId },
+//       {
+//         headers: {
+//           "Content-Type": "application/json",
+//           Authorization: `Bearer ${token}`,
+//         },
+//       }
+//     );
+//     console.log("participants", response.data);
+//     setEventData((prev) => ({ ...prev, participants: response.data }));
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
+
+export const inviteParticipant = async (
+  userId,
+  participantId,
+  token,
+  eventId,
+  setInvitations
+) => {
+  try {
+    const response = await axios.post(
+      `${SERVER}/invitations/event/${eventId}`,
+      {
+        invited: participantId,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    console.log(response.data);
+    setInvitations((prev) => [...prev, response.data]);
+  } catch (error) {
+    console.error(error);
+  }
+};
+

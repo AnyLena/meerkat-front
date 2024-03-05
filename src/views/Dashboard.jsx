@@ -5,20 +5,24 @@ import { welcomeMessages } from "../utils/welcomeMessages.js";
 
 //COMPONENTS
 import EventCard from "../components/EventCard";
+import Notifications from "../components/Notifications";
 
 //STYLES
 import "../styles/dashboard.css";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { getMyInvitations } from "../api/invitations.js";
 
 const Dashboard = () => {
   const { user, token } = useAuth();
   const [userEvents, setUserEvents] = useState([]);
+  const [invitations, setInvitations] = useState([]);
   const today = new Date();
   const randomMessage = Math.floor(Math.random() * welcomeMessages.length);
 
   useEffect(() => {
     fetchUserEvents(setUserEvents, token);
+    getMyInvitations(token, setInvitations);
   }, []);
 
   return (
@@ -31,10 +35,14 @@ const Dashboard = () => {
         {user ? (
           <>
             <div className="logo">
-              <h1>Hello, {user.name}!</h1>
+              {/* <h1>Hello, {user.name}!</h1>
               <p className="welcome-message">
                 {welcomeMessages[randomMessage]}
-              </p>
+              </p> */}
+              <Notifications
+                invitations={invitations}
+                setInvitations={setInvitations}
+              />
               {user.picture ? (
                 <img className="user-picture" src={user.picture.url} alt="" />
               ) : null}

@@ -98,7 +98,7 @@ button {
       background-color: var(--secondary-color);
     }
   }
-  &.btn-edit {
+  &.btn-icon {
     font-size: 30px;
     margin: 0;
     padding:10px 8px 10px 12px ;
@@ -115,6 +115,14 @@ button {
     padding: 10px;
     min-width: 0px;
     border-radius: 2px;
+  }
+  &.btn-disabled {
+    background-color: rgb(241, 241, 241);
+    color: #9a9a9a;
+    padding: .5rem;
+    border: none;
+    transition: 0.3s;
+    margin-left: auto;
   }
 }
 

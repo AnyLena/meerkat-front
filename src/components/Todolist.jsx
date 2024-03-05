@@ -9,25 +9,31 @@ import {
   FormControl,
   Tooltip,
 } from "@mui/material";
-import { FaRegEdit } from "react-icons/fa";
+import { FaRegEdit, FaRegTrashAlt } from "react-icons/fa";
 import { FaRegCircleCheck, FaRegCircle } from "react-icons/fa6";
 import "../styles/todolist.css";
 import { useAuth } from "../context/useAuth";
 import Zoom from "@mui/material/Zoom";
 import { toggleTodo } from "../api/todos.js";
-import { addTodo } from "../api/todos.js";
+import { addTodo, deleteTodo, editTodo } from "../api/todos.js";
 
 const Todolist = ({ eventData, setEventData }) => {
   const { token, user } = useAuth();
-  const [formData, setFormData] = useState({
-    assignee: user._id,
-    title: "",
-  });
+
   const [participantList, setParticipantList] = useState(
     eventData.participants
   );
   const [todoList, setTodoList] = useState(eventData.todos);
 
+  //STATES FOR TO-DO_EDITING
+  const [formData, setFormData] = useState({
+    assignee: user._id,
+    title: "",
+  });
+  const [isEditing, setIsEditing] = useState(false);
+  const [currentTodo, setCurrentTodo] = useState({});
+
+  // EVENT HANDLERS FOR TO-DOS
   const handleAdd = async () => {
     addTodo(eventData._id, formData, token, setEventData);
 
@@ -46,8 +52,43 @@ const Todolist = ({ eventData, setEventData }) => {
     toggleTodo(eventData._id, todoId, token, formData, setEventData);
   };
 
-  const handleEdit = () => {
-    console.log("edit");
+  const handleEdit = (todo) => {
+    if (currentTodo === null) {
+      setCurrentTodo(todo);
+      setIsEditing(true)
+    }
+    if (todo._id === currentTodo._id) {
+      setIsEditing(!isEditing);
+    } else if (todo._id !== currentTodo._id) {
+      setIsEditing(true);
+    } else {
+      setIsEditing(true);
+    }
+    setCurrentTodo(todo);
+  };
+
+  const handleInputTodo = (e) => {
+    console.log(e.target.value);
+    console.log(currentTodo);
+    const todoTitle = e.target.value;
+    setCurrentTodo((prev) => ({ ...prev, title: todoTitle }));
+  };
+
+  const handleChangeTodo = (event) => {
+    const todoAssignee = event.target.value;
+    setCurrentTodo((prev) => ({ ...prev, assignee: todoAssignee }));
+  };
+
+  const handleSave = () => {
+    editTodo(eventData._id, currentTodo, token, setEventData);
+    setIsEditing(false);
+    setCurrentTodo(null);
+  };
+
+  const handleDelete = (todoId) => {
+    deleteTodo(eventData._id, todoId, token, setEventData);
+    setIsEditing(false);
+    setCurrentTodo(null);
   };
 
   const handleChange = (event) => {
@@ -77,23 +118,20 @@ const Todolist = ({ eventData, setEventData }) => {
         assignee = eventData.owner;
       }
     }
-
     if (assignee && value === "name") {
       return assignee.name;
     }
-
     if (assignee && value === "picture" && assignee.picture) {
       return assignee.picture.url;
     }
-
     return "Assign Task";
   };
 
   useEffect(() => {
     setParticipantList(eventData.participants);
     setTodoList(eventData.todos);
-    console.log(eventData)
-    console.log(user)
+    console.log(eventData);
+    console.log(user);
   }, [eventData]);
 
   return (
@@ -103,43 +141,155 @@ const Todolist = ({ eventData, setEventData }) => {
       ) : null}
       <section className="todo-list">
         {todoList.map((todo, index) => (
-          <div className="todo-item" key={index}>
-            <Button onClick={handleToggle} id={todo._id} className="btn-check">
-              {todo.done ? <FaRegCircleCheck /> : <FaRegCircle />}
-            </Button>
-            <p>{todo.title}</p>
-            <Tooltip
-              title={getAssigned(todo, "name")}
-              TransitionComponent={Zoom}
-              arrow={false}
-              placement="top"
-              PopperProps={{
-                popperOptions: {
-                  modifiers: [
-                    {
-                      name: "offset",
-                      options: {
-                        offset: [0, -50],
-                      },
-                    },
-                  ],
-                },
-              }}
-            >
-              <div className="center-item">
-                <img
-                  className="profile-small"
-                  src={getAssigned(todo, "picture")}
-                  alt=""
-                />
-              </div>
-            </Tooltip>
-
-            <div className="center-item">
-              <Button className="btn-edit" onClick={handleEdit}>
-                <FaRegEdit />
+          <div
+            className={
+              user._id === eventData.owner._id &&
+              user._id === todo.assignee &&
+              !todo.done
+                ? "todo-item grid4 item-alert"
+                : user._id === eventData.owner._id
+                ? "todo-item grid4"
+                : user._id !== eventData.owner._id &&
+                  user._id === todo.assignee &&
+                  !todo.done
+                ? "todo-item grid3 item-alert"
+                : "todo-item grid3"
+            }
+            key={index}
+          >
+            {user._id === eventData.owner._id || user._id === todo.assignee ? (
+              <Button
+                onClick={handleToggle}
+                id={todo._id}
+                className={
+                  todo.done
+                    ? "btn-check btn-checked"
+                    : "btn-check btn-unchecked"
+                }
+              >
+                {todo.done ? <FaRegCircleCheck /> : <FaRegCircle />}
               </Button>
-            </div>
+            ) : (
+              <Tooltip
+                title={"You are not allowed to change todo-status."}
+                TransitionComponent={Zoom}
+                arrow={true}
+                placement="top"
+                PopperProps={{
+                  popperOptions: {
+                    modifiers: [
+                      {
+                        name: "offset",
+                        options: {
+                          offset: [0, -20],
+                        },
+                      },
+                    ],
+                  },
+                }}
+              >
+                <Button id={todo._id} className="btn-check btn-disabled">
+                  {todo.done ? <FaRegCircleCheck /> : <FaRegCircle />}
+                </Button>
+              </Tooltip>
+            )}
+
+            {isEditing && currentTodo._id === todo._id ? (
+              <TextField
+                label="Edit To-Do"
+                variant="outlined"
+                value={currentTodo.title}
+                onChange={handleInputTodo}
+              />
+            ) : (
+              <p>{todo.title}</p>
+            )}
+
+            {isEditing && currentTodo._id === todo._id ? (
+              <FormControl fullWidth>
+                <InputLabel id="demo-simple-select-label">Assign</InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="assign-participant"
+                  value={currentTodo.assignee}
+                  label="Assign"
+                  onChange={handleChangeTodo}
+                >
+                  <MenuItem key={user._id} value={user._id}>
+                    <img
+                      className="profile-small assign-img"
+                      src={user.picture.url}
+                      alt=""
+                    />
+                    {user.name}
+                  </MenuItem>
+                  {participantList.map((participant) => (
+                    <MenuItem key={participant._id} value={participant._id}>
+                      <img
+                        className="profile-small assign-img"
+                        src={participant.picture.url}
+                        alt=""
+                      />
+                      {participant.name}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            ) : (
+              <Tooltip
+                title={getAssigned(todo, "name")}
+                TransitionComponent={Zoom}
+                arrow={false}
+                placement="top"
+                PopperProps={{
+                  popperOptions: {
+                    modifiers: [
+                      {
+                        name: "offset",
+                        options: {
+                          offset: [0, -50],
+                        },
+                      },
+                    ],
+                  },
+                }}
+              >
+                <div className="center-item">
+                  <img
+                    className="profile-small"
+                    src={getAssigned(todo, "picture")}
+                    alt=""
+                  />
+                </div>
+              </Tooltip>
+            )}
+
+            {user._id === eventData.owner._id ? (
+              <div className="center-item">
+                <Button className="btn-icon" onClick={() => handleEdit(todo)}>
+                  <FaRegEdit />
+                </Button>
+              </div>
+            ) : null}
+
+            {isEditing && currentTodo._id === todo._id ? (
+              <>
+                <Button
+                  className="btn-icon btn-save"
+                  id="btn-save"
+                  onClick={handleSave}
+                >
+                  save
+                </Button>
+                <Button
+                  className="btn-icon btn-delete"
+                  id="btn-delete"
+                  onClick={() => handleDelete(todo._id)}
+                >
+                  <FaRegTrashAlt />
+                </Button>
+              </>
+            ) : null}
           </div>
         ))}
       </section>
