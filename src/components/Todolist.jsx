@@ -53,7 +53,17 @@ const Todolist = ({ eventData, setEventData }) => {
   };
 
   const handleEdit = (todo) => {
-    setIsEditing(true);
+    if (currentTodo === null) {
+      setCurrentTodo(todo);
+      setIsEditing(true)
+    }
+    if (todo._id === currentTodo._id) {
+      setIsEditing(!isEditing);
+    } else if (todo._id !== currentTodo._id) {
+      setIsEditing(true);
+    } else {
+      setIsEditing(true);
+    }
     setCurrentTodo(todo);
   };
 
@@ -133,12 +143,16 @@ const Todolist = ({ eventData, setEventData }) => {
         {todoList.map((todo, index) => (
           <div
             className={
-              user._id === eventData.owner._id && user._id === todo.assignee && !todo.done 
-                ? "todo-item grid4 item-alert" :
-                user._id === eventData.owner._id 
-                ? "todo-item grid4" :
-                user._id !== eventData.owner._id && user._id === todo.assignee && !todo.done 
-                ? "todo-item grid3 item-alert" 
+              user._id === eventData.owner._id &&
+              user._id === todo.assignee &&
+              !todo.done
+                ? "todo-item grid4 item-alert"
+                : user._id === eventData.owner._id
+                ? "todo-item grid4"
+                : user._id !== eventData.owner._id &&
+                  user._id === todo.assignee &&
+                  !todo.done
+                ? "todo-item grid3 item-alert"
                 : "todo-item grid3"
             }
             key={index}
@@ -182,11 +196,11 @@ const Todolist = ({ eventData, setEventData }) => {
 
             {isEditing && currentTodo._id === todo._id ? (
               <TextField
-              label="Edit To-Do"
-              variant="outlined"
-              value={currentTodo.title}
-              onChange={handleInputTodo}
-            />
+                label="Edit To-Do"
+                variant="outlined"
+                value={currentTodo.title}
+                onChange={handleInputTodo}
+              />
             ) : (
               <p>{todo.title}</p>
             )}
@@ -250,11 +264,13 @@ const Todolist = ({ eventData, setEventData }) => {
               </Tooltip>
             )}
 
-           {user._id === eventData.owner._id ? <div className="center-item">
-              <Button className="btn-icon" onClick={() => handleEdit(todo)}>
-                <FaRegEdit />
-              </Button>
-            </div>:null}
+            {user._id === eventData.owner._id ? (
+              <div className="center-item">
+                <Button className="btn-icon" onClick={() => handleEdit(todo)}>
+                  <FaRegEdit />
+                </Button>
+              </div>
+            ) : null}
 
             {isEditing && currentTodo._id === todo._id ? (
               <>
