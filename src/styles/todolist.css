@@ -12,7 +12,9 @@
     cursor: pointer;
     border: 4px solid var(--alert-color);
   }
-
+  .item-alert {
+    background-color: #ffe1cd;
+  }
   .todo-item {
     display: grid;
     grid-template-columns: 45px auto 130px 60px;
@@ -20,9 +22,45 @@
     gap: 10px;
     padding: 5px 10px;
     border-bottom: 1px solid var(--headingBG-color);
+
     .center-item {
       display: flex;
       justify-content: center;
+    }
+    .assign-img {
+      height: 20px;
+      width: 20px;
+      padding: 0;
+      margin: 0;
+      margin-right: 5px;
+    }
+    #assign-participant {
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  .btn-disabled svg {
+    fill: lightgrey;
+  }
+  .btn-unchecked svg {
+    fill: var(--alert-color);
+  }
+  .btn-checked svg {
+    fill: var(--primary-color);
+  }
+  .btn-save {
+    grid-area: 2/3/3/4;
+    font-size: 20px;
+    padding: 0px;
+    color: #222;
+  }
+  .btn-delete {
+    grid-area: 2/4/3/5;
+    font-size: 20px;
+    padding: 6px;
+    &:hover {
+      background-color: var(--alert-color);
     }
   }
 }
@@ -62,5 +100,8 @@
   .todo-owner form {
     display: grid;
     grid-template-columns: 1fr;
+  }
+  .btn-disabled {
+    background-color: red;
   }
 }

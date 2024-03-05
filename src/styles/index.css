@@ -98,7 +98,7 @@ button {
       background-color: var(--secondary-color);
     }
   }
-  &.btn-edit {
+  &.btn-icon {
     font-size: 30px;
     margin: 0;
     padding:10px 8px 10px 12px ;
