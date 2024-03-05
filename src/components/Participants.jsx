@@ -4,7 +4,11 @@ import "../styles/participants.css";
 import { useAuth } from "../context/useAuth";
 import { useEffect, useState } from "react";
 import { getUserNames } from "../api/users.js";
-import { addParticipant, removeParticipant } from "../api/events.js";
+import {
+  inviteParticipant,
+  removeParticipant,
+  getInvitations,
+} from "../api/events.js";
 import { IoIosClose } from "react-icons/io";
 import { Link } from "react-router-dom";
 
@@ -12,6 +16,7 @@ const Participants = ({ open, setOpen, setEventData, eventData }) => {
   const { user, token } = useAuth();
   const [contactsFilter, setContactsFilter] = useState({});
   const [contacts, setContacts] = useState({});
+  const [invitations, setInvitations] = useState(null);
 
   const style = {
     backgroundColor: "white",
@@ -25,7 +30,13 @@ const Participants = ({ open, setOpen, setEventData, eventData }) => {
 
   const handleAdd = (e) => {
     const participantId = e.target.id;
-    addParticipant(participantId, token, eventData._id, setEventData);
+    inviteParticipant(
+      user._id,
+      participantId,
+      token,
+      eventData._id,
+      setInvitations
+    );
   };
 
   const handleRemove = async (e) => {
@@ -45,6 +56,7 @@ const Participants = ({ open, setOpen, setEventData, eventData }) => {
 
   useEffect(() => {
     filterContacts();
+    getInvitations(eventData._id, token, setInvitations);
   }, [eventData]);
 
   useEffect(() => {
@@ -150,9 +162,31 @@ const Participants = ({ open, setOpen, setEventData, eventData }) => {
                                 <button
                                   onClick={handleAdd}
                                   id={participant._id}
-                                  className="btn-grey"
+                                  className={
+                                    invitations &&
+                                    invitations.find(
+                                      (invitation) =>
+                                        invitation.invited ===
+                                          participant._id &&
+                                        invitation.status === "pending"
+                                    )
+                                      ? "btn-disabled"
+                                      : "btn-grey"
+                                  }
+                                  disabled={invitations.find(
+                                    (invitation) =>
+                                      invitation.invited === participant._id &&
+                                      invitation.status === "pending"
+                                  )}
                                 >
-                                  add
+                                  {invitations &&
+                                  invitations.find(
+                                    (invitation) =>
+                                      invitation.invited === participant._id &&
+                                      invitation.status === "pending"
+                                  )
+                                    ? "pending"
+                                    : "invite"}
                                 </button>
                               ) : null}
                             </div>
