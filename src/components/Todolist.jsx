@@ -171,7 +171,7 @@ const Todolist = ({ eventData, setEventData }) => {
               </Button>
             ) : (
               <Tooltip
-                title={"You are not allowed to change todo-status."}
+                title={`This task is assigned to ${getAssigned(todo, "name")}`}
                 TransitionComponent={Zoom}
                 arrow={true}
                 placement="top"

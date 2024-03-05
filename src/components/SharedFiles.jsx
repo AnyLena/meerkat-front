@@ -27,16 +27,7 @@ const SharedFiles = ({ messages }) => {
                     className="file-icon"
                     onClick={() => window.open(message.file, "_blank")}
                   >
-                    <IoDocumentTextOutline
-                      style={{
-                        fontSize: "2.5rem",
-                        backgroundColor: "var(--secondary-color)",
-                        color: "white",
-                        borderRadius: "50%",
-                        padding: "0.5rem",
-                        marginBottom: "1rem",
-                      }}
-                    />
+                    <IoDocumentTextOutline className="icon" />
 
                     <p>
                       <span>

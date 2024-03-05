@@ -68,6 +68,7 @@ const Dashboard = () => {
                               messages={event.messages}
                               picture={event.picture.url}
                               host={event.owner.name}
+                              eventId={event._id}
                             />
                           </Link>
                         </div>

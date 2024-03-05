@@ -2,7 +2,7 @@ import axios from "axios";
 
 const SERVER = import.meta.env.VITE_SERVER;
 
-export const createEvent = async (formData, user) => {
+export const createEvent = async (formData, user, token, invitations, setInvitations) => {
   const date = new Date(formData.date);
   const time = new Date(formData.time);
   const dateTime = new Date(
@@ -29,6 +29,11 @@ export const createEvent = async (formData, user) => {
 
   try {
     const response = await axios.post(`${SERVER}/events`, data);
+    const eventId = response.data._id;
+    invitations.forEach((invited) => {
+      inviteParticipant(invited, token, eventId, setInvitations);
+    });
+
   } catch (error) {
     console.error(error);
   }
@@ -136,7 +141,6 @@ export const getInvitations = async (eventId, token, setInvitations) => {
 // };
 
 export const inviteParticipant = async (
-  userId,
   participantId,
   token,
   eventId,

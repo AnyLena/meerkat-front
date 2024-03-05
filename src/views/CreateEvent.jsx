@@ -35,12 +35,12 @@ const Form = () => {
     participants: [],
     image: "",
   });
-  const [personName, setPersonName] = useState([]);
   const navigate = useNavigate();
   const { user, token } = useAuth();
   const [names, setNames] = useState([]);
   const [isExploding, setIsExploding] = useState(false);
   const [selectedImage, setSelectedImage] = useState("");
+  const [invitations, setInvitations] = useState([]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -57,16 +57,6 @@ const Form = () => {
     window.scrollTo(0, 0);
   };
 
-  const handleChipChange = (event) => {
-    const {
-      target: { value },
-    } = event;
-    setPersonName(typeof value === "string" ? value.split(",") : value);
-    let participantsIds = names.filter((name) => value.includes(name.name));
-    participantsIds = participantsIds.map((participant) => participant._id);
-    setFormData({ ...formData, participants: participantsIds });
-  };
-
   const handleSelectImage = (key, value) => {
     setFormData({ ...formData, [key]: value });
     setSelectedImage(value);
@@ -78,7 +68,7 @@ const Form = () => {
   };
 
   const handleSubmit = () => {
-    createEvent(formData, user);
+    createEvent(formData, user, token, invitations, setInvitations);
     setIsExploding(true);
     setTimeout(() => {
       setIsExploding(false);
@@ -140,9 +130,9 @@ const Form = () => {
               formStep={formStep}
               handleNext={handleNext}
               handleBack={handleBack}
-              personName={personName}
-              handleChipChange={handleChipChange}
               names={names}
+              invitations={invitations}
+              setInvitations={setInvitations}
             />
 
             <ImageStep
