@@ -43,3 +43,39 @@ export const toggleTodo = async (
     console.error(error);
   }
 };
+
+export const editTodo = async (eventId, currentTodo, token, setEventData) => {
+  const todoId = currentTodo._id;
+  try {
+    const response = await axios.put(
+      `${SERVER}/events/${eventId}/todos/${todoId}/edit`, currentTodo, 
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    setEventData((prev) => ({ ...prev, todos: response.data }));
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+
+export const deleteTodo = async (eventId, todoId, token, setEventData) => {
+  try {
+    const response = await axios.delete(
+      `${SERVER}/events/${eventId}/todos/${todoId}`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    setEventData((prev) => ({ ...prev, todos: response.data }));
+  } catch (error) {
+    console.error(error);
+  }
+};

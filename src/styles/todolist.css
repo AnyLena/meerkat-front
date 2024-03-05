@@ -27,17 +27,34 @@
       display: flex;
       justify-content: center;
     }
-
-    
+    input {
+      font-size: 16px;
+      padding: 5px;
+    }
   }
   .btn-disabled svg {
-    fill: #222;
+    fill: lightgrey;
   }
   .btn-unchecked svg {
     fill: var(--alert-color);
   }
   .btn-checked svg {
     fill: var(--primary-color);
+  }
+  .btn-save {
+    grid-area: 2/3/3/4;
+    font-size: 20px;
+    padding:0px;
+    color: #222
+
+  }
+  .btn-delete {
+    grid-area: 2/4/3/5;
+    font-size: 20px;
+    padding:6px;
+    &:hover {
+      background-color: var(--alert-color);
+    }
   }
 }
 

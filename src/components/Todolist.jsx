@@ -9,13 +9,13 @@ import {
   FormControl,
   Tooltip,
 } from "@mui/material";
-import { FaRegEdit } from "react-icons/fa";
+import { FaRegEdit, FaRegTrashAlt } from "react-icons/fa";
 import { FaRegCircleCheck, FaRegCircle } from "react-icons/fa6";
 import "../styles/todolist.css";
 import { useAuth } from "../context/useAuth";
 import Zoom from "@mui/material/Zoom";
 import { toggleTodo } from "../api/todos.js";
-import { addTodo } from "../api/todos.js";
+import { addTodo, deleteTodo, editTodo } from "../api/todos.js";
 
 const Todolist = ({ eventData, setEventData }) => {
   const { token, user } = useAuth();
@@ -27,6 +27,8 @@ const Todolist = ({ eventData, setEventData }) => {
     eventData.participants
   );
   const [todoList, setTodoList] = useState(eventData.todos);
+  const [isEditing, setIsEditing] = useState(false);
+  const [currentTodo, setCurrentTodo] = useState({});
 
   const handleAdd = async () => {
     addTodo(eventData._id, formData, token, setEventData);
@@ -46,8 +48,33 @@ const Todolist = ({ eventData, setEventData }) => {
     toggleTodo(eventData._id, todoId, token, formData, setEventData);
   };
 
-  const handleEdit = () => {
-    console.log("edit");
+  const handleEdit = (todo) => {
+    setIsEditing(true);
+    setCurrentTodo(todo);
+  };
+
+  const handleInputTodo = (e) => {
+    console.log(e.target.value)
+    console.log(currentTodo)
+    const todoTitle = e.target.value
+    setCurrentTodo(prev => ({...prev, title: todoTitle}))
+  }
+
+  const handleChangeTodo = (event) => {
+    const todoAssignee = event.target.value;
+    setCurrentTodo((prev) => ({ ...prev,assignee: todoAssignee }));
+  };
+
+  const handleSave = () => {
+    editTodo(eventData._id, currentTodo, token, setEventData)
+    setIsEditing(false)
+    setCurrentTodo(null)
+  };
+
+  const handleDelete = (todoId) => {
+    deleteTodo(eventData._id, todoId, token, setEventData)
+    setIsEditing(false)
+    setCurrentTodo(null)
   };
 
   const handleChange = (event) => {
@@ -103,12 +130,23 @@ const Todolist = ({ eventData, setEventData }) => {
       ) : null}
       <section className="todo-list">
         {todoList.map((todo, index) => (
-          <div className={user._id === todo.assignee && !todo.done ? "todo-item item-alert" : "todo-item"} key={index}>
+          <div
+            className={
+              user._id === todo.assignee && !todo.done
+                ? "todo-item item-alert"
+                : "todo-item"
+            }
+            key={index}
+          >
             {user._id === eventData.owner._id || user._id === todo.assignee ? (
               <Button
                 onClick={handleToggle}
                 id={todo._id}
-                className={todo.done ? "btn-check btn-checked" : "btn-check btn-unchecked"}
+                className={
+                  todo.done
+                    ? "btn-check btn-checked"
+                    : "btn-check btn-unchecked"
+                }
               >
                 {todo.done ? <FaRegCircleCheck /> : <FaRegCircle />}
               </Button>
@@ -132,11 +170,46 @@ const Todolist = ({ eventData, setEventData }) => {
                 }}
               >
                 <Button id={todo._id} className="btn-check btn-disabled">
-                  {todo.done ? <FaRegCircleCheck/> : <FaRegCircle />}
+                  {todo.done ? <FaRegCircleCheck /> : <FaRegCircle />}
                 </Button>
               </Tooltip>
             )}
-            <p>{todo.title}</p>
+
+           {isEditing &&  currentTodo._id === todo._id ? 
+           <input type="text" value={currentTodo.title} onChange={handleInputTodo}/> :
+            <p>{todo.title}</p> }
+           
+          { isEditing && currentTodo._id === todo._id ?
+           <FormControl fullWidth>
+              <InputLabel id="demo-simple-select-label">Assign</InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="assign-participant"
+                value={currentTodo.assignee}
+                label="Assign"
+                onChange={handleChangeTodo}
+              >
+                <MenuItem key={user._id} value={user._id}>
+                  <img
+                    className="profile-small assign-img"
+                    src={user.picture.url}
+                    alt=""
+                  />
+                  {user.name}
+                </MenuItem>
+                {participantList.map((participant) => (
+                  <MenuItem key={participant._id} value={participant._id}>
+                    <img
+                      className="profile-small assign-img"
+                      src={participant.picture.url}
+                      alt=""
+                    />
+                    {participant.name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+            :
             <Tooltip
               title={getAssigned(todo, "name")}
               TransitionComponent={Zoom}
@@ -162,13 +235,32 @@ const Todolist = ({ eventData, setEventData }) => {
                   alt=""
                 />
               </div>
-            </Tooltip>
+            </Tooltip>}
 
             <div className="center-item">
-              <Button className="btn-edit" onClick={handleEdit}>
+              <Button className="btn-icon" onClick={() => handleEdit(todo)}>
                 <FaRegEdit />
               </Button>
             </div>
+
+            {isEditing && currentTodo._id === todo._id ? (
+              <>
+                <Button
+                  className="btn-icon btn-save"
+                  id="btn-save"
+                  onClick={handleSave}
+                >
+                  save
+                </Button>
+                <Button
+                  className="btn-icon btn-delete"
+                  id="btn-delete"
+                  onClick={()=>handleDelete(todo._id)}
+                >
+                  <FaRegTrashAlt />
+                </Button>
+              </>
+            ) : null}
           </div>
         ))}
       </section>
