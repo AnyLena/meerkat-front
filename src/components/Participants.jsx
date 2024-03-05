@@ -175,7 +175,8 @@ const Participants = ({ open, setOpen, setEventData, eventData }) => {
                                   }
                                   disabled={invitations.find(
                                     (invitation) =>
-                                      invitation.invited === participant._id
+                                      invitation.invited === participant._id &&
+                                      invitation.status === "pending"
                                   )}
                                 >
                                   {invitations &&
