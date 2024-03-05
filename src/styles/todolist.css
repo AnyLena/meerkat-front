@@ -27,11 +27,19 @@
       display: flex;
       justify-content: center;
     }
-    input {
-      font-size: 16px;
-      padding: 5px;
+    .assign-img {
+      height: 20px;
+      width: 20px;
+      padding: 0;
+      margin: 0;
+      margin-right: 5px;
+    }
+    #assign-participant {
+      display: flex;
+      align-items: center;
     }
   }
+
   .btn-disabled svg {
     fill: lightgrey;
   }
@@ -44,14 +52,13 @@
   .btn-save {
     grid-area: 2/3/3/4;
     font-size: 20px;
-    padding:0px;
-    color: #222
-
+    padding: 0px;
+    color: #222;
   }
   .btn-delete {
     grid-area: 2/4/3/5;
     font-size: 20px;
-    padding:6px;
+    padding: 6px;
     &:hover {
       background-color: var(--alert-color);
     }

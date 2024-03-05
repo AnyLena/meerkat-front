@@ -19,17 +19,21 @@ import { addTodo, deleteTodo, editTodo } from "../api/todos.js";
 
 const Todolist = ({ eventData, setEventData }) => {
   const { token, user } = useAuth();
-  const [formData, setFormData] = useState({
-    assignee: user._id,
-    title: "",
-  });
+
   const [participantList, setParticipantList] = useState(
     eventData.participants
   );
   const [todoList, setTodoList] = useState(eventData.todos);
+
+  //STATES FOR TO-DO_EDITING
+  const [formData, setFormData] = useState({
+    assignee: user._id,
+    title: "",
+  });
   const [isEditing, setIsEditing] = useState(false);
   const [currentTodo, setCurrentTodo] = useState({});
 
+  // EVENT HANDLERS FOR TO-DOS
   const handleAdd = async () => {
     addTodo(eventData._id, formData, token, setEventData);
 
@@ -54,27 +58,27 @@ const Todolist = ({ eventData, setEventData }) => {
   };
 
   const handleInputTodo = (e) => {
-    console.log(e.target.value)
-    console.log(currentTodo)
-    const todoTitle = e.target.value
-    setCurrentTodo(prev => ({...prev, title: todoTitle}))
-  }
+    console.log(e.target.value);
+    console.log(currentTodo);
+    const todoTitle = e.target.value;
+    setCurrentTodo((prev) => ({ ...prev, title: todoTitle }));
+  };
 
   const handleChangeTodo = (event) => {
     const todoAssignee = event.target.value;
-    setCurrentTodo((prev) => ({ ...prev,assignee: todoAssignee }));
+    setCurrentTodo((prev) => ({ ...prev, assignee: todoAssignee }));
   };
 
   const handleSave = () => {
-    editTodo(eventData._id, currentTodo, token, setEventData)
-    setIsEditing(false)
-    setCurrentTodo(null)
+    editTodo(eventData._id, currentTodo, token, setEventData);
+    setIsEditing(false);
+    setCurrentTodo(null);
   };
 
   const handleDelete = (todoId) => {
-    deleteTodo(eventData._id, todoId, token, setEventData)
-    setIsEditing(false)
-    setCurrentTodo(null)
+    deleteTodo(eventData._id, todoId, token, setEventData);
+    setIsEditing(false);
+    setCurrentTodo(null);
   };
 
   const handleChange = (event) => {
@@ -104,15 +108,12 @@ const Todolist = ({ eventData, setEventData }) => {
         assignee = eventData.owner;
       }
     }
-
     if (assignee && value === "name") {
       return assignee.name;
     }
-
     if (assignee && value === "picture" && assignee.picture) {
       return assignee.picture.url;
     }
-
     return "Assign Task";
   };
 
@@ -175,67 +176,75 @@ const Todolist = ({ eventData, setEventData }) => {
               </Tooltip>
             )}
 
-           {isEditing &&  currentTodo._id === todo._id ? 
-           <input type="text" value={currentTodo.title} onChange={handleInputTodo}/> :
-            <p>{todo.title}</p> }
-           
-          { isEditing && currentTodo._id === todo._id ?
-           <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-label">Assign</InputLabel>
-              <Select
-                labelId="demo-simple-select-label"
-                id="assign-participant"
-                value={currentTodo.assignee}
-                label="Assign"
-                onChange={handleChangeTodo}
-              >
-                <MenuItem key={user._id} value={user._id}>
-                  <img
-                    className="profile-small assign-img"
-                    src={user.picture.url}
-                    alt=""
-                  />
-                  {user.name}
-                </MenuItem>
-                {participantList.map((participant) => (
-                  <MenuItem key={participant._id} value={participant._id}>
+            {isEditing && currentTodo._id === todo._id ? (
+              <TextField
+              label="Edit To-Do"
+              variant="outlined"
+              value={currentTodo.title}
+              onChange={handleInputTodo}
+            />
+            ) : (
+              <p>{todo.title}</p>
+            )}
+
+            {isEditing && currentTodo._id === todo._id ? (
+              <FormControl fullWidth>
+                <InputLabel id="demo-simple-select-label">Assign</InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="assign-participant"
+                  value={currentTodo.assignee}
+                  label="Assign"
+                  onChange={handleChangeTodo}
+                >
+                  <MenuItem key={user._id} value={user._id}>
                     <img
                       className="profile-small assign-img"
-                      src={participant.picture.url}
+                      src={user.picture.url}
                       alt=""
                     />
-                    {participant.name}
+                    {user.name}
                   </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-            :
-            <Tooltip
-              title={getAssigned(todo, "name")}
-              TransitionComponent={Zoom}
-              arrow={false}
-              placement="top"
-              PopperProps={{
-                popperOptions: {
-                  modifiers: [
-                    {
-                      name: "offset",
-                      options: {
-                        offset: [0, -50],
+                  {participantList.map((participant) => (
+                    <MenuItem key={participant._id} value={participant._id}>
+                      <img
+                        className="profile-small assign-img"
+                        src={participant.picture.url}
+                        alt=""
+                      />
+                      {participant.name}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            ) : (
+              <Tooltip
+                title={getAssigned(todo, "name")}
+                TransitionComponent={Zoom}
+                arrow={false}
+                placement="top"
+                PopperProps={{
+                  popperOptions: {
+                    modifiers: [
+                      {
+                        name: "offset",
+                        options: {
+                          offset: [0, -50],
+                        },
                       },
-                    },
-                  ],
-                },
-              }}
-            >
-              <div className="center-item">
-                <img
-                  className="profile-small"
-                  src={getAssigned(todo, "picture")}
-                  alt=""
-                />
-              </div>
-            </Tooltip>}
+                    ],
+                  },
+                }}
+              >
+                <div className="center-item">
+                  <img
+                    className="profile-small"
+                    src={getAssigned(todo, "picture")}
+                    alt=""
+                  />
+                </div>
+              </Tooltip>
+            )}
 
             <div className="center-item">
               <Button className="btn-icon" onClick={() => handleEdit(todo)}>
@@ -255,7 +264,7 @@ const Todolist = ({ eventData, setEventData }) => {
                 <Button
                   className="btn-icon btn-delete"
                   id="btn-delete"
-                  onClick={()=>handleDelete(todo._id)}
+                  onClick={() => handleDelete(todo._id)}
                 >
                   <FaRegTrashAlt />
                 </Button>
