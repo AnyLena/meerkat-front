@@ -133,9 +133,13 @@ const Todolist = ({ eventData, setEventData }) => {
         {todoList.map((todo, index) => (
           <div
             className={
-              user._id === todo.assignee && !todo.done
-                ? "todo-item item-alert"
-                : "todo-item"
+              user._id === eventData.owner._id && user._id === todo.assignee && !todo.done 
+                ? "todo-item grid4 item-alert" :
+                user._id === eventData.owner._id 
+                ? "todo-item grid4" :
+                user._id !== eventData.owner._id && user._id === todo.assignee && !todo.done 
+                ? "todo-item grid3 item-alert" 
+                : "todo-item grid3"
             }
             key={index}
           >
@@ -246,11 +250,11 @@ const Todolist = ({ eventData, setEventData }) => {
               </Tooltip>
             )}
 
-            <div className="center-item">
+           {user._id === eventData.owner._id ? <div className="center-item">
               <Button className="btn-icon" onClick={() => handleEdit(todo)}>
                 <FaRegEdit />
               </Button>
-            </div>
+            </div>:null}
 
             {isEditing && currentTodo._id === todo._id ? (
               <>
