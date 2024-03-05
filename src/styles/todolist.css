@@ -12,7 +12,9 @@
     cursor: pointer;
     border: 4px solid var(--alert-color);
   }
-
+  .item-alert {
+    background-color: #ffe1cd;
+  }
   .todo-item {
     display: grid;
     grid-template-columns: 45px auto 130px 60px;
@@ -20,10 +22,22 @@
     gap: 10px;
     padding: 5px 10px;
     border-bottom: 1px solid var(--headingBG-color);
+
     .center-item {
       display: flex;
       justify-content: center;
     }
+
+    
+  }
+  .btn-disabled svg {
+    fill: #222;
+  }
+  .btn-unchecked svg {
+    fill: var(--alert-color);
+  }
+  .btn-checked svg {
+    fill: var(--primary-color);
   }
 }
 
@@ -62,5 +76,8 @@
   .todo-owner form {
     display: grid;
     grid-template-columns: 1fr;
+  }
+  .btn-disabled {
+    background-color: red;
   }
 }

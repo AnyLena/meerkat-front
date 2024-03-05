@@ -92,8 +92,8 @@ const Todolist = ({ eventData, setEventData }) => {
   useEffect(() => {
     setParticipantList(eventData.participants);
     setTodoList(eventData.todos);
-    console.log(eventData)
-    console.log(user)
+    console.log(eventData);
+    console.log(user);
   }, [eventData]);
 
   return (
@@ -103,10 +103,39 @@ const Todolist = ({ eventData, setEventData }) => {
       ) : null}
       <section className="todo-list">
         {todoList.map((todo, index) => (
-          <div className="todo-item" key={index}>
-            <Button onClick={handleToggle} id={todo._id} className="btn-check">
-              {todo.done ? <FaRegCircleCheck /> : <FaRegCircle />}
-            </Button>
+          <div className={user._id === todo.assignee && !todo.done ? "todo-item item-alert" : "todo-item"} key={index}>
+            {user._id === eventData.owner._id || user._id === todo.assignee ? (
+              <Button
+                onClick={handleToggle}
+                id={todo._id}
+                className={todo.done ? "btn-check btn-checked" : "btn-check btn-unchecked"}
+              >
+                {todo.done ? <FaRegCircleCheck /> : <FaRegCircle />}
+              </Button>
+            ) : (
+              <Tooltip
+                title={"You are not allowed to change todo-status."}
+                TransitionComponent={Zoom}
+                arrow={true}
+                placement="top"
+                PopperProps={{
+                  popperOptions: {
+                    modifiers: [
+                      {
+                        name: "offset",
+                        options: {
+                          offset: [0, -20],
+                        },
+                      },
+                    ],
+                  },
+                }}
+              >
+                <Button id={todo._id} className="btn-check btn-disabled">
+                  {todo.done ? <FaRegCircleCheck/> : <FaRegCircle />}
+                </Button>
+              </Tooltip>
+            )}
             <p>{todo.title}</p>
             <Tooltip
               title={getAssigned(todo, "name")}
