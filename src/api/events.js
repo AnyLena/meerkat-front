@@ -2,7 +2,13 @@ import axios from "axios";
 
 const SERVER = import.meta.env.VITE_SERVER;
 
-export const createEvent = async (formData, user, token, invitations, setInvitations) => {
+export const createEvent = async (
+  formData,
+  user,
+  token,
+  invitations,
+  setInvitations
+) => {
   const date = new Date(formData.date);
   const time = new Date(formData.time);
   const dateTime = new Date(
@@ -33,7 +39,6 @@ export const createEvent = async (formData, user, token, invitations, setInvitat
     invitations.forEach((invited) => {
       inviteParticipant(invited, token, eventId, setInvitations);
     });
-
   } catch (error) {
     console.error(error);
   }
@@ -166,3 +171,21 @@ export const inviteParticipant = async (
   }
 };
 
+export const putEvent = async (eventId, token, data, setEventData) => {
+  console.log(data, "PUT EVENT");
+  try {
+    const response = await axios.put(
+      `${SERVER}/events/${eventId}`,
+      { data },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    setEventData((prev) => ({ ...prev, ...response.data }));
+  } catch (error) {
+    console.error(error);
+  }
+};

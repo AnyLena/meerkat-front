@@ -5,7 +5,7 @@
   background-attachment: fixed;
   height: auto;
   margin-bottom: 4rem;
-  
+
   @media screen and (max-width: 768px) {
     background-size: 800px auto;
     background-position: center top;
@@ -52,7 +52,7 @@
   margin: 0;
   max-width: 800px;
   margin: auto;
-  
+
   h1 {
     position: relative;
     top: 50%;
@@ -61,7 +61,7 @@
     text-align: center;
     padding: 20px 0 60px 0;
   }
-  
+
   .header {
     margin-top: 40vh;
     background-color: rgba(255, 255, 255, 0.7);
@@ -83,17 +83,53 @@
   }
 
   .text {
+    display: flex;
+    justify-content: space-between;
     font-size: 1.2rem;
     margin: 1rem;
+    align-items: center;
+    input {
+      width: 80%;
+      padding: 0.5rem;
+      border: none;
+      font-size: 1rem;
+      &:focus {
+        border: 2px solid var(--primary-color);
+        border-radius: 10px;
+        outline: none;
+      }
+
+    }
+    .buttons {
+      display: flex;
+      .save-btn,
+      .edit-btn {
+        padding: 0.5rem;
+        border: none;
+        cursor: pointer;
+        transition: 0.3s;
+        margin-left: 1rem;
+        &:active {
+          transform: scale(0.95);
+        }
+      }
+      .save-btn {
+        background-color: var(--secondary-color);
+        color: black;
+      }
+      .edit-btn {
+        background-color: rgb(230, 230, 230);
+      }
+    }
   }
-  
+
   h2 {
     margin-top: 50px;
   }
 
   .participants {
     margin: 30px 5px;
-    
+
     .flex-container {
       display: flex;
       justify-content: space-between;
@@ -104,7 +140,7 @@
       display: grid;
       grid-template-columns: repeat(5, 30px);
     }
-    
+
     .profile-img {
       height: 40px;
       width: 40px;
@@ -127,4 +163,4 @@
       border-radius: 10px;
     }
   }
-} 
+}
