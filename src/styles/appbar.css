@@ -6,5 +6,15 @@
     button {
        font-family: "Oswald"
     }
+    .welcome-message {
+        color: white;
+        font-size: 1.3rem;
+        margin: 0 20px;
+
+        span {
+            font-weight: bold;
+            color: white;
+        }
+    }
 }
 

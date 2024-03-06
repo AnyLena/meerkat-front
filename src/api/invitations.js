@@ -70,13 +70,14 @@ export const acceptInvitation = async (invitationId, token, setInvitations) => {
     );
     console.log(response.data, "ACCEPTED");
 
-    setInvitations((prev) =>
-      prev.map((invitation) =>
-        invitation._id === invitationId
-          ? { ...invitation, status: "accepted" }
-          : invitation
-      )
-    );
+    // setInvitations((prev) =>
+    //   prev.map((invitation) =>
+    //     invitation._id === invitationId
+    //       ? { ...invitation, status: "accepted" }
+    //       : invitation
+    //   )
+    // );
+    setInvitations((prev) => prev.filter((inv) => inv._id !== invitationId));
   } catch (error) {
     console.error(error);
   }
