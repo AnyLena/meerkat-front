@@ -116,6 +116,14 @@ button {
     min-width: 0px;
     border-radius: 2px;
   }
+  &.btn-disabled {
+    background-color: rgb(241, 241, 241);
+    color: #9a9a9a;
+    padding: .5rem;
+    border: none;
+    transition: 0.3s;
+    margin-left: auto;
+  }
 }
 
 img {

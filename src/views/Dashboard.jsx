@@ -6,20 +6,24 @@ import DashboardMenu from "../components/DashboardMenu.jsx";
 
 //COMPONENTS
 import EventCard from "../components/EventCard";
+import Notifications from "../components/Notifications";
 
 //STYLES
 import "../styles/dashboard.css";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { getMyInvitations } from "../api/invitations.js";
 
 const Dashboard = () => {
   const { user, token } = useAuth();
   const [userEvents, setUserEvents] = useState([]);
+  const [invitations, setInvitations] = useState([]);
   const today = new Date();
   const randomMessage = Math.floor(Math.random() * welcomeMessages.length);
 
   useEffect(() => {
     fetchUserEvents(setUserEvents, token);
+    getMyInvitations(token, setInvitations);
   }, []);
 
   useEffect(() => {
@@ -37,22 +41,31 @@ const Dashboard = () => {
       <section className="dashboard">
         {user ? (
           <>
+
+         
             {/* <div className="logo">
               <h1>Hello, {user.name}!</h1>
               <p className="welcome-message">
                 {welcomeMessages[randomMessage]}
               </p>
               {user.picture.url ? (
-                <img className="user-picture" src={user.picture.url} alt="" />
+               <img className="user-picture" src={user.picture.url} alt="" />
               ) : null}
             </div> */}
 
-            <div className="logo">
+  <div className="logo">
               <h1>Hello, {user.name}!</h1>
               <p className="welcome-message">
                 {welcomeMessages[randomMessage]}
               </p>
             </div>
+
+
+           
+              <Notifications
+                invitations={invitations}
+                setInvitations={setInvitations}
+              />
 
             {userEvents.length > 0 ? (
               <motion.div
@@ -60,6 +73,7 @@ const Dashboard = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7 }}
               >
+
                 <h2>Your Upcoming Events</h2>
                 <section className="dashboard-events">
                   {userEvents.map((event) =>
@@ -79,6 +93,7 @@ const Dashboard = () => {
                       </div>
                     ) : null
                   )}
+
                 </section>
               </motion.div>
             ) : null}
