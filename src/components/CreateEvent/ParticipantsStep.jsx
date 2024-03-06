@@ -37,66 +37,42 @@ const ParticipantsStep = ({
       <label className="form-step-label">
         <p>Who's coming?</p>
       </label>
-      {names.length > 0 && (
-        <Button
-          className={
-            invitations.length === names.length ? "invited-all" : "invite-all"
-          }
-          onClick={handleInviteAll}
-        >
-          {invitations.length === names.length ? "uninvite all" : "invite all"}
-        </Button>
-      )}
-      <div className="participants-container">
-        {names.length > 0 &&
-          names.map((name) => (
-            <div
-              onClick={() => handleInvitation(name._id)}
-              key={name._id}
-              className={
-                invitations.includes(name._id) ? "participant participant-selected" : "participant"
-              }
-            >
-              <img src={name.picture.url} alt="profile" />
-              <p>{name.name}</p>
-            </div>
-          ))}
-        {names.length === 0 && (
-          <p className="no-participants">You have no contacts yet</p>
+      <div className="participants-buttons">
+        <div className="participants-container">
+          {names.length > 0 &&
+            names.map((name) => (
+              <div
+                onClick={() => handleInvitation(name._id)}
+                key={name._id}
+                className={
+                  invitations.includes(name._id)
+                    ? "participant participant-selected"
+                    : "participant"
+                }
+              >
+                <img src={name.picture.url} alt="profile" />
+                <p>{name.name}</p>
+              </div>
+            ))}
+          {names.length === 0 && (
+            <p className="no-participants">You have no contacts yet</p>
+          )}
+        </div>
+        {names.length > 0 && (
+          <div className="invite-all-btn">
+          <Button
+            className={
+              invitations.length === names.length ? "invited-all" : "invite-all"
+            }
+            onClick={handleInviteAll}
+          >
+            {invitations.length === names.length
+              ? "uninvite all"
+              : "invite all"}
+          </Button>
+          </div>
         )}
       </div>
-
-      {/* <Select
-        labelId="demo-multiple-chip-label"
-        id="demo-multiple-chip"
-        multiple
-        value={personName}
-        onChange={handleChipChange}
-        renderValue={(selected) => (
-          <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
-            {selected.map((value) => (
-              <Chip key={value} label={value} />
-            ))}
-          </Box>
-        )}
-      >
-        {names.length > 0 && (
-          <MenuItem value="" disabled>
-            Select Participants
-          </MenuItem>
-        )}
-        {names.map((name) => (
-          <MenuItem key={name.id} value={name.name}>
-            {name.name}
-          </MenuItem>
-        ))}
-        {names.length === 0 && (
-          <MenuItem value="" disabled>
-            You have no contacts yet
-          </MenuItem>
-        )}
-      </Select> */}
-
       <Box
         sx={{
           display: "flex",
