@@ -6,8 +6,6 @@ const Location = ({ location }) => {
     googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY,
   });
 
-  console.log(location);
-
   return (
     <section className="location">
       <h2 className="event-heading">Location</h2>
@@ -15,7 +13,7 @@ const Location = ({ location }) => {
         <p>{location.description}</p>
       </div>
 
-      {isLoaded && location.map ? (
+      {isLoaded && location.map && location.lat ? (
         <div className="map">
           <GoogleMap
             mapContainerClassName="map-container"

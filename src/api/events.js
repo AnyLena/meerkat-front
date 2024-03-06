@@ -25,8 +25,8 @@ export const createEvent = async (
     location: {
       description: formData.location,
       map: formData.map,
-      lat: formData.position.lat,
-      lng: formData.position.lng,
+      lat: formData.position?.lat,
+      lng: formData.position?.lng,
     },
     participants: formData.participants,
     picture: formData.image,
