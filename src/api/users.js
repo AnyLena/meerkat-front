@@ -37,11 +37,33 @@ export const searchUsers = async (searchQuery, token, setSearchResults) => {
   }
 };
 
-export const addContact = async (contactId, userId, token, setUser) => {
+// export const addContact = async (contactId, userId, token, setUser) => {
+//   try {
+//     const response = await axios.put(
+//       `${SERVER}/users/${userId}/contacts/add`,
+//       { contact: contactId },
+//       {
+//         headers: {
+//           "Content-Type": "application/json",
+//           Authorization: `Bearer ${token}`,
+//         },
+//       }
+//     );
+//     setUser(response.data);
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
+
+export const sendFriendshipRequest = async (
+  contactId,
+  token,
+  setInvitations
+) => {
   try {
-    const response = await axios.put(
-      `${SERVER}/users/${userId}/contacts/add`,
-      { contact: contactId },
+    const response = await axios.post(
+      `${SERVER}/invitations/friendship`,
+      { invited: contactId },
       {
         headers: {
           "Content-Type": "application/json",
@@ -49,7 +71,8 @@ export const addContact = async (contactId, userId, token, setUser) => {
         },
       }
     );
-    setUser(response.data);
+    setInvitations((prev) => [...prev, response.data]);
+    console.log("REQUEST SENT", response.data);
   } catch (error) {
     console.log(error);
   }
@@ -91,4 +114,3 @@ export const getUserNames = async (contacts, token, setNames) => {
     console.error(error);
   }
 };
-

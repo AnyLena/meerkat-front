@@ -15,7 +15,7 @@
     color: var(--background-color);
     font-family: var(--header-font);
     margin: 0 auto;
-  }  
+  }
 }
 .title-container {
   display: flex;
@@ -63,14 +63,14 @@
   margin-bottom: 4rem;
 
   .search-bar form {
-    margin: 0 auto;
+    margin: 1rem;
     display: flex;
     justify-content: center;
     input {
       padding: 0.5rem;
       border: 1px solid var(--primary-color);
       border-radius: 5px;
-      margin-right: .5rem;
+      margin-right: 0.5rem;
     }
     button {
       padding: 0.5rem;
@@ -78,10 +78,10 @@
       background-color: var(--primary-color);
       color: white;
       cursor: pointer;
-      border:none;
+      border: none;
       transition: 0.2s;
       &:active {
-        transform: scale(.96);
+        transform: scale(0.96);
       }
     }
   }
@@ -117,15 +117,62 @@
         background-color: var(--primary-color);
         color: white;
         cursor: pointer;
-        border:none;
+        border: none;
         transition: 0.2s;
         &:active {
-          transform: scale(.96);
+          transform: scale(0.96);
         }
       }
       .red {
         background-color: var(--alert-color);
       }
+      .grey {
+        background-color: lightgray;
+        &:active {
+          transform: scale(1);
+        }
+      }
+      .lightgreen {
+        background-color: var(--secondary-color);
+      }
+    }
+  }
+}
+.friendship-requests {
+  label {
+    display: block;
+    margin: 1rem auto;
+    padding-left: 2rem;
+    font-weight: bold;
+  }
+  .invitation {
+    display: flex;
+    align-items: center;
+    padding: 0 2rem;
+    img{
+      width: 30px;
+      height: 30px;
+      object-fit: cover;
+      margin-right: 1rem;
+    }
+    button {
+      margin-left: auto;
+      border: none;
+      padding: 0.5rem;
+      &:hover {
+        cursor: pointer;
+      }
+      &:active{
+        transform: scale(0.96);
+      }
+    }
+    .btn-close{
+      border-radius: 50%;
+    }
+    .buttons {
+      margin-left: auto;
+      display: flex;
+      gap: .25rem;
     }
   }
 }
