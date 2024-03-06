@@ -22,13 +22,18 @@ const Dashboard = () => {
     fetchUserEvents(setUserEvents, token);
   }, []);
 
+  useEffect(() => {
+    console.log(userEvents)
+  }, [userEvents]);
+
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 1.5 }}
     >
-      <DashboardMenu/>
+      <DashboardMenu />
       <section className="dashboard">
         {user ? (
           <>
@@ -37,7 +42,7 @@ const Dashboard = () => {
               <p className="welcome-message">
                 {welcomeMessages[randomMessage]}
               </p>
-              {user.picture ? (
+              {user.picture.url ? (
                 <img className="user-picture" src={user.picture.url} alt="" />
               ) : null}
             </div> */}
@@ -55,26 +60,25 @@ const Dashboard = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7 }}
               >
-                <section className="dashboard-events top-div">
-                  <h2>Your Upcoming Events</h2>
-                  <div className="white-background">
-                    {userEvents.map((event) =>
-                      new Date(event.date.start) > today ? (
-                        <div className="event-card" key={event._id}>
-                          <Link to={`/event/${event._id}`}>
-                            <EventCard
-                              date={event.date}
-                              title={event.title}
-                              location={event.location}
-                              messages={event.messages}
-                              picture={event.picture.url}
-                              host={event.owner.name}
-                            />
-                          </Link>
-                        </div>
-                      ) : null
-                    )}
-                  </div>
+                <h2>Your Upcoming Events</h2>
+                <section className="dashboard-events">
+                  {userEvents.map((event) =>
+                    new Date(event.date.start) > today ? (
+                      <div className="event-card" key={event._id}>
+                        <Link to={`/event/${event._id}`}>
+                          <EventCard
+                            date={event.date}
+                            title={event.title}
+                            location={event.location}
+                            messages={event.messages}
+                            picture={event.picture.url}
+                            host={event.owner.name}
+                            hostImg={event.owner.picture.url}
+                          />
+                        </Link>
+                      </div>
+                    ) : null
+                  )}
                 </section>
               </motion.div>
             ) : null}

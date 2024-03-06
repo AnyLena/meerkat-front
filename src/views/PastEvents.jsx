@@ -32,8 +32,9 @@ const PastEvents = () => {
         {user ? (
           <>
             {userEvents.length > 0 ? (
-              <section className="dashboard-events">
+              <>
                 <h2>Your Past Events</h2>
+              <section className="dashboard-events">
                 {userEvents.map((event) =>
                   new Date(event.date.start) < today ? (
                     <div key={event._id}>
@@ -49,6 +50,7 @@ const PastEvents = () => {
                   ) : null
                 )}
               </section>
+              </>
             ) : null}
             {userEvents.find((event) => event.date.start < today) ? null : (
               <div className="no-past-event">

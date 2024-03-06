@@ -6,7 +6,7 @@ import MailboxIcon from "./MailboxIcon";
 //STYLES
 import "../styles/infobox.css";
 
-const EventCard = ({ date, title, location, picture, host, eventId }) => {
+const EventCard = ({ date, title, location, picture, host, hostImg, eventId }) => {
   const [start, setStart] = useState({});
   const [end, setEnd] = useState({});
 
@@ -32,7 +32,7 @@ const EventCard = ({ date, title, location, picture, host, eventId }) => {
               {date.end ? ` – ${end.hours}:${end.minutes}` : null}
             </p>
           </div>
-          <MailboxIcon eventId={eventId} />
+          {host ? <div className="host-img"><img style={{height: "90px", width: "90px"}} src={hostImg} alt="host" /></div> : <MailboxIcon eventId={eventId} />}
         </div>
         {location && title ? (
           <div

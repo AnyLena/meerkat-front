@@ -1,103 +1,42 @@
 .dashboard {
-  margin: 1rem;
-  max-width: 800px;
+  margin: 1rem auto;
+  max-width: 1000px;
   border-radius: 20px;
 
   .logo {
-    /* display: grid;
-    grid-template-columns: 1fr 2fr; */
-
-    background-color: white;
-    z-index: -1;
-    position: fixed;
-    top: 1rem;
-    max-width: 800px;
-    margin: 4rem auto;
-    gap: 20px;
-
-  }
-  h1 {
-    margin: 1rem auto;
+    margin: 2rem;
     text-align: center;
-  }
-  .user-picture {
-    width: 100px;
-    height: 100px;
-    margin: auto;
-  }
-  .welcome-message {
-    margin: 10px;
-    font-size: 1.2rem;
-    text-align: center;
-    margin: 1rem;
-  }
-  button {
-    background-color: rgb(241, 241, 241);
-    color: black;
-    border-radius: 0;
-    align-self: flex-end;
-    margin-left: auto;
-    font-size: 0.75rem;
-    font-weight: normal;
-    text-transform: none;
-    margin-right: 1rem;
-    &:hover {
-      background-color: rgb(233, 233, 233);
-    }
-    &:active {
-      background-color: rgb(233, 233, 233);
-      transform: scale(0.95);
-    }
-  }
-}
-
-
-
-.dashboard-events {
-  width: 100%;
-  margin-bottom: 6rem;
-  background-color: rgba(255, 255, 255);
-
-  &.top-div {
-    margin-top: 150px;
-    background: rgba(255, 255, 255, 0.7);
   }
 
   h2 {
     text-align: center;
-    padding-top: 40px;
+    margin-top: 2rem;
   }
-  .white-background {
-    background-color: white;
-  }
-  .event-card {
-    transition: all 0.1s ease-in-out;
-    &:hover {
-      cursor: pointer;
+
+  .dashboard-events {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-bottom: 100px;
+
+    .event-card {
+      transition: all 0.1s ease-in-out;
+      &:hover {
+        cursor: pointer;
+      }
+      &:active {
+        transform: scale(0.98);
+      }
     }
-    &:active {
-      transform: scale(0.98);
+    a {
+      text-decoration: none;
     }
-  }
-}
 
-a {
-  text-decoration: none;
-}
-
-.dashboard-events > div {
-  margin: 0;
-}
-
-@media screen and (max-width: 550px) {
-  .dashboard .time-infobox {
-    max-width: 550vw;
-  }
-}
-
-@media screen and (min-width: 800px) {
-  .dashboard {
-    margin: 1rem auto;
+    .host-img {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
   }
 }
 
@@ -109,10 +48,14 @@ a {
   align-items: center;
 }
 
-/* @media screen and (min-width: 600px) {
-  .white-background{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    column-gap: 2rem;
+@media screen and (max-width: 1000px) {
+  .dashboard {
+    margin: 1rem;
+
+    .dashboard-events {
+      display: flex;
+      flex-direction: column;
+      gap: 0px;
+    }
   }
-} */
+}
