@@ -14,7 +14,7 @@ import { motion } from "framer-motion";
 import { getMyInvitations } from "../api/invitations.js";
 
 const Dashboard = () => {
-  const { user, token } = useAuth();
+  const { user, setUser, token } = useAuth();
   const [userEvents, setUserEvents] = useState([]);
   const [invitations, setInvitations] = useState([]);
   const today = new Date();
@@ -42,6 +42,7 @@ const Dashboard = () => {
               <Notifications
                 invitations={invitations}
                 setInvitations={setInvitations}
+                setUser={setUser}
               />
               {user.picture ? (
                 <img className="user-picture" src={user.picture.url} alt="" />

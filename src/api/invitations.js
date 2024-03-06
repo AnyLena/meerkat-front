@@ -17,6 +17,21 @@ export const getMyInvitations = async (token, setInvitations) => {
   }
 };
 
+export const getMyFriendRequests = async (token, setInvitations) => {
+  try {
+    const response = await axios.get(`${SERVER}/invitations/friendship`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    console.log(response.data, "My friend requests");
+    setInvitations(response.data);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 export const updateInvitation = async (
   invitationId,
   answer,
@@ -85,3 +100,18 @@ export const rejectInvitation = async (invitationId, token, setInvitations) => {
     console.error(error);
   }
 };
+
+export const deleteInvitation = async (invitationId, token, setInvitations) => {
+  try {
+    const response = await axios.delete(`${SERVER}/invitations/${invitationId}`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    console.log(response.data, "DELETED");
+    setInvitations((prev) => prev.filter((inv) => inv._id !== invitationId));
+  } catch (error) {
+    console.error(error);
+  }
+}
