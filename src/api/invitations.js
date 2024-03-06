@@ -70,13 +70,7 @@ export const acceptInvitation = async (invitationId, token, setInvitations) => {
     );
     console.log(response.data, "ACCEPTED");
 
-    setInvitations((prev) =>
-      prev.map((invitation) =>
-        invitation._id === invitationId
-          ? { ...invitation, status: "accepted" }
-          : invitation
-      )
-    );
+    setInvitations((prev) => prev.filter((inv) => inv._id !== invitationId));
   } catch (error) {
     console.error(error);
   }
@@ -103,15 +97,18 @@ export const rejectInvitation = async (invitationId, token, setInvitations) => {
 
 export const deleteInvitation = async (invitationId, token, setInvitations) => {
   try {
-    const response = await axios.delete(`${SERVER}/invitations/${invitationId}`, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const response = await axios.delete(
+      `${SERVER}/invitations/${invitationId}`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
     console.log(response.data, "DELETED");
     setInvitations((prev) => prev.filter((inv) => inv._id !== invitationId));
   } catch (error) {
     console.error(error);
   }
-}
+};

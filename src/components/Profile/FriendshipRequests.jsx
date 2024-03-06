@@ -8,8 +8,6 @@ const FriendshipRequests = ({
   token,
   setUser,
 }) => {
-  console.log(invitations, "FRIENDSHIPREQUEST COMPONENT");
-
   const handleDeleteRequest = (id) => {
     deleteInvitation(id, token, setInvitations);
   };
@@ -17,7 +15,7 @@ const FriendshipRequests = ({
   const handleAccept = (id) => {
     acceptInvitation(id, token, setInvitations);
     const newFriend = invitations.find((i) => i._id === id).inviting;
-    setUser((prev) => ({ ...prev, contacts: [...prev.contacts, newFriend] }));
+    setUser((prev) => ({ ...prev, contacts: [...prev.contacts, newFriend._id] }));
   };
 
   const handleReject = (id) => {

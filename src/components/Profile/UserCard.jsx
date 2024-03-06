@@ -13,14 +13,17 @@ const UserCard = ({ contact, invitations, setInvitations, setUser }) => {
   const handleRemove = (contactId) => {
     removeContact(contactId, user._id, token, setUser);
     setInvitations((prev) =>
-      prev.filter((i) => i.invited._id !== contactId && i.inviting._id !== contactId)
+      prev.filter(
+        (i) => i.invited._id !== contactId && i.inviting._id !== contactId
+      )
     );
   };
 
   const handleAccept = (id) => {
     console.log("ACCEPTED", id);
     acceptInvitation(id, token, setInvitations);
-    setUser((prev) => ({ ...prev, contacts: [...prev.contacts, contact._id] }));
+    const newFriend = invitations.find((i) => i._id === id).inviting;
+    setUser((prev) => ({ ...prev, contacts: [...prev.contacts, newFriend._id] }));
   };
 
   return (
@@ -50,7 +53,11 @@ const UserCard = ({ contact, invitations, setInvitations, setUser }) => {
             (i) => i.inviting._id === contact._id && i.status === "pending"
           ) ? (
           <button
-            onClick={() => handleAccept(invitations.find((i) => i.inviting._id === contact._id)._id)}
+            onClick={() =>
+              handleAccept(
+                invitations.find((i) => i.inviting._id === contact._id)._id
+              )
+            }
             className="btn lightgreen"
           >
             accept
