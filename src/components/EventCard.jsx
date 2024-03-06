@@ -6,10 +6,18 @@ import MailboxIcon from "./MailboxIcon";
 //STYLES
 import "../styles/infobox.css";
 
-const EventCard = ({ date, title, location, picture, host, hostImg, eventId }) => {
+const EventCard = ({
+  date,
+  title,
+  location,
+  picture,
+  host,
+  hostImg,
+  eventId,
+}) => {
   const [start, setStart] = useState({});
   const [end, setEnd] = useState({});
-
+  const today = new Date();
   const { user } = useAuth();
 
   useEffect(() => {
@@ -32,7 +40,17 @@ const EventCard = ({ date, title, location, picture, host, hostImg, eventId }) =
               {date.end ? ` – ${end.hours}:${end.minutes}` : null}
             </p>
           </div>
-          {host ? <div className="host-img"><img style={{height: "90px", width: "90px"}} src={hostImg} alt="host" /></div> : <MailboxIcon eventId={eventId} />}
+          {host ? (
+            <div className="host-img">
+              <img
+                style={{ height: "90px", width: "90px" }}
+                src={hostImg}
+                alt="host"
+              />
+            </div>
+          ) : (
+            <MailboxIcon eventId={eventId} />
+          )}
         </div>
         {location && title ? (
           <div
@@ -42,7 +60,9 @@ const EventCard = ({ date, title, location, picture, host, hostImg, eventId }) =
             <div className="description">
               <p className="title">{title}</p>
               <p>{location.description}</p>
-              {user.name === host ? (
+              {user.name === host && new Date(date.start) < today ? (
+                <p className="host">You were the host.</p>
+              ) : user.name === host ? (
                 <p className="host">You are the host!</p>
               ) : (
                 <p className="host">Host: {host}</p>
