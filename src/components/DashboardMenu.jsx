@@ -23,40 +23,27 @@ import { useAuth } from "../context/useAuth.jsx";
 import "../styles/appbar.css";
 
 const pages = [
-  { name: "My Events", path: "/" },
+  { name: "Upcoming Events", path: "/" },
   { name: "Past Events", path: "/past-events" },
-  { name: "Notifications", path: "/notifications" },
 ];
 
 const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = useState(null);
-  const [anchorElUser, setAnchorElUser] = useState(null);
-  const { user, setUser, userIsLoggedIn, setUserIsLoggedIn } = useAuth();
+  const { user } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
-
-  // const handleLogOut = () => {
-  //   setUserIsLoggedIn(false);
-  //   setUser({});
-  //   navigate("/");
-  // };
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
-  // const handleOpenUserMenu = (event) => {
-  //   setAnchorElUser(event.currentTarget);
-  // };
+  const handleProfile = () => {
+    navigate("/profile");
+  };
 
   const handleCloseNavMenu = (path) => {
     setAnchorElNav(null);
     navigate(path);
   };
-
-  // const handleCloseUserMenu = (setting) => {
-  //   setAnchorElUser(null);
-  //   setting === "Logout" ? handleLogOut() : navigate("/");
-  // };
 
   return (
     <AppBar
@@ -159,43 +146,11 @@ const ResponsiveAppBar = () => {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            {user.picture?.url  ? (
-              <IconButton
-                // onClick={handleOpenUserMenu}
-                sx={{ p: 0 }}
-              >
+            {user.picture?.url ? (
+              <IconButton onClick={handleProfile} sx={{ p: 0 }}>
                 <Avatar alt={user.username} src={user.picture.url} />
               </IconButton>
             ) : null}
-            {/* 
-
-            MENU IF WE NEED IT FOR PROFILE ELSE DELETE
-            
-            <Menu
-              sx={{ mt: "45px" }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting) => (
-                <MenuItem
-                  key={setting}
-                  onClick={(e) => handleCloseUserMenu(setting)}
-                >
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
-            </Menu> */}
           </Box>
         </Toolbar>
       </Container>

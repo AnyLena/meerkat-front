@@ -10,6 +10,7 @@ import Notifications from "../components/Notifications";
 
 //STYLES
 import "../styles/dashboard.css";
+import "../styles/notifications.css";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { getMyInvitations } from "../api/invitations.js";
@@ -25,6 +26,10 @@ const Dashboard = () => {
     fetchUserEvents(setUserEvents, token);
     getMyInvitations(token, setInvitations);
   }, []);
+
+  useEffect(() => {
+    console.log(invitations);
+  }, [invitations]);
 
   return (
     <motion.div
@@ -43,12 +48,25 @@ const Dashboard = () => {
               </p>
             </div>
 
-            {invitations ? (
-              <Notifications
-                invitations={invitations}
-                setInvitations={setInvitations}
-                setUser={setUser}
-              />
+            <h2>Notifications</h2>
+            {invitations.length > 0 ? (
+              <div className="notifications">
+                <h3 className="notifications-head_a">Event Invitations</h3>
+                <Notifications
+                  invitations={invitations}
+                  setInvitations={setInvitations}
+                  setUser={setUser}
+                  type="event"
+                />
+                <h3 className="notifications-head_b">Friend Requests</h3>
+
+                <Notifications
+                  invitations={invitations}
+                  setInvitations={setInvitations}
+                  setUser={setUser}
+                  type="friendship"
+                />
+              </div>
             ) : null}
 
             {userEvents.length > 0 ? (
