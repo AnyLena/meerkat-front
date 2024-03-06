@@ -15,7 +15,7 @@ import {
 } from "@mui/material";
 import { IoMenu } from "react-icons/io5";
 
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { useAuth } from "../context/useAuth.jsx";
@@ -159,12 +159,14 @@ const ResponsiveAppBar = () => {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            <IconButton
-              // onClick={handleOpenUserMenu}
-              sx={{ p: 0 }}
-            >
-              <Avatar alt={user.username} src={user.picture.url} />
-            </IconButton>
+            {user.picture?.url  ? (
+              <IconButton
+                // onClick={handleOpenUserMenu}
+                sx={{ p: 0 }}
+              >
+                <Avatar alt={user.username} src={user.picture.url} />
+              </IconButton>
+            ) : null}
             {/* 
 
             MENU IF WE NEED IT FOR PROFILE ELSE DELETE
