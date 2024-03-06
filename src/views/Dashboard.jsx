@@ -26,23 +26,16 @@ const Dashboard = () => {
     getMyInvitations(token, setInvitations);
   }, []);
 
-  useEffect(() => {
-    console.log(userEvents)
-  }, [userEvents]);
-
-
   return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 1.5 }}
     >
-      <DashboardMenu />
+     {Object.keys(user).length > 0 ? <DashboardMenu /> : null}
       <section className="dashboard">
         {user ? (
           <>
-
-         
             {/* <div className="logo">
               <h1>Hello, {user.name}!</h1>
               <p className="welcome-message">
@@ -53,19 +46,17 @@ const Dashboard = () => {
               ) : null}
             </div> */}
 
-  <div className="logo">
+            <div className="logo">
               <h1>Hello, {user.name}!</h1>
               <p className="welcome-message">
                 {welcomeMessages[randomMessage]}
               </p>
             </div>
 
-
-           
-              <Notifications
+            {/* {invitations ? <Notifications
                 invitations={invitations}
                 setInvitations={setInvitations}
-              />
+              />: null} */}
 
             {userEvents.length > 0 ? (
               <motion.div
@@ -73,7 +64,6 @@ const Dashboard = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7 }}
               >
-
                 <h2>Your Upcoming Events</h2>
                 <section className="dashboard-events">
                   {userEvents.map((event) =>
@@ -93,7 +83,6 @@ const Dashboard = () => {
                       </div>
                     ) : null
                   )}
-
                 </section>
               </motion.div>
             ) : null}
