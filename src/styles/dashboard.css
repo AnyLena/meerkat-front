@@ -11,7 +11,19 @@
   h2 {
     text-align: center;
     margin-top: 2rem;
+
+    .notification-number {
+      background-color: var(--alert-color);
+      color: white;
+      padding: 2px 7px;
+      border-radius: 30px;
+      font-size: 1rem;
+      position: relative;
+      top: -15px;
+      left: -5px;
+    }
   }
+
 
   .dashboard-events {
     display: grid;

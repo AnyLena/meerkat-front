@@ -148,6 +148,7 @@ const ResponsiveAppBar = () => {
           <Box sx={{ flexGrow: 0 }}>
             {user.picture?.url ? (
               <IconButton onClick={handleProfile} sx={{ p: 0 }}>
+                <p className="welcome-message">Welcome, <span>{user.name}</span></p>
                 <Avatar alt={user.username} src={user.picture.url} />
               </IconButton>
             ) : null}

@@ -33,42 +33,64 @@ const Dashboard = () => {
   }, [invitations]);
 
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 1.5 }}
-    >
+    // <motion.div
+    //   initial={{ opacity: 1, y: -10 }}
+    //   animate={{ opacity: 1, y: 0 }}
+    //   transition={{ duration: 0.7 }}
+    // >
+    <>
       {Object.keys(user).length > 0 ? <DashboardMenu /> : null}
       <section className="dashboard">
         {user ? (
           <>
-            <div className="logo">
-              <h1>Hello, {user.name}!</h1>
-              <p className="welcome-message">
-                {welcomeMessages[randomMessage]}
-              </p>
-            </div>
-
-            <h2>Notifications</h2>
+           <motion.div
+                initial={{ opacity: 0, y: 100 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7 }}
+              >
             {invitations.length > 0 ? (
-              <div className="notifications">
-                <h3 className="notifications-head_a">Event Invitations</h3>
-                <Notifications
-                  invitations={invitations}
-                  setInvitations={setInvitations}
-                  setUser={setUser}
-                  type="event"
-                />
-                <h3 className="notifications-head_b">Friend Requests</h3>
+              <>
+                <h2>
+                  Notifications{" "}
+                  <span className="notification-number">
+                    {invitations.length}
+                  </span>
+                </h2>
+                <div className="notifications">
+                  {invitations.some(
+                    (invitation) => invitation.type === "event"
+                  ) ? (
+                    <>
+                      <h3 className="notifications-head_a">
+                        Event Invitations
+                      </h3>
+                      <Notifications
+                        invitations={invitations}
+                        setInvitations={setInvitations}
+                        setUser={setUser}
+                        type="event"
+                        setUserEvents={setUserEvents}
+                      />{" "}
+                    </>
+                  ) : null}
 
-                <Notifications
-                  invitations={invitations}
-                  setInvitations={setInvitations}
-                  setUser={setUser}
-                  type="friendship"
-                />
-              </div>
+                  {invitations.some(
+                    (invitation) => invitation.type === "friendship"
+                  ) ? (
+                    <>
+                      <h3 className="notifications-head_b">Friend Requests</h3>
+                      <Notifications
+                        invitations={invitations}
+                        setInvitations={setInvitations}
+                        setUser={setUser}
+                        type="friendship"
+                      />{" "}
+                    </>
+                  ) : null}
+                </div>
+              </>
             ) : null}
+            </motion.div>
 
             {userEvents.length > 0 ? (
               <motion.div
@@ -101,7 +123,8 @@ const Dashboard = () => {
           </>
         ) : null}
       </section>
-    </motion.div>
+      </>
+    // </motion.div>
   );
 };
 
