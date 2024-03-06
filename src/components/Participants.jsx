@@ -31,7 +31,6 @@ const Participants = ({ open, setOpen, setEventData, eventData }) => {
   const handleAdd = (e) => {
     const participantId = e.target.id;
     inviteParticipant(
-      user._id,
       participantId,
       token,
       eventData._id,
