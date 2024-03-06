@@ -40,10 +40,13 @@ const PastEvents = () => {
                     <div key={event._id}>
                       <Link to={`/event/${event._id}`}>
                         <EventCard
-                          date={event.date}
-                          title={event.title}
-                          location={event.location}
-                          picture={event.picture.url}
+                            date={event.date}
+                            title={event.title}
+                            location={event.location}
+                            messages={event.messages}
+                            picture={event.picture.url}
+                            host={event.owner.name}
+                            hostImg={event.owner.picture.url}
                         />
                       </Link>
                     </div>
@@ -52,7 +55,7 @@ const PastEvents = () => {
               </section>
               </>
             ) : null}
-            {userEvents.find((event) => event.date.start < today) ? null : (
+           {userEvents.every((event) => new Date(event.date.start) > new Date()) ? (
               <div className="no-past-event">
                 <p>
                   You do not have any past events. Go and make some memories.
@@ -63,7 +66,7 @@ const PastEvents = () => {
                   </Button>
                 </Link>
               </div>
-            )}
+            ) : null}
           </>
         ) : null}
       </section>
