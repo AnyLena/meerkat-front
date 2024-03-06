@@ -1,15 +1,16 @@
-import React from "react";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import "../styles/profile.css";
 import { IoIosArrowBack } from "react-icons/io";
 import { useAuth } from "../context/useAuth";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { searchUsers } from "../api/users";
+import { getMyFriendRequests } from "../api/invitations";
 
 // Components
 import UserProfile from "../components/Profile/UserProfile";
+import FriendshipRequests from "../components/Profile/FriendshipRequests";
 import SearchBar from "../components/Profile/SearchBar";
 import SearchResults from "../components/Profile/SearchResults";
 
@@ -17,8 +18,8 @@ const Profile = () => {
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
-  const { user, token, logout } = useAuth();
-  console.log(user);
+  const [invitations, setInvitations] = useState([]);
+  const { user, setUser, token, logout } = useAuth();
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -27,6 +28,10 @@ const Profile = () => {
     setSearchQuery("");
     searchUsers(searchQuery, token, setSearchResults);
   };
+
+  useEffect(() => {
+    getMyFriendRequests(token, setInvitations);
+  }, [token]);
 
   return (
     <div className="profile">
@@ -69,12 +74,18 @@ const Profile = () => {
       <UserProfile user={user} />
 
       <div className="search">
+        <FriendshipRequests invitations={invitations} setInvitations={setInvitations} user={user} token={token} setUser={setUser}/>
         <SearchBar
           handleSearch={handleSearch}
           setSearchQuery={setSearchQuery}
           searchQuery={searchQuery}
         />
-        <SearchResults searchResults={searchResults} />
+        <SearchResults
+          searchResults={searchResults}
+          invitations={invitations}
+          setInvitations={setInvitations}
+          setUser={setUser}
+        />
       </div>
     </div>
   );

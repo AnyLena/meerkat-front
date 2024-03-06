@@ -77,8 +77,9 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
   gap: 1rem;
-
   .participant {
+    justify-self: center;
+    max-width: 100px;
     opacity: .4;
     display: flex;
     flex-direction: column;

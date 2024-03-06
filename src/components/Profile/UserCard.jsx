@@ -1,16 +1,26 @@
 import React from "react";
-import { addContact, removeContact } from "../../api/users";
+import { sendFriendshipRequest, removeContact } from "../../api/users";
 import { useAuth } from "../../context/useAuth";
+import { acceptInvitation } from "../../api/invitations";
 
-const UserCard = ({ contact }) => {
-  const { user, token, setUser } = useAuth();
-
+const UserCard = ({ contact, invitations, setInvitations, setUser }) => {
+  const { user, token } = useAuth();
+  console.log(invitations, "friend requests");
   const handleAdd = (contactId) => {
-    addContact(contactId, user._id, token, setUser);
+    sendFriendshipRequest(contactId, token, setInvitations);
   };
 
   const handleRemove = (contactId) => {
     removeContact(contactId, user._id, token, setUser);
+    setInvitations((prev) =>
+      prev.filter((i) => i.invited._id !== contactId && i.inviting._id !== contactId)
+    );
+  };
+
+  const handleAccept = (id) => {
+    console.log("ACCEPTED", id);
+    acceptInvitation(id, token, setInvitations);
+    setUser((prev) => ({ ...prev, contacts: [...prev.contacts, contact._id] }));
   };
 
   return (
@@ -24,17 +34,32 @@ const UserCard = ({ contact }) => {
       </div>
 
       <div className="buttons">
-
-        {!user.contacts.includes(contact._id) ? (
+        {!user.contacts.includes(contact._id) &&
+        !invitations.find((i) => i.invited._id === contact._id) &&
+        !invitations.find((i) => i.inviting._id === contact._id) ? (
           <button className="btn" onClick={() => handleAdd(contact._id)}>
-            Add
+            connect
+          </button>
+        ) : invitations.find(
+            (i) => i.invited._id === contact._id && i.status === "pending"
+          ) ? (
+          <button disabled className="btn grey">
+            pending
+          </button>
+        ) : invitations.find(
+            (i) => i.inviting._id === contact._id && i.status === "pending"
+          ) ? (
+          <button
+            onClick={() => handleAccept(invitations.find((i) => i.inviting._id === contact._id)._id)}
+            className="btn lightgreen"
+          >
+            accept
           </button>
         ) : (
           <button className="btn red" onClick={() => handleRemove(contact._id)}>
-            Remove
+            remove
           </button>
         )}
-
       </div>
     </div>
   );
