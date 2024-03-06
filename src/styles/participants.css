@@ -34,7 +34,7 @@
 
   .btn-grey, .btn-red {
     margin-left: auto;
-    padding: 0.5rem
+    margin-right: 1rem;
   }
 
   .button-container {
@@ -46,11 +46,16 @@
   text-align: center;
   }
 }
+#show-participants-btn {
+  margin-right: .5rem;
+}
 
 @media screen and (max-width: 420px) {
   #show-participants-btn {
     max-width: 90px;
     padding: 0.5rem;
-    font-size: 1rem;
+    font-size: .75rem;
+    margin-right: .5rem;
+
   }
 }

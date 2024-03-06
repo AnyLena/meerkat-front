@@ -11,6 +11,7 @@ import Infobox from "../components/Infobox.jsx";
 import Location from "../components/Location.jsx";
 import Participantslist from "../components/Participantslist.jsx";
 import SharedFiles from "../components/SharedFiles.jsx";
+import EventDescription from "../components/EventDescription.jsx";
 
 //STYLES
 import "../styles/event.css";
@@ -95,15 +96,13 @@ const Event = () => {
             </div>
 
             <section className="info">
-              <Infobox eventId={eventData._id} date={eventData.date} messages={messages} setMessages={setMessages} />
+              <Infobox eventId={eventData._id} date={eventData.date} messages={messages} setMessages={setMessages} setEventData={setEventData} token={token} />
 
               <Participantslist
                 setEventData={setEventData}
                 eventData={eventData}
               />
-              <div className="text">
-                <p>{eventData.description}</p>
-              </div>
+              <EventDescription eventData={eventData} setEventData={setEventData} user={user} token={token}/>
               <Todolist eventData={eventData} setEventData={setEventData} />
               <Location location={eventData.location} />
               <SharedFiles messages={messages}/>

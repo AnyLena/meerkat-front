@@ -26,6 +26,38 @@
       font-family: "Oswald";
       line-height: 1.2;
     }
+    input {
+      padding: 0.5rem;
+      border: none;
+      font-size: 1rem;
+      &:focus {
+        border: 2px solid var(--primary-color);
+        border-radius: 10px;
+        outline: none;
+      }
+    }
+    .edit-save-btns {
+      display: flex;
+      gap: 0.5rem;
+    }
+    .save-btn,
+    .edit-btn {
+      margin-top: 0.5rem;
+      padding: 0.5rem;
+      border: none;
+      cursor: pointer;
+      transition: 0.3s;
+      &:active {
+        transform: scale(0.95);
+      }
+    }
+    .save-btn {
+      background-color: var(--secondary-color);
+      color: black;
+    }
+    .edit-btn {
+      background-color: rgb(230, 230, 230);
+    }
   }
   .time-center {
     border-right: 3px solid var(--secondary-color);
@@ -33,6 +65,11 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    .day-container {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
     .day {
       font-size: 1.4em;
       text-transform: uppercase;
