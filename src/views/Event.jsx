@@ -96,7 +96,7 @@ const Event = () => {
             </div>
 
             <section className="info">
-              <Infobox eventId={eventData._id} date={eventData.date} messages={messages} setMessages={setMessages} />
+              <Infobox eventId={eventData._id} date={eventData.date} messages={messages} setMessages={setMessages} setEventData={setEventData} token={token} />
 
               <Participantslist
                 setEventData={setEventData}
