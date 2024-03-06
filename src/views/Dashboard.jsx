@@ -32,20 +32,10 @@ const Dashboard = () => {
       animate={{ opacity: 1 }}
       transition={{ duration: 1.5 }}
     >
-     {Object.keys(user).length > 0 ? <DashboardMenu /> : null}
+      {Object.keys(user).length > 0 ? <DashboardMenu /> : null}
       <section className="dashboard">
         {user ? (
           <>
-            {/* <div className="logo">
-              <h1>Hello, {user.name}!</h1>
-              <p className="welcome-message">
-                {welcomeMessages[randomMessage]}
-              </p>
-              {user.picture.url ? (
-               <img className="user-picture" src={user.picture.url} alt="" />
-              ) : null}
-            </div> */}
-
             <div className="logo">
               <h1>Hello, {user.name}!</h1>
               <p className="welcome-message">
@@ -53,15 +43,13 @@ const Dashboard = () => {
               </p>
             </div>
 
-            {/* {invitations ? <Notifications
+            {invitations ? (
+              <Notifications
                 invitations={invitations}
                 setInvitations={setInvitations}
                 setUser={setUser}
               />
-              {user.picture ? (
-                <img className="user-picture" src={user.picture.url} alt="" />
-              ) : null}
-            </div>
+            ) : null}
 
             {userEvents.length > 0 ? (
               <motion.div
