@@ -16,7 +16,8 @@ const FriendshipRequests = ({
 
   const handleAccept = (id) => {
     acceptInvitation(id, token, setInvitations);
-    setUser((prev) => ({ ...prev, contacts: [...prev.contacts, id] }));
+    const newFriend = invitations.find((i) => i._id === id).inviting;
+    setUser((prev) => ({ ...prev, contacts: [...prev.contacts, newFriend] }));
   };
 
   const handleReject = (id) => {
