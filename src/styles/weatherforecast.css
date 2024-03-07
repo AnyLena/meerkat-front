@@ -1,0 +1,40 @@
+.weatherforecast {
+  .weather-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    margin: 20px;
+    line-height: 1.3;
+    /* border: red 1px solid */
+    .temp {
+      font-size: 2rem;
+      font-family: "Oswald";
+    }
+  }
+}
+
+.weather-icon {
+  /* border: red 1px solid; */
+  text-align: center;
+  img {
+    background-color: rgb(236, 236, 236);
+    border-radius: 30px;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .weatherforecast {
+    .weather-info {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      text-align: center;
+      max-width: 200px;
+      margin: 20px auto;
+    }
+    .weather-info-text {
+        grid-area: 2/1/3/3;
+    }
+  }
+}

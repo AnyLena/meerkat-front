@@ -10,6 +10,7 @@ import Header from "../components/Header.jsx";
 import Todolist from "../components/Todolist";
 import Infobox from "../components/Infobox.jsx";
 import Location from "../components/Location.jsx";
+import Weatherforecast from "../components/Weatherforecast.jsx";
 import Participantslist from "../components/Participantslist.jsx";
 import SharedFiles from "../components/SharedFiles.jsx";
 import EventDescription from "../components/EventDescription.jsx";
@@ -108,6 +109,7 @@ const Event = () => {
                 setMessages={setMessages}
                 setEventData={setEventData}
                 token={token}
+
                 user={user}
                 eventData={eventData}
               />
@@ -124,12 +126,17 @@ const Event = () => {
               />
               <Todolist eventData={eventData} setEventData={setEventData} />
               <Location location={eventData.location} />
+
+              {eventData.location.map && eventData.location.lat ? (
+                <Weatherforecast eventData={eventData} />
+              ) : null}
               <SharedFiles messages={messages} />
               <LeaveOrDeleteEvent
                 eventData={eventData}
                 token={token}
                 user={user}
               />
+
             </section>
           </section>
         ) : null}
