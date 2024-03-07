@@ -96,16 +96,30 @@ const Event = () => {
             </div>
 
             <section className="info">
-              <Infobox eventId={eventData._id} date={eventData.date} messages={messages} setMessages={setMessages} setEventData={setEventData} token={token} />
+              <Infobox
+                eventId={eventData._id}
+                date={eventData.date}
+                messages={messages}
+                setMessages={setMessages}
+                setEventData={setEventData}
+                token={token}
+                user={user}
+                eventData={eventData}
+              />
 
               <Participantslist
                 setEventData={setEventData}
                 eventData={eventData}
               />
-              <EventDescription eventData={eventData} setEventData={setEventData} user={user} token={token}/>
+              <EventDescription
+                eventData={eventData}
+                setEventData={setEventData}
+                user={user}
+                token={token}
+              />
               <Todolist eventData={eventData} setEventData={setEventData} />
               <Location location={eventData.location} />
-              <SharedFiles messages={messages}/>
+              <SharedFiles messages={messages} />
             </section>
           </section>
         ) : null}
