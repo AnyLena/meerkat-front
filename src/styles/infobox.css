@@ -1,12 +1,11 @@
 .time-infobox {
   background-color: var(--headingBG-color);
   border-radius: 30px;
-  /* font-size: 1.2rem; */
   font-size: 20px;
-  margin-top: 40px;
+ 
 
   .time-grid-container {
-    padding: 30px 10px;
+    padding: 15px 10px;
     display: grid;
     grid-template-columns: 1fr 3fr 1fr;
   }
@@ -22,7 +21,7 @@
     align-items: center;
 
     .day {
-      font-size: 2.8em;
+      font-size: 2.2em;
       font-family: "Oswald";
       line-height: 1.2;
     }
@@ -59,9 +58,18 @@
       background-color: rgb(230, 230, 230);
     }
   }
+  .host-img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    p {
+      font-family: "Oswald";
+    }
+   }
   .time-center {
-    border-right: 3px solid var(--secondary-color);
-    border-left: 3px solid var(--secondary-color);
+    /* border-right: 1px solid black;
+    border-left: 1px solid black; */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -71,40 +79,46 @@
       align-items: center;
     }
     .day {
-      font-size: 1.4em;
+      font-size: 1.5em;
       text-transform: uppercase;
       font-family: "Oswald";
       line-height: 1.5;
     }
   }
   .time-envelope {
+    align-self: center;
     position: relative;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    min-width: 90px;
+    width: 60px;
+    height: 90px;
     transition: all 0.2s ease-in-out;
-    img {
-      max-width: 70px;
-    }
+   
     &:active {
       transform: scale(0.95);
     }
+    svg {
+      font-size: 5rem;
+    }
   }
-
   .red-circle {
     position: absolute;
     top: 0;
-    right: 20%;
+    right: 10%;
+
 
     p {
       background-color: var(--alert-color);
       border-radius: 15px;
-      padding: 3px 8px;
+      padding: 3px 3px;
       color: white;
       font-family: "Oswald";
       text-align: center;
+      font-size: 1rem;
+      min-height: 26px;
+      min-width: 26px;
     }
   }
 
@@ -116,7 +130,7 @@
 
   .description {
     background-color: rgba(255, 255, 255, 0.7);
-    padding: 10px 30px 20px 30px;
+    padding: 20px 30px 25px 30px;
     border-radius: 0px 0px 30px 30px;
     margin-bottom: 0px;
 
@@ -140,9 +154,8 @@
     font-size: 16px;
 
     .time-grid-container {
-      padding: 25px 0px;
+      padding: 15px 15px 15px 0px;
       grid-template-columns: repeat(3, auto);
-      /* margin: 0 1rem; */
     }
 
     .time-grid-container > div {
@@ -150,16 +163,14 @@
     }
 
     .time-envelope {
-      min-width: auto;
-      img {
-        max-width: 50px;
-      }
+     justify-self: flex-end;
+     padding-left: 5px;
+    svg {
+      font-size: 4rem;
     }
-
+    }
     .red-circle {
-      p {
-        padding: 3px 6px;
-      }
+      right: 0%;
     }
   }
 }

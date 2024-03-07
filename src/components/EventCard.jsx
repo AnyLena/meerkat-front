@@ -43,10 +43,11 @@ const EventCard = ({
           {host ? (
             <div className="host-img">
               <img
-                style={{ height: "90px", width: "90px" }}
+                style={{ height: "50px", width: "50px" }}
                 src={hostImg}
                 alt="host"
               />
+              <p>{host}</p>
             </div>
           ) : (
             <MailboxIcon eventId={eventId} />
@@ -60,13 +61,13 @@ const EventCard = ({
             <div className="description">
               <p className="title">{title}</p>
               <p>{location.description}</p>
-              {user.name === host && new Date(date.start) < today ? (
+              {/* {user.name === host && new Date(date.start) < today ? (
                 <p className="host">You were the host.</p>
               ) : user.name === host ? (
                 <p className="host">You are the host!</p>
               ) : (
                 <p className="host">Host: {host}</p>
-              )}
+              )} */}
             </div>
           </div>
         ) : null}
