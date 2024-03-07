@@ -61,19 +61,19 @@ const FriendshipRequests = ({
                   <img src={inv.inviting.picture.url} alt="" />
                   <p>{inv.inviting.name}</p>
                   <div className="buttons">
-                    <button
+                    <button className="btn-green"
                       onClick={() => {
                         handleAccept(inv._id);
                       }}
                     >
                       accept
                     </button>
-                    <button
+                    <button className="btn-red"
                       onClick={() => {
                         handleReject(inv._id);
                       }}
                     >
-                      reject
+                      decline
                     </button>
                   </div>
                 </div>

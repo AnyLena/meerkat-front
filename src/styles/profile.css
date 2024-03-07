@@ -148,7 +148,8 @@
   .invitation {
     display: flex;
     align-items: center;
-    padding: 0 2rem;
+    padding: 5px 2rem;
+    
     img{
       width: 30px;
       height: 30px;
@@ -168,11 +169,13 @@
     }
     .btn-close{
       border-radius: 50%;
+      height: 28px;
+      width: 28px;
     }
     .buttons {
       margin-left: auto;
       display: flex;
-      gap: .25rem;
+      gap: .5rem;
     }
   }
 }

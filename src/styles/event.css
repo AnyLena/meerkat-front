@@ -56,7 +56,7 @@
   h1 {
     position: relative;
     top: 50%;
-    width: 100%;
+ margin-left: 37px; 
     font-size: 2rem;
     text-align: center;
     padding: 20px 0 60px 0;
@@ -66,31 +66,63 @@
     margin-top: 40vh;
     background-color: rgba(255, 255, 255, 0.7);
     display: flex;
-    align-items: baseline;
+    /* align-items: baseline; */
     justify-content: center;
+
+    .title-edit {
+      position: relative;
+      top: 50%;
+      text-align: center;
+      padding: 20px 0 60px 0;
+    }
     input {
       font-size: 1.5rem;
+      background-color: rgba(255, 255, 255, 0.8);
+      font-family: 'Oswald';  
+      font-size: 2rem;
       border: none;
+      border-radius: 5px;
       text-align: center;
       outline: none;
-      width: auto;
-      margin-left: 2rem;
-    
+      margin-left: 75px;   
     }
+
+
     .buttons {
-      margin-right: 2rem;
-      margin-left: auto;
-      flex-wrap: nowrap;
+      position: relative;
+      top:-100;
+      margin: 1.2rem 0rem 0rem 0.5rem;
+      max-height: 50px;
       display: flex;
+      align-items: center;
+
       button {
         padding: 0.5rem;
+        margin: 4px;
         border: none;
+        border-radius: 20px;
         cursor: pointer;
         transition: 0.3s;
-        margin-left: .5rem;
         &:active {
           transform: scale(0.95);
         }
+      }
+    }
+   
+  }
+
+  @media screen and (max-width: 550px) {
+    .header {
+      input {
+        max-width: 250px;
+      }
+    }
+  }
+
+  @media screen and (max-width: 450px) {
+    .header {
+      input {
+        max-width: 180px;
       }
     }
   }

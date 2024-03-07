@@ -3,6 +3,9 @@ import { convertDate } from "../utils/convertDate.js";
 import Messages from "./Messages/Messages";
 import MailboxIcon from "./MailboxIcon";
 import { putEvent } from "../api/events.js";
+import { FaPencilAlt } from "react-icons/fa";
+import { IoIosClose } from "react-icons/io";
+import { IoIosCheckmark } from "react-icons/io";
 
 //STYLES
 import "../styles/infobox.css";
@@ -28,7 +31,7 @@ const Infobox = ({
   useEffect(() => {
     setStart(convertDate(date.start));
     setEnd(convertDate(date.end));
-    console.log(date.start.slice(11,16, "TIME"))
+    console.log(date.start.slice(11, 16, "TIME"));
   }, [date]);
 
   const handleEdit = () => {
@@ -45,7 +48,7 @@ const Infobox = ({
   const handleDateChange = (e) => {
     setNewDate(e.target.value);
     console.log(newDate, "data changed");
-    console.log(newTime, "time changed")
+    console.log(newTime, "time changed");
   };
 
   const handleSave = () => {
@@ -58,9 +61,9 @@ const Infobox = ({
   };
 
   const handleTimeChange = (e) => {
-    setNewTime(e.target.value)
-    console.log(newTime)
-  }
+    setNewTime(e.target.value);
+    console.log(newTime);
+  };
 
   return (
     <>
@@ -68,16 +71,20 @@ const Infobox = ({
         <div className="time-grid-container">
           {!edit ? (
             <div className="time-date">
-              <p className="day">{start.day}</p>
-              <p>{start.month}</p>
+              <div>
+                <p className="day">{start.day}</p>
+                <p>{start.month}</p>
+              </div>
               {eventData.owner._id === user._id && (
-                <button onClick={handleEdit} className="edit-btn">
-                  edit
-                </button>
+                <div className="buttons">
+                  <button onClick={handleEdit} className="edit-btn">
+                    <FaPencilAlt />
+                  </button>
+                </div>
               )}
             </div>
           ) : (
-            <div className="time-date">
+            <div className="time-date edit">
               <input
                 ref={inputRef}
                 type="date"
@@ -85,13 +92,14 @@ const Infobox = ({
                 onChange={handleDateChange}
               />
               <div className="edit-save-btns">
-                <button onClick={() => setEdit(!edit)} className="edit-btn">
-                  cancel
-                </button>
-
-                <button onClick={handleSave} className="save-btn">
-                  save
-                </button>
+                <div className="buttons">
+                  <button onClick={handleSave} className="btn-green">
+                    <IoIosCheckmark />
+                  </button>
+                  <button onClick={() => setEdit(!edit)} className="btn-red">
+                    <IoIosClose />
+                  </button>
+                </div>
               </div>
             </div>
           )}
@@ -107,7 +115,7 @@ const Infobox = ({
             ) : (
               <input
                 type="time"
-                value={newTime.slice(0,2) + ":" + newTime.slice(3,5)}
+                value={newTime.slice(0, 2) + ":" + newTime.slice(3, 5)}
                 onChange={handleTimeChange}
               />
             )}

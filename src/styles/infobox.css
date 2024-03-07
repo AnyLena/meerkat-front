@@ -2,7 +2,6 @@
   background-color: var(--headingBG-color);
   border-radius: 30px;
   font-size: 20px;
- 
 
   .time-grid-container {
     padding: 15px 10px;
@@ -16,9 +15,13 @@
 
   .time-date {
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
+    text-align: center;
+
+    &.edit {
+      flex-direction: column;
+    }
 
     .day {
       font-size: 2.2em;
@@ -35,27 +38,25 @@
         outline: none;
       }
     }
-    .edit-save-btns {
+    .buttons {
+      position: relative;
+      top: -100;
+      margin: 5px;
+      max-height: 50px;
       display: flex;
-      gap: 0.5rem;
-    }
-    .save-btn,
-    .edit-btn {
-      margin-top: 0.5rem;
-      padding: 0.5rem;
-      border: none;
-      cursor: pointer;
-      transition: 0.3s;
-      &:active {
-        transform: scale(0.95);
+      align-items: center;
+
+      button {
+        padding: 0.5rem;
+        margin: 4px;
+        border: none;
+        border-radius: 20px;
+        cursor: pointer;
+        transition: 0.3s;
+        &:active {
+          transform: scale(0.95);
+        }
       }
-    }
-    .save-btn {
-      background-color: var(--secondary-color);
-      color: black;
-    }
-    .edit-btn {
-      background-color: rgb(230, 230, 230);
     }
   }
   .host-img {
@@ -66,13 +67,14 @@
     p {
       font-family: "Oswald";
     }
-   }
+  }
   .time-center {
-    /* border-right: 1px solid black;
-    border-left: 1px solid black; */
+    border-right: 1px solid black; 
+    border-left: 1px solid black; 
     display: flex;
     flex-direction: column;
     justify-content: center;
+
     .day-container {
       display: flex;
       gap: 1rem;
@@ -83,6 +85,11 @@
       text-transform: uppercase;
       font-family: "Oswald";
       line-height: 1.5;
+    }
+    input {
+      font-size: 1.1rem;
+      max-width: 50px;
+      padding: 2px;
     }
   }
   .time-envelope {
@@ -95,7 +102,7 @@
     width: 60px;
     height: 90px;
     transition: all 0.2s ease-in-out;
-   
+
     &:active {
       transform: scale(0.95);
     }
@@ -107,7 +114,6 @@
     position: absolute;
     top: 0;
     right: 10%;
-
 
     p {
       background-color: var(--alert-color);
@@ -163,11 +169,11 @@
     }
 
     .time-envelope {
-     justify-self: flex-end;
-     padding-left: 5px;
-    svg {
-      font-size: 4rem;
-    }
+      justify-self: flex-end;
+      padding-left: 5px;
+      svg {
+        font-size: 4rem;
+      }
     }
     .red-circle {
       right: 0%;
