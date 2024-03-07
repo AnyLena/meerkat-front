@@ -6,6 +6,7 @@ import { useAuth } from "../context/useAuth.jsx";
 import { useNavigate } from "react-router-dom";
 
 //COMPONENTS
+import Header from "../components/Header.jsx";
 import Todolist from "../components/Todolist";
 import Infobox from "../components/Infobox.jsx";
 import Location from "../components/Location.jsx";
@@ -13,6 +14,7 @@ import Weatherforecast from "../components/Weatherforecast.jsx";
 import Participantslist from "../components/Participantslist.jsx";
 import SharedFiles from "../components/SharedFiles.jsx";
 import EventDescription from "../components/EventDescription.jsx";
+import LeaveOrDeleteEvent from "../components/LeaveOrDeleteEvent.jsx";
 
 //STYLES
 import "../styles/event.css";
@@ -92,9 +94,12 @@ const Event = () => {
       >
         {Object.keys(eventData).length > 0 ? (
           <section className="event">
-            <div className="header">
-              <h1>{eventData.title}</h1>
-            </div>
+            <Header
+              eventData={eventData}
+              user={user}
+              setEventData={setEventData}
+              token={token}
+            />
 
             <section className="info">
               <Infobox
@@ -104,6 +109,9 @@ const Event = () => {
                 setMessages={setMessages}
                 setEventData={setEventData}
                 token={token}
+
+                user={user}
+                eventData={eventData}
               />
 
               <Participantslist
@@ -118,10 +126,17 @@ const Event = () => {
               />
               <Todolist eventData={eventData} setEventData={setEventData} />
               <Location location={eventData.location} />
+
               {eventData.location.map && eventData.location.lat ? (
                 <Weatherforecast eventData={eventData} />
               ) : null}
               <SharedFiles messages={messages} />
+              <LeaveOrDeleteEvent
+                eventData={eventData}
+                token={token}
+                user={user}
+              />
+
             </section>
           </section>
         ) : null}
