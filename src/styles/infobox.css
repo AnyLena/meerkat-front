@@ -56,12 +56,6 @@
         &:active {
           transform: scale(0.95);
         }
-
-        &.edit-btn {
-   
-
-
-        }
       }
     }
   }
@@ -80,6 +74,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+
     .day-container {
       display: flex;
       gap: 1rem;
