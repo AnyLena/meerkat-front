@@ -47,7 +47,7 @@ const EventCard = ({
                 src={hostImg}
                 alt="host"
               />
-              <p>{host}</p>
+              <p>{host === user.name ? "You" : host}</p>
             </div>
           ) : (
             <MailboxIcon eventId={eventId} />
