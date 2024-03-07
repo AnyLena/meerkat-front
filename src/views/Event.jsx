@@ -6,6 +6,7 @@ import { useAuth } from "../context/useAuth.jsx";
 import { useNavigate } from "react-router-dom";
 
 //COMPONENTS
+import Header from "../components/Header.jsx";
 import Todolist from "../components/Todolist";
 import Infobox from "../components/Infobox.jsx";
 import Location from "../components/Location.jsx";
@@ -91,9 +92,12 @@ const Event = () => {
       >
         {Object.keys(eventData).length > 0 ? (
           <section className="event">
-            <div className="header">
-              <h1>{eventData.title}</h1>
-            </div>
+            <Header
+              eventData={eventData}
+              user={user}
+              setEventData={setEventData}
+              token={token}
+            />
 
             <section className="info">
               <Infobox

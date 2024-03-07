@@ -65,6 +65,34 @@
   .header {
     margin-top: 40vh;
     background-color: rgba(255, 255, 255, 0.7);
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    input {
+      font-size: 1.5rem;
+      border: none;
+      text-align: center;
+      outline: none;
+      width: auto;
+      margin-left: 2rem;
+    
+    }
+    .buttons {
+      margin-right: 2rem;
+      margin-left: auto;
+      flex-wrap: nowrap;
+      display: flex;
+      button {
+        padding: 0.5rem;
+        border: none;
+        cursor: pointer;
+        transition: 0.3s;
+        margin-left: .5rem;
+        &:active {
+          transform: scale(0.95);
+        }
+      }
+    }
   }
 
   @media screen and (min-width: 800px) {
@@ -98,7 +126,6 @@
         border-radius: 10px;
         outline: none;
       }
-
     }
     .buttons {
       display: flex;
