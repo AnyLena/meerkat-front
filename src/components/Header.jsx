@@ -1,5 +1,8 @@
 import { useState, useRef, useEffect } from "react";
 import { putEvent } from "../api/events";
+import { FaPencilAlt } from "react-icons/fa";
+import { IoIosClose } from "react-icons/io";
+import { IoIosCheckmark } from "react-icons/io";
 
 const Header = ({ eventData, user, setEventData, token }) => {
   const [newTitle, setNewTitle] = useState(eventData.title);
@@ -26,7 +29,7 @@ const Header = ({ eventData, user, setEventData, token }) => {
   return (
     <div className="header">
       {edit && eventData.owner._id === user._id ? (
-        <div className="title">
+        <div className="title-edit">
           <input
             ref={inputRef}
             type="text"
@@ -46,11 +49,11 @@ const Header = ({ eventData, user, setEventData, token }) => {
         <h1>{eventData.title}</h1>
       )}
       <div className="buttons">
-        {eventData.owner._id === user._id && (
-          <button onClick={handleClickEdit}>{edit ? "cancel" : "edit"}</button>
-        )}
         {edit && eventData.owner._id === user._id && (
-          <button onClick={handleEdit}>save</button>
+          <button className="btn-green" onClick={handleEdit}><IoIosCheckmark /></button>
+        )}
+        {eventData.owner._id === user._id && (
+          <button className={edit? "btn-red" : "btn-grey" } onClick={handleClickEdit}>{edit ? <IoIosClose /> : <FaPencilAlt/>}</button>
         )}
       </div>
     </div>
