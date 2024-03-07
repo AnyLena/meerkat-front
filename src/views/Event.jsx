@@ -13,6 +13,7 @@ import Location from "../components/Location.jsx";
 import Participantslist from "../components/Participantslist.jsx";
 import SharedFiles from "../components/SharedFiles.jsx";
 import EventDescription from "../components/EventDescription.jsx";
+import LeaveOrDeleteEvent from "../components/LeaveOrDeleteEvent.jsx";
 
 //STYLES
 import "../styles/event.css";
@@ -124,6 +125,11 @@ const Event = () => {
               <Todolist eventData={eventData} setEventData={setEventData} />
               <Location location={eventData.location} />
               <SharedFiles messages={messages} />
+              <LeaveOrDeleteEvent
+                eventData={eventData}
+                token={token}
+                user={user}
+              />
             </section>
           </section>
         ) : null}
