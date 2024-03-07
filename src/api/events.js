@@ -189,3 +189,34 @@ export const putEvent = async (eventId, token, data, setEventData) => {
     console.error(error);
   }
 };
+
+export const leaveEvent = async (eventId, token) => {
+  try {
+    const response = await axios.put(
+      `${SERVER}/events/${eventId}/participants/leave`,
+      {},
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    console.log("leave", response.data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export const deleteEvent = async (eventId, token) => {
+  try {
+    const response = await axios.delete(`${SERVER}/events/${eventId}`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  } catch (error) {
+    console.error(error);
+  }
+};

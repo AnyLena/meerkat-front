@@ -6,12 +6,14 @@ import { useAuth } from "../context/useAuth.jsx";
 import { useNavigate } from "react-router-dom";
 
 //COMPONENTS
+import Header from "../components/Header.jsx";
 import Todolist from "../components/Todolist";
 import Infobox from "../components/Infobox.jsx";
 import Location from "../components/Location.jsx";
 import Participantslist from "../components/Participantslist.jsx";
 import SharedFiles from "../components/SharedFiles.jsx";
 import EventDescription from "../components/EventDescription.jsx";
+import LeaveOrDeleteEvent from "../components/LeaveOrDeleteEvent.jsx";
 
 //STYLES
 import "../styles/event.css";
@@ -91,21 +93,43 @@ const Event = () => {
       >
         {Object.keys(eventData).length > 0 ? (
           <section className="event">
-            <div className="header">
-              <h1>{eventData.title}</h1>
-            </div>
+            <Header
+              eventData={eventData}
+              user={user}
+              setEventData={setEventData}
+              token={token}
+            />
 
             <section className="info">
-              <Infobox eventId={eventData._id} date={eventData.date} messages={messages} setMessages={setMessages} setEventData={setEventData} token={token} />
+              <Infobox
+                eventId={eventData._id}
+                date={eventData.date}
+                messages={messages}
+                setMessages={setMessages}
+                setEventData={setEventData}
+                token={token}
+                user={user}
+                eventData={eventData}
+              />
 
               <Participantslist
                 setEventData={setEventData}
                 eventData={eventData}
               />
-              <EventDescription eventData={eventData} setEventData={setEventData} user={user} token={token}/>
+              <EventDescription
+                eventData={eventData}
+                setEventData={setEventData}
+                user={user}
+                token={token}
+              />
               <Todolist eventData={eventData} setEventData={setEventData} />
               <Location location={eventData.location} />
-              <SharedFiles messages={messages}/>
+              <SharedFiles messages={messages} />
+              <LeaveOrDeleteEvent
+                eventData={eventData}
+                token={token}
+                user={user}
+              />
             </section>
           </section>
         ) : null}
