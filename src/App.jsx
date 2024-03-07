@@ -8,8 +8,9 @@ import Dashboard from "./views/Dashboard";
 import Event from "./views/Event";
 import CreateEvent from "./views/CreateEvent";
 import Profile from "./views/Profile";
-import Loader from './components/Loader';
+import Loader from "./components/Loader";
 import PastEvents from "./views/PastEvents";
+import CompleteRegistration from "./views/CompleteRegistration";
 
 function App() {
   const { token, globalLoading } = useAuth();
@@ -19,7 +20,13 @@ function App() {
       {globalLoading ? (
         <Loader />
       ) : !token ? (
-        <Landing />
+        <Routes>
+          <Route index element={<Landing />} />
+          <Route
+            path="/complete-registration/:token"
+            element={<CompleteRegistration />}
+          />
+        </Routes>
       ) : (
         <>
           <Routes>

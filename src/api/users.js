@@ -30,7 +30,6 @@ export const searchUsers = async (searchQuery, token, setSearchResults) => {
         Authorization: `Bearer ${token}`,
       },
     });
-    console.log(response.data);
     setSearchResults(response.data);
   } catch (error) {
     console.log(error);
@@ -72,7 +71,6 @@ export const sendFriendshipRequest = async (
       }
     );
     setInvitations((prev) => [...prev, response.data]);
-    console.log("REQUEST SENT", response.data);
   } catch (error) {
     console.log(error);
   }
@@ -90,7 +88,6 @@ export const removeContact = async (contactId, userId, token, setUser) => {
         },
       }
     );
-    console.log(response.data);
     setUser(response.data);
   } catch (error) {
     console.log(error);
@@ -108,8 +105,30 @@ export const getUserNames = async (contacts, token, setNames) => {
         Authorization: `Bearer ${token}`,
       },
     });
-    console.log(response.data);
     setNames(response.data);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const decryptToken = async (token, setDecryptedToken) => {
+  try {
+    const response = await axios.post(`${SERVER}/users/decrypt-token`, {
+      token,
+    });
+    setDecryptedToken(response.data);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const completeRegistration = async (userData, id) => {
+  console.log(userData, id);
+  try {
+    const response = await axios.put(
+      `${SERVER}/users/complete-registration/${id}`,
+      userData
+    );
   } catch (error) {
     console.error(error);
   }
