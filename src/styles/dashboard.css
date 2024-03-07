@@ -10,7 +10,7 @@
 
   h2 {
     text-align: center;
-    margin-top: 2rem;
+    margin: 2rem;
 
     .notification-number {
       background-color: var(--alert-color);
@@ -43,12 +43,6 @@
     a {
       text-decoration: none;
     }
-
-    .host-img {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
   }
 }
 
@@ -67,7 +61,7 @@
     .dashboard-events {
       display: flex;
       flex-direction: column;
-      gap: 0px;
+
     }
   }
 }
