@@ -65,7 +65,9 @@
     align-items: center;
     flex-direction: column;
     p {
-      font-family: "Oswald";
+      margin-top: 5px;
+      font-family: "Gafata";
+      font-size: 1.25rem;
     }
   }
   .time-center {

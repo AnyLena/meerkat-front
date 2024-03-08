@@ -1,4 +1,5 @@
 import * as React from "react";
+import { motion } from "framer-motion";
 
 import {
   AppBar,
@@ -32,7 +33,7 @@ const ResponsiveAppBar = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
-
+  
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -46,116 +47,124 @@ const ResponsiveAppBar = () => {
   };
 
   return (
-    <AppBar
-      className="appbar"
-      position="sticky"
-      sx={{ backgroundColor: "#233d4d" }}
+    <motion.div
+      initial={location.pathname === "/" ? { y: -600, opacity: 0 } : {}}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ ease: "easeInOut", duration: 0.5 }}
     >
-      <Container maxWidth="xl">
-        <Toolbar disableGutters>
-          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenNavMenu}
-              color="inherit"
-            >
-              <IoMenu className="burger-icon" />
-            </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "left",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "left",
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
+      <AppBar
+        className="appbar"
+        position="sticky"
+        sx={{ backgroundColor: "#233d4d" }}
+      >
+        <Container maxWidth="xl">
+          <Toolbar disableGutters>
+            <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+              <IconButton
+                size="large"
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={handleOpenNavMenu}
+                color="inherit"
+              >
+                <IoMenu className="burger-icon" />
+              </IconButton>
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorElNav}
+                anchorOrigin={{
+                  vertical: "bottom",
+                  horizontal: "left",
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "left",
+                }}
+                open={Boolean(anchorElNav)}
+                onClose={handleCloseNavMenu}
+                sx={{
+                  display: { xs: "block", md: "none" },
+                }}
+              >
+                {pages.map((page) => (
+                  <MenuItem
+                    className="menu-item"
+                    key={page.name}
+                    onClick={() => handleCloseNavMenu(page.path)}
+                  >
+                    <Typography
+                      textAlign="center"
+                      sx={{
+                        mr: 2,
+                        display: { xs: "flex", md: "none" },
+                        flexGrow: 1,
+                        fontFamily: "Oswald",
+                        textTransform: "uppercase",
+                        textDecoration: "none",
+                        cursor: "pointer",
+                      }}
+                    >
+                      {page.name}
+                    </Typography>
+                  </MenuItem>
+                ))}
+              </Menu>
+            </Box>
+            <Typography
+              onClick={() => navigate("/")}
+              variant="h5"
+              noWrap
+              component="a"
               sx={{
-                display: { xs: "block", md: "none" },
+                mr: 2,
+                display: { xs: "flex", md: "none" },
+                flexGrow: 1,
+                fontWeight: 700,
+                fontFamily: "Oswald",
+                textTransform: "uppercase",
+                color: "white",
+                textDecoration: "none",
+                cursor: "pointer",
               }}
             >
-              {pages.map((page) => (
-                <MenuItem
-                  className="menu-item"
-                  key={page.name}
-                  onClick={() => handleCloseNavMenu(page.path)}
-                >
-                  <Typography
-                    textAlign="center"
+              Meerkats
+            </Typography>
+            <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+              {pages.map((page) => {
+                const pagePath = `${page.path}`;
+                return (
+                  <Button
+                    key={page.name}
+                    onClick={(e) => handleCloseNavMenu(page.path)}
                     sx={{
-                      mr: 2,
-                      display: { xs: "flex", md: "none" },
-                      flexGrow: 1,
-                      fontWeight: 700,
-                      fontFamily: "Oswald",
-                      textTransform: "uppercase",
-                      textDecoration: "none",
-                      cursor: "pointer",
+                      my: 2,
+                      color:
+                        location.pathname === pagePath ? "var(--headingBG-color)" : "white",
+                      display: "block",
                     }}
                   >
                     {page.name}
-                  </Typography>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box>
-          <Typography
-            onClick={() => navigate("/")}
-            variant="h5"
-            noWrap
-            component="a"
-            sx={{
-              mr: 2,
-              display: { xs: "flex", md: "none" },
-              flexGrow: 1,
-              fontWeight: 700,
-              fontFamily: "Oswald",
-              textTransform: "uppercase",
-              color: "white",
-              textDecoration: "none",
-              cursor: "pointer",
-            }}
-          >
-            Meerkat
-          </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {pages.map((page) => {
-              const pagePath = `/${page.path}`;
-              return (
-                <Button
-                  key={page.name}
-                  onClick={(e) => handleCloseNavMenu(page.path)}
-                  sx={{
-                    my: 2,
-                    color: location.pathname === pagePath ? "#b5e9f7" : "white",
-                    display: "block",
-                  }}
-                >
-                  {page.name}
-                </Button>
-              );
-            })}
-          </Box>
+                  </Button>
+                );
+              })}
+            </Box>
 
-          <Box sx={{ flexGrow: 0 }}>
-            {user.picture?.url ? (
-              <IconButton onClick={handleProfile} sx={{ p: 0 }}>
-                <p className="welcome-message">Welcome, <span>{user.name}</span></p>
-                <Avatar alt={user.username} src={user.picture.url} />
-              </IconButton>
-            ) : null}
-          </Box>
-        </Toolbar>
-      </Container>
-    </AppBar>
+            <Box sx={{ flexGrow: 0 }}>
+              {user.picture?.url ? (
+                <IconButton onClick={handleProfile} sx={{ p: 0 }}>
+                  <p className="welcome-message">
+                    Welcome, <span>{user.name}</span>
+                  </p>
+                  <Avatar alt={user.username} src={user.picture.url} />
+                </IconButton>
+              ) : null}
+            </Box>
+          </Toolbar>
+        </Container>
+      </AppBar>
+    </motion.div>
   );
 };
 export default ResponsiveAppBar;
