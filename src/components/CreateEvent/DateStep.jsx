@@ -157,6 +157,7 @@ const DateStep = ({
           disabled={
             formData.date === "" ||
             formData.time === "" ||
+            formData.time?.invalid?.reason === "unparsable" ||
             formData.location === ""
           }
           type="button"
