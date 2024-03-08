@@ -65,3 +65,14 @@
     }
   }
 }
+
+.welcome-screen {
+  text-align: center;
+
+  h1,button {
+    margin: 2rem;
+  }
+  h1 {
+    margin-top: 4rem;
+  }
+}
