@@ -1,16 +1,22 @@
 import "./styles/app.css";
 import "./styles/fonts.css";
-import { Routes, Route } from "react-router-dom";
+import { Navigate, Routes, Route } from "react-router-dom";
 import { useAuth } from "./context/useAuth";
+
+//VIEWS
 import Landing from "./views/Landing";
-import Navbar from "./components/Navbar";
 import Dashboard from "./views/Dashboard";
 import Event from "./views/Event";
 import CreateEvent from "./views/CreateEvent";
 import Profile from "./views/Profile";
-import Loader from "./components/Loader";
 import PastEvents from "./views/PastEvents";
 import CompleteRegistration from "./views/CompleteRegistration";
+import NotFound from "./components/NotFound";
+
+//COMPONENTS
+import Navbar from "./components/Navbar";
+import Loader from "./components/Loader";
+
 
 function App() {
   const { token, globalLoading } = useAuth();
@@ -26,6 +32,8 @@ function App() {
             path="/complete-registration/:token"
             element={<CompleteRegistration />}
           />
+           <Route path="/not-found" element={<NotFound />} />
+           <Route path="*" element={<Navigate to="/not-found" replace />} />
         </Routes>
       ) : (
         <>
@@ -35,6 +43,9 @@ function App() {
             <Route path="/new" element={<CreateEvent />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/event/:id" element={<Event />} />
+
+            <Route path="/not-found" element={<NotFound />} />
+            <Route path="*" element={<Navigate to="/not-found" replace />} />
           </Routes>
           <Navbar />
         </>
