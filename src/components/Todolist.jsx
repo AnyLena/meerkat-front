@@ -68,8 +68,6 @@ const Todolist = ({ eventData, setEventData }) => {
   };
 
   const handleInputTodo = (e) => {
-    console.log(e.target.value);
-    console.log(currentTodo);
     const todoTitle = e.target.value;
     setCurrentTodo((prev) => ({ ...prev, title: todoTitle }));
   };
@@ -130,8 +128,6 @@ const Todolist = ({ eventData, setEventData }) => {
   useEffect(() => {
     setParticipantList(eventData.participants);
     setTodoList(eventData.todos);
-    console.log(eventData);
-    console.log(user);
   }, [eventData]);
 
   return (
