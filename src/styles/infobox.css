@@ -82,11 +82,14 @@
       gap: 1rem;
       align-items: center;
     }
+    .local {
+      font-size: 0.8rem;
+    }
     .day {
       font-size: 1.5em;
       text-transform: uppercase;
       font-family: "Oswald";
-      line-height: 1.5;
+      line-height: 1.8;
     }
     input {
       font-size: 1.1rem;
