@@ -62,6 +62,7 @@ const DateStep = ({
       <TimePicker
         label="Time"
         required
+        format="HH:mm"
         onChange={(newValue) => handleChange("time", newValue)}
         viewRenderers={{
           hours: renderTimeViewClock,
