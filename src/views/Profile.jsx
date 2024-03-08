@@ -10,6 +10,7 @@ import { getMyFriendRequests } from "../api/invitations";
 
 // Components
 import UserProfile from "../components/Profile/UserProfile";
+import LatestFriends from "../components/Profile/LatestFriends";
 import FriendshipRequests from "../components/Profile/FriendshipRequests";
 import SearchBar from "../components/Profile/SearchBar";
 import SearchResults from "../components/Profile/SearchResults";
@@ -74,7 +75,14 @@ const Profile = () => {
       <UserProfile user={user} />
 
       <div className="search">
-        <FriendshipRequests invitations={invitations} setInvitations={setInvitations} user={user} token={token} setUser={setUser}/>
+        <LatestFriends user={user} token={token} setUser={setUser} />
+        <FriendshipRequests
+          invitations={invitations}
+          setInvitations={setInvitations}
+          user={user}
+          token={token}
+          setUser={setUser}
+        />
         <SearchBar
           handleSearch={handleSearch}
           setSearchQuery={setSearchQuery}
