@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { leaveEvent, deleteEvent } from "../api/events";
 import { useNavigate } from "react-router-dom";
 
-const LeaveOrDeleteEvent = ({ eventData, token, user }) => {
+const DeleteEvent = ({ eventData, token, user }) => {
   const [active, setActive] = useState(false);
 
   const confirmRef = useRef();
@@ -32,15 +32,10 @@ const LeaveOrDeleteEvent = ({ eventData, token, user }) => {
 
   return (
     <section className="leave-or-delete">
-      {eventData.owner._id !== user._id ? (
-        <button onClick={handleActive} className="leave-btn">
-          Leave event
-        </button>
-      ) : (
+    
         <button onClick={handleActive} className="delete-btn">
           Delete event
         </button>
-      )}
       {active && (
         <div
           ref={confirmRef}
@@ -62,4 +57,4 @@ const LeaveOrDeleteEvent = ({ eventData, token, user }) => {
   );
 };
 
-export default LeaveOrDeleteEvent;
+export default DeleteEvent;
