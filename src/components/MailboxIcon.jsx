@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { getUnreadMessagesNumber, markMessagesAsRead } from "../api/messages";
 import { useAuth } from "../context/useAuth";
-import Envelope from "../assets/envelope.png";
 import { IoMailOutline } from "react-icons/io5";
 
 const MailboxIcon = ({ setOpen, eventId }) => {
@@ -25,6 +24,7 @@ const MailboxIcon = ({ setOpen, eventId }) => {
     >
       <div className="mail-icon">
         <IoMailOutline />
+        <p className="messages">Messages</p>
         {unreadMessages > 0 ? (
           <div className="red-circle">
             <p>{unreadMessages}</p>

@@ -148,14 +148,24 @@ const Infobox = ({
                     {start.getMinutes().toString().padStart(2, "0")} |{" "}
                     {Object.keys(timezone).length > 0 ? (
                       <span>
-
-                        {timezone.offset_STD[0] === "+" ? 
-                        (Number(eventData.date.start.split("T")[1].split(":")[0])+ Number(timezone.offset_STD.split("+")[1].split(":")[0])) %24
-                        : 
-                        ((Number(eventData.date.start.split("T")[1].split(":")[0]) - Number(timezone.offset_STD.split("-")[1].split(":")[0]) + 24) % 24) }
+                        {timezone.offset_STD[0] === "+"
+                          ? (Number(
+                              eventData.date.start.split("T")[1].split(":")[0]
+                            ) +
+                              Number(
+                                timezone.offset_STD.split("+")[1].split(":")[0]
+                              )) %
+                            24
+                          : (Number(
+                              eventData.date.start.split("T")[1].split(":")[0]
+                            ) -
+                              Number(
+                                timezone.offset_STD.split("-")[1].split(":")[0]
+                              ) +
+                              24) %
+                            24}
                       </span>
-                    ) : 
-                    null}
+                    ) : null}
                     :{start.getMinutes().toString().padStart(2, "0")}{" "}
                     <span className="local">(local time)</span>
                   </>
