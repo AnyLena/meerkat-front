@@ -81,21 +81,24 @@ const Participants = ({ open, setOpen, setEventData, eventData }) => {
         >
           <Box sx={style}>
             <div className="participant-modal">
-              <div className="button-container">
-                <Button
-                  className="btn-close"
-                  onClick={handleClose}
-                  sx={{
-                    borderRadius: "50%",
-                    backgroundColor: "rgba(241, 241, 241)",
-                    color: "white",
-                    width: "40px",
-                    height: "40px",
-                    minWidth: "0 !important",
-                  }}
-                >
-                  <IoIosClose style={{ fontSize: "1.25rem" }} />
-                </Button>
+              <div className="header">
+                <h2>{eventData.title}</h2>
+                <div className="button-container">
+                  <Button
+                    className="btn-close"
+                    onClick={handleClose}
+                    sx={{
+                      borderRadius: "50%",
+                      backgroundColor: "rgba(241, 241, 241)",
+                      color: "white",
+                      width: "40px",
+                      height: "40px",
+                      minWidth: "0 !important",
+                    }}
+                  >
+                    <IoIosClose style={{ fontSize: "1.25rem" }} />
+                  </Button>
+                </div>
               </div>
               {eventData.participants.length === 0 &&
               Object.keys(contacts).length === 0 ? (

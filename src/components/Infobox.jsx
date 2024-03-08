@@ -127,7 +127,8 @@ const Infobox = ({
               <p>
                 {start instanceof Date ? (
                   <>
-                    {start.getHours()}:{start.getMinutes().toString().padStart(2, "0")}
+                    {start.getHours()}:
+                    {start.getMinutes().toString().padStart(2, "0")}
                   </>
                 ) : null}
                 {/* {date.end ? ` – ${end.hours}:${end.minutes}` : null} */}
@@ -145,6 +146,7 @@ const Infobox = ({
           <MailboxIcon eventId={eventId} setOpen={setOpen} />
         </div>
         <Messages
+          eventTitle={eventData.title}
           open={open}
           setOpen={setOpen}
           messages={messages}

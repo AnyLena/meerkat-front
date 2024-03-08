@@ -10,7 +10,7 @@ import Header from "./Header";
 import MessageList from "./MessageList";
 import MessageInput from "./MessageInput";
 
-const Messages = ({ open, setOpen, messages, setMessages }) => {
+const Messages = ({ eventTitle, open, setOpen, messages, setMessages }) => {
   const { user, token } = useAuth();
   const { id } = useParams();
 
@@ -55,7 +55,7 @@ const Messages = ({ open, setOpen, messages, setMessages }) => {
         className="modal"
       >
         <div className="messages-container">
-          <Header setOpen={setOpen} />
+          <Header setOpen={setOpen} eventTitle={eventTitle}/>
           <motion.div
             initial={{ opacity: 0, y: 100 }}
             animate={{ opacity: 1, y: 0 }}

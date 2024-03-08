@@ -14,11 +14,15 @@
   max-width: 800px;
   padding: 1rem;
   margin: 0 auto;
-
-  h2 {
-    margin-top: 10px;
+  .header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2ch;
+    h2 {
+      margin: 0 auto;
+    }
   }
-
   .participant-container {
     display: flex;
     align-items: center;
