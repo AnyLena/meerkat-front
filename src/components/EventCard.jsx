@@ -30,8 +30,10 @@ const EventCard = ({
       <div className="time-infobox">
         <div className="time-grid-container">
           <div className="time-date">
-            <p className="day">{start.day}</p>
-            <p>{start.month}</p>
+            <div>
+              <p className="day">{start.day}</p>
+              <p>{start.month}</p>
+            </div>
           </div>
           <div className="time-center">
             <p className="day">{start.weekday}</p>
@@ -48,6 +50,7 @@ const EventCard = ({
                 alt="host"
               />
               <p>{host === user.name ? "You" : host}</p>
+
             </div>
           ) : (
             <MailboxIcon eventId={eventId} />
@@ -61,13 +64,6 @@ const EventCard = ({
             <div className="description">
               <p className="title">{title}</p>
               <p>{location.description}</p>
-              {/* {user.name === host && new Date(date.start) < today ? (
-                <p className="host">You were the host.</p>
-              ) : user.name === host ? (
-                <p className="host">You are the host!</p>
-              ) : (
-                <p className="host">Host: {host}</p>
-              )} */}
             </div>
           </div>
         ) : null}
