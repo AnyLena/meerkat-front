@@ -30,12 +30,7 @@ const Participants = ({ open, setOpen, setEventData, eventData }) => {
 
   const handleAdd = (e) => {
     const participantId = e.target.id;
-    inviteParticipant(
-      participantId,
-      token,
-      eventData._id,
-      setInvitations
-    );
+    inviteParticipant(participantId, token, eventData._id, setInvitations);
   };
 
   const handleRemove = async (e) => {
@@ -111,6 +106,22 @@ const Participants = ({ open, setOpen, setEventData, eventData }) => {
                 <Typography id="modal-modal-description" sx={{ mt: 2 }}>
                   <h2 className="event-heading">Participants</h2>
                   <section className="participant-modal">
+                    <div
+                      className="participant-container"
+                      key={eventData.owner._id}
+                    >
+                      <img
+                        className="profile-small"
+                        src={eventData.owner.picture.url}
+                        alt=""
+                      />
+                      {eventData.owner.name === user.name ? (
+                        <div>You (host)</div>
+                      ) : (
+                        <div>{eventData.owner.name} (host)</div>
+                      )}
+                    </div>
+
                     {eventData.participants.length > 0 ? (
                       eventData.participants.map((participant) => (
                         <div
