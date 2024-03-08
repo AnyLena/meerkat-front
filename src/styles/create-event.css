@@ -90,21 +90,18 @@
   gap: 1rem;
   margin-bottom: 1rem;
   .participant {
+    box-sizing: border-box;
     justify-self: center;
-    opacity: .4;
+    opacity: 0.4;
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
     align-items: center;
     border-radius: 10px;
-    padding: .75rem;
+    padding: 0.75rem;
     text-align: center;
     cursor: pointer;
-    background-color: var(--headingBG-color);
     transition: all 0.2s;
-    background-color: #f9d779;
-    min-width: 80px;
-
     img {
       width: 50px;
       height: 50px;
@@ -114,7 +111,6 @@
     }
     p {
       color: var(--background-color);
-      font-weight: bold;
       margin: auto 0;
     }
     button {
@@ -133,8 +129,9 @@
     }
   }
   .participant-selected {
+    font-weight: bold;
     opacity: 1;
-    background-color: var(--headingBG-color)
+    border: 4px solid var(--headingBG-color);
   }
 }
 .form-step {
@@ -152,6 +149,97 @@
   }
   .invited-all {
     background-color: var(--headingBG-color);
+  }
+}
+
+.form-step .email-invitation {
+  background-color: rgb(242, 242, 242);
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+
+  label {
+    width: 200px;
+    background-color: transparent;
+    margin: 2rem auto;
+    height: auto;
+  }
+  .email-invitation-container {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    margin: 0 auto;
+  }
+  form {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    padding: 1rem;
+    margin: 0 auto;
+    input {
+      width: 100%;
+      padding: 0.5rem;
+      border-radius: 10px;
+      border: none;
+      outline: none;
+      &:focus {
+        border: 1px solid var(--headingBG-color);
+        box-sizing: border-box;
+      }
+    }
+    button {
+      width: 100px;
+      border-radius: 10px;
+      border: none;
+      background-color: var(--secondary-color);
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s;
+      &:active {
+        transform: scale(0.95);
+      }
+    }
+  }
+  .email-invitations {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 1rem;
+    margin: 0 auto;
+    .email-invitation-item {
+      display: flex;
+      flex-direction: row;
+      gap: 0.5rem;
+      padding: 0.5rem;
+      border-radius: 10px;
+      border: 2px solid var(--headingBG-color);
+      color: white;
+      p {
+        margin: auto 0;
+      }
+      button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: auto;
+        border: none;
+        background-color: transparent;
+        cursor: pointer;
+        transition: all 0.3s;
+        border-radius: 50%;
+        background-color: lightgray;
+        font-size: 1.5rem;
+        &:hover {
+          background-color: var(--alert-color);
+        }
+        &:active {
+          transform: scale(0.95);
+        }
+      }
+    }
   }
 }
 .form-step-label-last {

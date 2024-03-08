@@ -41,6 +41,7 @@ const Form = () => {
   const [isExploding, setIsExploding] = useState(false);
   const [selectedImage, setSelectedImage] = useState("");
   const [invitations, setInvitations] = useState([]);
+  const [emailInvitations, setEmailInvitations] = useState([]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -68,7 +69,7 @@ const Form = () => {
   };
 
   const handleSubmit = () => {
-    createEvent(formData, user, token, invitations, setInvitations);
+    createEvent(formData, user, token, invitations, setInvitations, emailInvitations);
     setIsExploding(true);
     setTimeout(() => {
       setIsExploding(false);
@@ -133,6 +134,8 @@ const Form = () => {
               names={names}
               invitations={invitations}
               setInvitations={setInvitations}
+              emailInvitations={emailInvitations}
+              setEmailInvitations={setEmailInvitations}
             />
 
             <ImageStep

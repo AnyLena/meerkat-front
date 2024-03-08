@@ -7,7 +7,8 @@ export const createEvent = async (
   user,
   token,
   invitations,
-  setInvitations
+  setInvitations,
+  emailInvitations
 ) => {
   const date = new Date(formData.date);
   const time = new Date(formData.time);
@@ -36,9 +37,16 @@ export const createEvent = async (
   try {
     const response = await axios.post(`${SERVER}/events`, data);
     const eventId = response.data._id;
-    invitations.forEach((invited) => {
-      inviteParticipant(invited, token, eventId, setInvitations);
-    });
+    if (invitations.length > 0) {
+      invitations.forEach((invited) => {
+        inviteParticipant(invited, token, eventId, setInvitations);
+      });
+    }
+    if (emailInvitations.length > 0) {
+      emailInvitations.forEach((email) => {
+        emailInvitation(email, eventId, token);
+      });
+    }
   } catch (error) {
     console.error(error);
   }
@@ -170,6 +178,24 @@ export const inviteParticipant = async (
     console.error(error);
   }
 };
+
+export const emailInvitation = async (email, eventId, token) => {
+  try {
+    const response = await axios.post(
+      `${SERVER}/users/invite/${eventId}`,
+      { email },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    console.log(response.data);
+  } catch (error) {
+    console.error(error);
+  }
+}
 
 export const putEvent = async (eventId, token, data, setEventData) => {
   console.log(data, "PUT EVENT");
