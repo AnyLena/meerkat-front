@@ -1,0 +1,40 @@
+.notfound {
+  display: flex;
+  max-width: 800px;
+  height: 80vh;
+  margin: 1rem auto;
+  gap: 50px;
+  /* border: 1px solid red; */
+
+  .flex-item {
+    width: 100%;
+    /* border: 1px solid red; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  img {
+    max-width: 300px;
+    max-height: 300px;
+    margin: auto;
+  }
+  h1 {
+    font-size: 3rem;
+  }
+  p {
+    margin: 1.5rem 0;
+  }
+}
+@media screen and (max-width: 800px) {
+  .notfound {
+    margin: 2rem;
+  }
+}
+
+@media screen and (max-width: 800px) {
+    .notfound {
+        flex-direction: column-reverse;  
+        justify-content: center;
+        text-align: center;
+    }
+  }

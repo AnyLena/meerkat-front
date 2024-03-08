@@ -62,6 +62,7 @@ const DateStep = ({
       <TimePicker
         label="Time"
         required
+        format="HH:mm"
         onChange={(newValue) => handleChange("time", newValue)}
         viewRenderers={{
           hours: renderTimeViewClock,
@@ -156,6 +157,7 @@ const DateStep = ({
           disabled={
             formData.date === "" ||
             formData.time === "" ||
+            formData.time?.invalid?.reason === "unparsable" ||
             formData.location === ""
           }
           type="button"

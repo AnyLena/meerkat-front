@@ -82,11 +82,14 @@
       gap: 1rem;
       align-items: center;
     }
+    .local {
+      font-size: 0.8rem;
+    }
     .day {
       font-size: 1.5em;
       text-transform: uppercase;
       font-family: "Oswald";
-      line-height: 1.5;
+      line-height: 1.8;
     }
     input {
       font-size: 1.1rem;
@@ -98,6 +101,8 @@
     align-self: center;
     position: relative;
     display: flex;
+    margin: 0 auto;
+    text-align: center;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -105,11 +110,17 @@
     height: 90px;
     transition: all 0.2s ease-in-out;
 
+    .messages {
+      font-size: 1rem;
+      line-height: 0.5;
+      margin-bottom: 10px;
+    }
+
     &:active {
       transform: scale(0.95);
     }
     svg {
-      font-size: 5rem;
+      font-size: 4rem;
     }
   }
   .red-circle {
@@ -174,7 +185,7 @@
       justify-self: flex-end;
       padding-left: 5px;
       svg {
-        font-size: 4rem;
+        font-size: 3rem;
       }
     }
     .red-circle {

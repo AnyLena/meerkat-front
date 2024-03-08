@@ -7,6 +7,7 @@ import DashboardMenu from "../components/DashboardMenu.jsx";
 //COMPONENTS
 import EventCard from "../components/EventCard";
 import Notifications from "../components/Notifications";
+import Welcome from "../components/Welcome";
 
 //STYLES
 import "../styles/dashboard.css";
@@ -43,53 +44,58 @@ const Dashboard = () => {
       <section className="dashboard">
         {user ? (
           <>
-           <motion.div
-                initial={{ opacity: 0, y: 100 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7 }}
-              >
-            {invitations.length > 0 ? (
-              <>
-                <h2>
-                  Notifications{" "}
-                  <span className="notification-number">
-                    {invitations.length}
-                  </span>
-                </h2>
-                <div className="notifications">
-                  {invitations.some(
-                    (invitation) => invitation.type === "event"
-                  ) ? (
-                    <>
-                      <h3 className="notifications-head_a">
-                        Event Invitations
-                      </h3>
-                      <Notifications
-                        invitations={invitations}
-                        setInvitations={setInvitations}
-                        setUser={setUser}
-                        type="event"
-                        setUserEvents={setUserEvents}
-                      />{" "}
-                    </>
-                  ) : null}
+            <motion.div
+              initial={{ opacity: 0, y: 100 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7 }}
+            >
+              {invitations.length === 0 && userEvents.length === 0 ? (
+                <Welcome/>
+              ) : null}
+              {invitations.length > 0 ? (
+                <>
+                  <h2>
+                    Notifications{" "}
+                    <span className="notification-number">
+                      {invitations.length}
+                    </span>
+                  </h2>
+                  <div className="notifications">
+                    {invitations.some(
+                      (invitation) => invitation.type === "event"
+                    ) ? (
+                      <>
+                        <h3 className="notifications-head_a">
+                          Event Invitations
+                        </h3>
+                        <Notifications
+                          invitations={invitations}
+                          setInvitations={setInvitations}
+                          setUser={setUser}
+                          type="event"
+                          setUserEvents={setUserEvents}
+                        />{" "}
+                      </>
+                    ) : null}
 
-                  {invitations.some(
-                    (invitation) => invitation.type === "friendship"
-                  ) ? (
-                    <>
-                      <h3 className="notifications-head_b">Friend Requests</h3>
-                      <Notifications
-                        invitations={invitations}
-                        setInvitations={setInvitations}
-                        setUser={setUser}
-                        type="friendship"
-                      />{" "}
-                    </>
-                  ) : null}
-                </div>
-              </>
-            ) : null}
+                    {invitations.some(
+                      (invitation) => invitation.type === "friendship"
+                    ) ? (
+                      <>
+                        <h3 className="notifications-head_b">
+                          Friend Requests
+                        </h3>
+                        <Notifications
+                          invitations={invitations}
+                          setInvitations={setInvitations}
+                          setUser={setUser}
+                          type="friendship"
+                        />{" "}
+                      </>
+                    ) : null}
+                  </div>
+                </>
+              ) : null}
             </motion.div>
 
             {userEvents.length > 0 ? (
@@ -123,7 +129,7 @@ const Dashboard = () => {
           </>
         ) : null}
       </section>
-      </>
+    </>
     // </motion.div>
   );
 };

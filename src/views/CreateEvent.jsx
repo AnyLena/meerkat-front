@@ -58,15 +58,18 @@ const Form = () => {
     window.scrollTo(0, 0);
   };
 
-  const handleSelectImage = (key, value) => {
+  const handleSelectImage = ( key, value) => {
     setFormData({ ...formData, [key]: value });
     setSelectedImage(value);
   };
 
   const handleChange = (key, value) => {
-    setFormData({ ...formData, [key]: value });
-    console.log(formData);
+    setFormData({ ...formData, [key]: value });    
   };
+
+  useEffect(()=> {
+    console.log(formData);
+  },[formData])
 
   const handleSubmit = () => {
     createEvent(formData, user, token, invitations, setInvitations, emailInvitations);
