@@ -113,37 +113,11 @@ export const getInvitations = async (eventId, token, setInvitations) => {
         Authorization: `Bearer ${token}`,
       },
     });
-    console.log(response.data, "INVITED");
     setInvitations(response.data);
   } catch (error) {
     console.error(error);
   }
 };
-
-// export const addParticipant = async (
-//   participantId,
-//   token,
-//   eventId,
-//   setEventData
-// ) => {
-//   console.log("addParticipant", participantId, token, eventId);
-//   try {
-//     const response = await axios.put(
-//       `${SERVER}/events/${eventId}/participants/add`,
-//       { participant: participantId },
-//       {
-//         headers: {
-//           "Content-Type": "application/json",
-//           Authorization: `Bearer ${token}`,
-//         },
-//       }
-//     );
-//     console.log("participants", response.data);
-//     setEventData((prev) => ({ ...prev, participants: response.data }));
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
 
 export const inviteParticipant = async (
   participantId,

@@ -6,7 +6,6 @@ export const getWeatherData = async (lat,lng,date,hour,setWeatherData) => {
         const response = await axios.get(
           `https://api.weatherapi.com/v1/forecast.json?key=${KEY}&q=${lat},${lng}&dt=${date}&hour=${hour}`
         );
-        console.log(response.data);
         setWeatherData(response.data);
       } catch (error) {
         console.error(error);
