@@ -186,6 +186,7 @@ const Infobox = ({
           <MailboxIcon eventId={eventId} setOpen={setOpen} />
         </div>
         <Messages
+          eventTitle={eventData.title}
           open={open}
           setOpen={setOpen}
           messages={messages}

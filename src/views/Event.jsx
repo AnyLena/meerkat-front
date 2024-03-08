@@ -14,7 +14,7 @@ import Weatherforecast from "../components/Weatherforecast.jsx";
 import Participantslist from "../components/Participantslist.jsx";
 import SharedFiles from "../components/SharedFiles.jsx";
 import EventDescription from "../components/EventDescription.jsx";
-import LeaveOrDeleteEvent from "../components/LeaveOrDeleteEvent.jsx";
+import DeleteEvent from "../components/DeleteEvent.jsx";
 
 //STYLES
 import "../styles/event.css";
@@ -109,7 +109,6 @@ const Event = () => {
                 setMessages={setMessages}
                 setEventData={setEventData}
                 token={token}
-
                 user={user}
                 eventData={eventData}
               />
@@ -131,12 +130,9 @@ const Event = () => {
                 <Weatherforecast eventData={eventData} />
               ) : null}
               <SharedFiles messages={messages} />
-              <LeaveOrDeleteEvent
-                eventData={eventData}
-                token={token}
-                user={user}
-              />
-
+              {eventData.owner._id === user._id && (
+                <DeleteEvent eventData={eventData} token={token} user={user} />
+              )}
             </section>
           </section>
         ) : null}

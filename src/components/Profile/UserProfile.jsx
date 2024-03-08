@@ -21,7 +21,7 @@ const UserProfile = ({ user }) => {
         <p>{email}</p>
         <div className="separator"></div>
         <h3>{contacts.length}</h3>
-        <p>{contacts.length === 1 ? "contact" : "contacts"}</p>
+        <p>{contacts.length === 1 ? "friend" : "friends"}</p>
       </div>
 
     </motion.div>

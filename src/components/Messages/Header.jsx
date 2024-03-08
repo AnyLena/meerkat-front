@@ -2,7 +2,7 @@ import { Button } from "@mui/material";
 import { motion } from "framer-motion";
 import { IoIosClose } from "react-icons/io";
 
-const Header = ({ setOpen }) => {
+const Header = ({ setOpen, eventTitle }) => {
   return (
     <div className="messages-header">
       <motion.div
@@ -11,7 +11,7 @@ const Header = ({ setOpen }) => {
         transition={{ ease: "easeInOut", duration: 0.5 }}
         className="messages-header-h2"
       >
-        <h2>Messages</h2>
+        <h2>{eventTitle}: messages</h2>
         <div className="messages-header-close">
           <Button
             className="btn-close"
