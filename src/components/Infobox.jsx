@@ -6,6 +6,7 @@ import { putEvent } from "../api/events.js";
 import { FaPencilAlt } from "react-icons/fa";
 import { IoIosClose } from "react-icons/io";
 import { IoIosCheckmark } from "react-icons/io";
+import { months, days } from "../utils/dateNames.js";
 
 //STYLES
 import "../styles/infobox.css";
@@ -21,18 +22,17 @@ const Infobox = ({
   eventData,
 }) => {
   const [start, setStart] = useState({});
-  const [end, setEnd] = useState({});
+  // const [end, setEnd] = useState({});
   const [open, setOpen] = useState(false);
   const [edit, setEdit] = useState(false);
-  const [newDate, setNewDate] = useState(date.start);
-  const [newTime, setNewTime] = useState(date.start.slice(11, 16));
+  const [newStart, setNewStart] = useState();
   const inputRef = useRef();
 
   useEffect(() => {
-    setStart(convertDate(date.start));
-    setEnd(convertDate(date.end));
-    console.log(date.start.slice(11, 16, "TIME"));
-  }, [date]);
+    const dateStart = new Date(eventData.date.start);
+    setStart(dateStart);
+    setNewStart(dateStart);
+  }, [eventData]);
 
   const handleEdit = () => {
     setEdit(!edit);
@@ -46,23 +46,30 @@ const Infobox = ({
   }, [edit]);
 
   const handleDateChange = (e) => {
-    setNewDate(e.target.value);
-    console.log(newDate, "data changed");
-    console.log(newTime, "time changed");
+    let updatedStart = new Date(newStart);
+
+    if (e.target.type === "date") {
+      const newDate = new Date(e.target.value);
+      updatedStart.setFullYear(newDate.getFullYear());
+      updatedStart.setMonth(newDate.getMonth());
+      updatedStart.setDate(newDate.getDate());
+    }
+    if (e.target.type === "time") {
+      const timeString = e.target.value;
+      const [hours, minutes] = timeString.split(":");
+      updatedStart.setHours(Number(hours));
+      updatedStart.setMinutes(Number(minutes));
+    }
+    setNewStart(updatedStart);
   };
 
   const handleSave = () => {
     setEdit(false);
-    const newDateTime = newDate + "T" + newTime;
+    console.log(newStart);
     const data = {
-      date: { start: newDateTime, end: date.end },
+      date: { start: newStart, end: date.end },
     };
     putEvent(eventId, token, data, setEventData);
-  };
-
-  const handleTimeChange = (e) => {
-    setNewTime(e.target.value);
-    console.log(newTime);
   };
 
   return (
@@ -72,8 +79,12 @@ const Infobox = ({
           {!edit ? (
             <div className="time-date">
               <div>
-                <p className="day">{start.day}</p>
-                <p>{start.month}</p>
+                {start instanceof Date ? (
+                  <>
+                    <p className="day">{start.getDate()}</p>
+                    <p>{months[start.getMonth()]}</p>{" "}
+                  </>
+                ) : null}
               </div>
               {eventData.owner._id === user._id && (
                 <div className="buttons">
@@ -88,7 +99,10 @@ const Infobox = ({
               <input
                 ref={inputRef}
                 type="date"
-                value={newDate.slice(0, 10)}
+                value={`${newStart.getFullYear()}-${(
+                  "0" +
+                  (newStart.getMonth() + 1)
+                ).slice(-2)}-${("0" + newStart.getDate()).slice(-2)}`}
                 onChange={handleDateChange}
               />
               <div className="edit-save-btns">
@@ -105,18 +119,26 @@ const Infobox = ({
           )}
           <div className="time-center">
             <div className="day-container">
-              <p className="day">{start.weekday}</p>
+              {start instanceof Date ? (
+                <p className="day">{days[start.getDay()]}</p>
+              ) : null}
             </div>
             {!edit ? (
               <p>
-                {start.hours}:{start.minutes}
-                {date.end ? ` – ${end.hours}:${end.minutes}` : null}
+                {start instanceof Date ? (
+                  <>
+                    {start.getHours()}:{start.getMinutes().toString().padStart(2, "0")}
+                  </>
+                ) : null}
+                {/* {date.end ? ` – ${end.hours}:${end.minutes}` : null} */}
               </p>
             ) : (
               <input
                 type="time"
-                value={newTime.slice(0, 2) + ":" + newTime.slice(3, 5)}
-                onChange={handleTimeChange}
+                value={`${("0" + newStart.getHours()).slice(-2)}:${(
+                  "0" + newStart.getMinutes()
+                ).slice(-2)}`}
+                onChange={handleDateChange}
               />
             )}
           </div>

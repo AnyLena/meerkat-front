@@ -15,8 +15,6 @@ const Weatherforecast = ({ eventData }) => {
     maxDate.setDate(maxDate.getDate() + 14);
     const eventDate = new Date(eventData.date.start);
 
-    console.log(today, maxDate, eventDate);
-
     if (maxDate <= eventDate) {
       setNoWeatherData("future");
     } else if (eventDate < today) {
@@ -29,15 +27,18 @@ const Weatherforecast = ({ eventData }) => {
   const getWeather = () => {
     const lat = eventData.location.lat;
     const lng = eventData.location.lng;
-    const date = eventData.date.start.split("T")[0];
-    const hour = eventData.date.start.split("T")[1].split(":")[0];
-    console.log(lat, lng);
+
+    const eventDate = new Date(eventData.date.start);
+    const date = `${eventDate.getFullYear()}-${(eventDate.getMonth() + 1)
+      .toString()
+      .padStart(2, "0")}-${eventDate.getDate().toString().padStart(2, "0")}`;
+    const hour = eventDate.getHours();
     getWeatherData(lat, lng, date, hour, setWeatherData);
   };
 
   useEffect(() => {
     checkDate();
-  }, []);
+  }, [eventData]);
 
   useEffect(() => {
     if (Object.keys(weatherData).length > 0) {
