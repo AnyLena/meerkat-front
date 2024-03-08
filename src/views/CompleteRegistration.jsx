@@ -15,7 +15,7 @@ import { useNavigate } from "react-router-dom";
 const CompleteRegistration = () => {
   const { token } = useParams();
   const [loading, setLoading] = useState(false);
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const [decryptedToken, setDecryptedToken] = useState("");
   const [userData, setUserData] = useState({
@@ -48,10 +48,11 @@ const CompleteRegistration = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(userData);
+    setLoading(true);
     completeRegistration(userData, decryptedToken.id);
 
     setTimeout(() => {
+      setLoading(false);
       navigate("/");
     }, 3000);
   };
@@ -79,7 +80,6 @@ const CompleteRegistration = () => {
           />
           <TextField
             id="outlined-basic"
-            label="Email"
             variant="outlined"
             name="email"
             type="email"
@@ -112,7 +112,20 @@ const CompleteRegistration = () => {
               Complete registration
             </Button>
           </Box>
-          <div className="loading">{loading && <CircularProgress />}</div>
+          <div className="loading">
+            {loading && (
+              <CircularProgress
+                sx={{
+                  color: "var(--primary-color)",
+                  position: "absolute",
+                  top: "50%",
+                  left: "50%",
+                  marginTop: "-12px",
+                  marginLeft: "-12px",
+                }}
+              />
+            )}
+          </div>
         </form>
       </div>
     </motion.div>

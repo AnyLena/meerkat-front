@@ -11,12 +11,14 @@ import {
 } from "../api/events.js";
 import { IoIosClose } from "react-icons/io";
 import { Link } from "react-router-dom";
+import { emailInvitation } from "../api/events.js";
 
 const Participants = ({ open, setOpen, setEventData, eventData }) => {
   const { user, token } = useAuth();
   const [contactsFilter, setContactsFilter] = useState({});
   const [contacts, setContacts] = useState({});
   const [invitations, setInvitations] = useState(null);
+  const [emailInvitationMessage, setEmailInvitationMessage] = useState("");
 
   const style = {
     backgroundColor: "white",
@@ -46,6 +48,12 @@ const Participants = ({ open, setOpen, setEventData, eventData }) => {
         )
     );
     setContactsFilter(filteredContacts);
+  };
+
+  const handleEmailInvitation = (e) => {
+    e.preventDefault();
+    setEmailInvitationMessage(`Invitation sent to ${e.target[0].value}!`);
+    emailInvitation(e.target[0].value, eventData._id, token);
   };
 
   useEffect(() => {
@@ -147,7 +155,7 @@ const Participants = ({ open, setOpen, setEventData, eventData }) => {
                       ))
                     ) : (
                       <div className="all-invited">
-                        You can add your friends to this event!
+                        Invite your friends to this event!
                       </div>
                     )}
                   </section>
@@ -207,6 +215,14 @@ const Participants = ({ open, setOpen, setEventData, eventData }) => {
                           </div>
                         )}
                       </section>
+                      <div className="email-invitation-container">
+                        <label>Invite via email</label>
+                        <form onSubmit={handleEmailInvitation}>
+                          <input type="email" placeholder="Email" />
+                          <button type="submit">Invite</button>
+                        </form>
+                        <p>{emailInvitationMessage}</p>
+                      </div>
                     </>
                   ) : null}
                 </Typography>

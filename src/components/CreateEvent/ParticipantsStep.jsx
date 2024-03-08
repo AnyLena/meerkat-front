@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Box, Button, Chip, MenuItem, Select } from "@mui/material";
 import { buttonStyle } from "../../styles/MUI";
 import "../../styles/create-event.css";
+import EmailInvitation from "./EmailInvitation";
 
 const ParticipantsStep = ({
   formStep,
@@ -10,6 +11,8 @@ const ParticipantsStep = ({
   names,
   invitations,
   setInvitations,
+  emailInvitations,
+  setEmailInvitations,
 }) => {
   const handleInvitation = (id) => {
     if (invitations.includes(id)) {
@@ -17,7 +20,6 @@ const ParticipantsStep = ({
     } else {
       setInvitations([...invitations, id]);
     }
-    console.log(invitations);
   };
 
   const handleInviteAll = () => {
@@ -60,19 +62,26 @@ const ParticipantsStep = ({
         </div>
         {names.length > 0 && (
           <div className="invite-all-btn">
-          <Button
-            className={
-              invitations.length === names.length ? "invited-all" : "invite-all"
-            }
-            onClick={handleInviteAll}
-          >
-            {invitations.length === names.length
-              ? "uninvite all"
-              : "invite all"}
-          </Button>
+            <Button
+              className={
+                invitations.length === names.length
+                  ? "invited-all"
+                  : "invite-all"
+              }
+              onClick={handleInviteAll}
+            >
+              {invitations.length === names.length
+                ? "uninvite all"
+                : "invite all"}
+            </Button>
           </div>
         )}
       </div>
+      <EmailInvitation
+        names={names}
+        emailInvitations={emailInvitations}
+        setEmailInvitations={setEmailInvitations}
+      />
       <Box
         sx={{
           display: "flex",

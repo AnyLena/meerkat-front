@@ -91,7 +91,20 @@ const Signup = ({ setShowLogin, setMessage, setErrorMessage }) => {
               Sign Up
             </Button>
           </Box>
-          <div className="loading">{loading && <CircularProgress />}</div>
+          <div className="loading">
+            {loading && (
+              <CircularProgress
+                sx={{
+                  color: "var(--primary-color)",
+                  position: "absolute",
+                  top: "50%",
+                  left: "50%",
+                  marginTop: "-12px",
+                  marginLeft: "-12px",
+                }}
+              />
+            )}
+          </div>
         </form>
       </div>
       <Button
