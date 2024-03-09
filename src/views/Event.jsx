@@ -70,20 +70,22 @@ const Event = () => {
 
         {Object.keys(eventData).length > 0 && (
           <div className="top-container">
-            <div className="owner">
-              <img src={eventData.owner.picture.url} alt="" />
-              <p>
-                {eventData.owner.name !== user.name ? (
-                  <>
-                    <span>{eventData.owner.name}</span> is the host
-                  </>
-                ) : (
-                  <>
-                    <span>You</span> are the host
-                  </>
-                )}
-              </p>
-            </div>
+            {eventData.owner && (
+              <div className="owner">
+                <img src={eventData.owner.picture.url} alt="" />
+                <p>
+                  {eventData.owner.name !== user.name ? (
+                    <>
+                      <span>{eventData.owner.name}</span> is the host
+                    </>
+                  ) : (
+                    <>
+                      <span>You</span> are the host
+                    </>
+                  )}
+                </p>
+              </div>
+            )}
           </div>
         )}
       </motion.div>

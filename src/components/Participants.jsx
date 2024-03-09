@@ -203,7 +203,7 @@ const Participants = ({ open, setOpen, setEventData, eventData }) => {
                                       ? "btn-disabled"
                                       : "btn-grey"
                                   }
-                                  disabled={invitations.find(
+                                  disabled={invitations && invitations.find(
                                     (invitation) =>
                                       invitation.invited === participant._id &&
                                       invitation.status === "pending"

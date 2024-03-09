@@ -8,7 +8,7 @@ const SharedFiles = ({ messages }) => {
 
   return (
     <>
-      {messages && messages.length > 0 && (
+      {messages && messages.find((mes) => mes.file !== null) && (
         <div className="shared-files">
           <div className="event-heading">
             <h2>Shared files</h2>
