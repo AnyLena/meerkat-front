@@ -13,7 +13,7 @@ const EmailInvitation = ({ emailInvitations, setEmailInvitations }) => {
   return (
     <div className="email-invitation">
       <label className="form-step-label">
-        <p>Invite by email</p>
+        <p>Invite via email</p>
       </label>
       <div className="email-invitation-container">
         <form onSubmit={handleAddEmail}>

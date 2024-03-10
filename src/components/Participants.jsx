@@ -165,11 +165,11 @@ const Participants = ({ open, setOpen, setEventData, eventData }) => {
                           ) : null}
                         </div>
                       ))
-                    ) : (
+                    ) : !invitations.find((inv) => inv.status === "pending") ? (
                       <div className="all-invited">
                         Invite your friends to this event!
                       </div>
-                    )}
+                    ) : null}
                   </section>
 
                   {eventData.owner._id === user._id ? (
@@ -203,11 +203,15 @@ const Participants = ({ open, setOpen, setEventData, eventData }) => {
                                       ? "btn-disabled"
                                       : "btn-grey"
                                   }
-                                  disabled={invitations && invitations.find(
-                                    (invitation) =>
-                                      invitation.invited === participant._id &&
-                                      invitation.status === "pending"
-                                  )}
+                                  disabled={
+                                    invitations &&
+                                    invitations.find(
+                                      (invitation) =>
+                                        invitation.invited ===
+                                          participant._id &&
+                                        invitation.status === "pending"
+                                    )
+                                  }
                                 >
                                   {invitations &&
                                   invitations.find(
