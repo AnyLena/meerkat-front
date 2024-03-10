@@ -47,7 +47,7 @@ const Infobox = ({
   }, [eventData]);
 
   useEffect(() => {
-    console.log(timezone);
+    // console.log(timezone);
   }, [timezone]);
   const handleEdit = () => {
     setEdit(!edit);
@@ -80,7 +80,6 @@ const Infobox = ({
 
   const handleSave = () => {
     setEdit(false);
-    console.log(newStart);
     const data = {
       date: { start: newStart, end: date.end },
     };

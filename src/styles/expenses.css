@@ -1,0 +1,99 @@
+.expenses {
+  .expenses-form {
+    display: grid;
+    width: 100%;
+    gap: 10px;
+    grid-template-columns: auto auto auto;
+    margin: 2rem 0;
+  }
+  .expense-item {
+    display: grid;
+    margin: 5px;
+    grid-template-columns: 45px auto 130px;
+    align-items: center;
+    gap: 10px;
+    padding: 5px 10px;
+    border-bottom: 1px solid var(--headingBG-color);
+    /* .assign-img {
+        height: 20px;
+        width: 20px;
+        padding: 0;
+        margin: 0;
+        margin-right: 5px;
+    } */
+  }
+  .expense-amount {
+    text-align: right;
+  }
+  .expense-total {
+    padding: 5px 10px;
+    border-bottom: 1px solid var(--headingBG-color);
+    text-align: right;
+    margin: 5px;
+    font-weight: bold;
+  }
+  .average-box {
+    margin: 1rem;
+    text-align: center;
+  }
+  .average {
+    font-size: 1.5rem
+  }
+  .user-amount {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .user-amount-item {
+    border: 2px solid var(--headingBG-color);
+    padding: 20px;
+    border-radius: 20px;
+    p {
+        margin: 5px 0;
+    }
+  }
+  .user-amount--bold {
+    font-weight: bold;
+  }
+
+}
+/* 
+  .todo-owner form {
+    display: grid;
+    grid-template-columns: auto 130px 60px;
+    gap: 10px;
+    margin: 13px;
+    margin-top: 30px;
+  
+    * {
+      font-family: "Gafata";
+    }
+  
+    #assign-participant {
+      display: flex;
+      align-items: center;
+    }
+  
+    .assign-img {
+      height: 20px;
+      width: 20px;
+      padding: 0;
+      margin: 0;
+      margin-right: 5px;
+    }
+  }
+  
+  @media screen and (max-width: 450px) {
+    .todo-list {
+      .todo-item {
+        grid-template-columns: 40px auto 60px 60px;
+      }
+    }
+  
+    .todo-owner form {
+      display: grid;
+      grid-template-columns: 1fr;
+    }
+    .btn-disabled {
+      background-color: red;
+    } */
