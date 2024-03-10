@@ -25,13 +25,61 @@
   right: 50%;
   transform: translate(50%);
 }
+.profile-selector-modal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+  .modal-content {
+    background-color: white;
+    padding: 2rem 4rem;
+    text-align: center;
+    border-radius: 10px;
+  }
+  .buttons {
+    display: flex;
+    margin-top: 1rem;
+    gap: 1rem;
+    justify-content: center;
+  }
+  .accept-btn {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: 0.2s;
+    &:active {
+      transform: scale(0.96);
+    }
+  }
+  .cancel-btn {
+    background-color: var(--alert-color);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: 0.2s;
+    &:active {
+      transform: scale(0.96);
+    }
+  }
+}
 
 .profile-content {
   margin-top: 2rem;
   display: flex;
   .profile-image {
     flex: 1 0;
-
+    cursor: pointer;
     img {
       width: 100%;
       height: 100%;
@@ -55,7 +103,7 @@
     .separator {
       height: 1px;
       width: 80%;
-      margin: 2rem auto;
+      margin: 1rem auto;
       background-color: var(--primary-color);
     }
   }
@@ -74,7 +122,7 @@
     flex-direction: column;
     align-items: center;
     margin-bottom: 1rem;
-    p{
+    p {
       text-align: center;
     }
     img {
@@ -139,7 +187,7 @@
       justify-content: center;
       align-items: center;
       text-align: center;
-      h2{
+      h2 {
         font-size: 1rem;
       }
       img {

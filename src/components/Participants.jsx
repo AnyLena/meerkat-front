@@ -101,7 +101,8 @@ const Participants = ({ open, setOpen, setEventData, eventData }) => {
                 </div>
               </div>
               {eventData.participants.length === 0 &&
-              Object.keys(contacts).length === 0 ? (
+              Object.keys(contacts).length === 0 &&
+              invitations === null ? (
                 <>
                   <h2 className="event-heading">No friends to add</h2>
                   <p className="all-invited">
@@ -165,7 +166,8 @@ const Participants = ({ open, setOpen, setEventData, eventData }) => {
                           ) : null}
                         </div>
                       ))
-                    ) : !invitations.find((inv) => inv.status === "pending") ? (
+                    ) : invitations &&
+                      !invitations.find((inv) => inv.status === "pending") ? (
                       <div className="all-invited">
                         Invite your friends to this event!
                       </div>
