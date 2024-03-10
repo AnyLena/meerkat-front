@@ -1,14 +1,36 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import ProfileSelectorModal from "./ProfileSelectorModal";
+import { IoIosClose, IoIosCheckmark } from "react-icons/io";
+import { FaPencilAlt } from "react-icons/fa";
+import { editUser } from "../../api/users";
 
 const UserProfile = ({ user, setUser, token }) => {
   const { name, email, contacts, picture } = user;
   const [open, setOpen] = useState(false);
+  const [edit, setEdit] = useState(false);
+  const [newName, setNewName] = useState(name);
+  const ref = useRef();
 
   const handleOpenModal = () => {
     setOpen(true);
   };
+
+  const handleChange = (e) => {
+    setNewName(e.target.value);
+  };
+
+  const handleSave = () => {
+    editUser(user._id, token, { name: newName }, setUser);
+    setEdit(!edit);
+  };
+
+  useEffect(() => {
+    if (edit) {
+      ref.current.focus();
+      ref.current.select();
+    }
+  }, [edit]);
 
   return (
     <>
@@ -23,7 +45,33 @@ const UserProfile = ({ user, setUser, token }) => {
         </div>
 
         <div className="profile-details">
-          <h2>{name}</h2>
+          <div className="name-edit">
+            {!edit && (
+              <>
+                <h2>{name}</h2>
+
+                <button onClick={() => setEdit(!edit)} className="edit-btn">
+                  <FaPencilAlt />
+                </button>
+              </>
+            )}
+            {edit && (
+              <>
+                <input
+                  ref={ref}
+                  type="text"
+                  value={newName}
+                  onChange={handleChange}
+                />
+                <button onClick={handleSave} className="btn-green">
+                  <IoIosCheckmark />
+                </button>
+                <button onClick={() => setEdit(!edit)} className="btn-red">
+                  <IoIosClose />
+                </button>
+              </>
+            )}
+          </div>
           <p>{email}</p>
           <div className="separator"></div>
           <h3>{contacts.length}</h3>

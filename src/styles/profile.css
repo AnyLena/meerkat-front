@@ -97,6 +97,30 @@
     align-items: center;
     display: flex;
     flex-direction: column;
+    .name-edit {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      input {
+        flex: 1 0;
+        padding: 0.5rem;
+        border: 1px solid var(--primary-color);
+        border-radius: 5px;
+        margin-right: 0.5rem;
+        outline: none;
+        font-size: 1rem;
+      }
+      button {
+        border: none;
+        border-radius: 50%;
+        padding: 0.5rem;
+      }
+    }
+    h2 {
+      @media screen and (max-width: 400px) {
+        font-size: 1.1rem;
+      }
+    }
     p {
       margin-top: 0.5rem;
     }
@@ -178,7 +202,7 @@
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
     gap: 1rem;
     .user-card {
-      background-color: #fff5e6;
+      background-color: #fcca4633;
       border-radius: 10px;
       padding: 1rem;
       display: flex;

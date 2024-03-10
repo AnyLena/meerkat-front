@@ -2,7 +2,6 @@ import { motion } from "framer-motion";
 import ProfileSelector from "../ProfileSelector";
 import { editUser } from "../../api/users";
 import { useState } from "react";
-import { useAuth } from "../../context/useAuth";
 
 const PofileSelectorModal = ({ open, setOpen, user, setUser, token }) => {
   const [newPicture, setNewPicture] = useState({
