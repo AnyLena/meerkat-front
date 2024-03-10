@@ -14,7 +14,7 @@
   max-width: 800px;
   padding: 1rem;
   margin: 0 auto;
-  .header{
+  .header {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -33,10 +33,9 @@
     .btn-disabled {
       margin-right: 1rem;
     }
-    .leave-event{
+    .leave-event {
       margin-left: auto;
       margin-right: 1rem;
-      transition: all 0.3s ease-in-out;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -46,6 +45,7 @@
         border: none;
         cursor: pointer;
         transition: 0.3s;
+        border-radius: 0px !important;
         &:active {
           transform: scale(0.95);
         }
@@ -54,28 +54,8 @@
       .delete-btn {
         background-color: var(--alert-color);
         color: black;
-        padding: .5rem;
-        border-radius: 10px;
-      }
-      .confirm {
-        margin-top: 8rem;
-        transition: all 0.3s ease-in-out;
-        text-align: center;
-        p {
-          margin-bottom: 0.5rem;
-        }
-        .buttons {
-          display: flex;
-          justify-content: space-between;
-        }
-        button {
-          border: none;
-          cursor: pointer;
-          transition: 0.3s;
-          &:active {
-            transform: scale(0.95);
-          }
-        }
+        padding: 0.5rem;
+        border-radius: 0px !important;
       }
     }
   }

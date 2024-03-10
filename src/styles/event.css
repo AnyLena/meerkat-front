@@ -244,25 +244,5 @@
     background-color: var(--alert-color);
     color: black;
     padding: 1rem;
-    border-radius: 10px;
-  }
-  .confirm {
-    transition: all .3s ease-in-out;
-    text-align: center;
-    p{
-      margin-bottom: .5rem;
-    }
-    .buttons {
-      display: flex;
-      justify-content: space-between;
-    }
-    button {
-      border: none;
-      cursor: pointer;
-      transition: 0.3s;
-      &:active {
-        transform: scale(0.95);
-      }
-    }
   }
 }

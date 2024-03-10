@@ -72,7 +72,7 @@ const Profile = () => {
         </Button>
       </motion.div>
 
-      <UserProfile user={user} />
+      <UserProfile user={user} setUser={setUser} token={token}/>
 
       <div className="search">
         <LatestFriends user={user} token={token} setUser={setUser} />

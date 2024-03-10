@@ -133,3 +133,18 @@ export const completeRegistration = async (userData, id) => {
     console.error(error);
   }
 };
+
+export const editUser = async (userId, token, userData, setUser) => {
+  try {
+    const response = await axios.put(`${SERVER}/users/${userId}`, userData, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    setUser(response.data);
+    console.log(response.data, "response edituser");
+  } catch (error) {
+    console.error(error);
+  }
+}
