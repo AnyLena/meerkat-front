@@ -49,49 +49,6 @@ const ImageStep = ({
           ></motion.div>
         ))}
       </div>
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "center",
-          gap: "4rem",
-          marginBottom: "8rem",
-        }}
-      >
-        <Button sx={buttonStyle} type="button" onClick={handleBack}>
-          Back
-        </Button>
-        <Button
-          className="create-event-btn"
-          type="submit"
-          onClick={handleSubmit}
-          disabled={isExploding}
-          sx={{
-            animation: "pulse 2s infinite",
-            backgroundColor: "var(--headingBG-color)",
-            color: "black",
-            "&:hover": {
-              backgroundColor: "var(--headingBG-color)",
-            },
-          }}
-        >
-          Create Event
-          {isExploding && (
-            <CircularProgress
-              size={24}
-              sx={{
-                color: "var(--primary-color)",
-                position: "absolute",
-                top: "50%",
-                left: "50%",
-                marginTop: "-12px",
-                marginLeft: "-12px",
-              }}
-            />
-          )}
-        </Button>
-        <div className="explosion">{isExploding && <ConfettiExplosion />}</div>
-      </Box>
     </motion.div>
   );
 };

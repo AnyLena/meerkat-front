@@ -18,6 +18,7 @@ import { theme } from "../context/theme";
 import { IoIosArrowBack } from "react-icons/io";
 
 // Form Steps
+import BottomBar from "../components/CreateEvent/BottomBar";
 import TitleStep from "../components/CreateEvent/TitleStep";
 import DateStep from "../components/CreateEvent/DateStep";
 import ParticipantsStep from "../components/CreateEvent/ParticipantsStep";
@@ -58,21 +59,28 @@ const Form = () => {
     window.scrollTo(0, 0);
   };
 
-  const handleSelectImage = ( key, value) => {
+  const handleSelectImage = (key, value) => {
     setFormData({ ...formData, [key]: value });
     setSelectedImage(value);
   };
 
   const handleChange = (key, value) => {
-    setFormData({ ...formData, [key]: value });    
+    setFormData({ ...formData, [key]: value });
   };
 
-  useEffect(()=> {
+  useEffect(() => {
     console.log(formData);
-  },[formData])
+  }, [formData]);
 
   const handleSubmit = () => {
-    createEvent(formData, user, token, invitations, setInvitations, emailInvitations);
+    createEvent(
+      formData,
+      user,
+      token,
+      invitations,
+      setInvitations,
+      emailInvitations
+    );
     setIsExploding(true);
     setTimeout(() => {
       setIsExploding(false);
@@ -81,85 +89,94 @@ const Form = () => {
   };
 
   return (
-    <div className="create-event">
-      <ThemeProvider theme={theme}>
-        <LocalizationProvider dateAdapter={AdapterLuxon}>
-          <motion.div
-            initial={{ y: -600, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ ease: "easeInOut", duration: 0.5 }}
-            className="create-event-header"
-          >
-            <Button
-              className="back-btn"
-              onClick={() => navigate(-1)}
-              sx={{
-                borderRadius: "50%",
-                backgroundColor: "rgba(0, 0, 0, 0.1)",
-                color: "white",
-                width: "40px",
-                height: "40px",
-                minWidth: "0 !important",
-              }}
-            >
-              <IoIosArrowBack style={{ fontSize: "1.25rem" }} />
-            </Button>
-            <div className="title-container">
-              <h2>Create an event</h2>
-            </div>
-          </motion.div>
-
-          <motion.div
-            className="multi-step-form"
-            initial={{ y: 600, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ ease: "easeInOut", duration: 0.5 }}
-          >
-            <TitleStep
-              handleChange={handleChange}
-              handleNext={handleNext}
-              formData={formData}
-              formStep={formStep}
-            />
-
-            <DateStep
-              formStep={formStep}
-              handleChange={handleChange}
-              handleNext={handleNext}
-              handleBack={handleBack}
-              formData={formData}
-            />
-
-            <ParticipantsStep
-              formStep={formStep}
-              handleNext={handleNext}
-              handleBack={handleBack}
-              names={names}
-              invitations={invitations}
-              setInvitations={setInvitations}
-              emailInvitations={emailInvitations}
-              setEmailInvitations={setEmailInvitations}
-            />
-
-            <ImageStep
-              formStep={formStep}
-              handleBack={handleBack}
-              handleSelectImage={handleSelectImage}
-              handleSubmit={handleSubmit}
-              isExploding={isExploding}
-              selectedImage={selectedImage}
-            />
-
-            {/* extra step. DO NOT DELETE */}
+    <>
+      <div className="create-event">
+        <ThemeProvider theme={theme}>
+          <LocalizationProvider dateAdapter={AdapterLuxon}>
             <motion.div
-              initial={{ x: 100 * formStep + "%" }}
-              animate={{ x: -100 * formStep + "%" }}
-              className="form-step extra"
-            ></motion.div>
-          </motion.div>
-        </LocalizationProvider>
-      </ThemeProvider>
-    </div>
+              initial={{ y: -600, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ ease: "easeInOut", duration: 0.5 }}
+              className="create-event-header"
+            >
+              <Button
+                className="back-btn"
+                onClick={() => navigate(-1)}
+                sx={{
+                  borderRadius: "50%",
+                  backgroundColor: "rgba(0, 0, 0, 0.1)",
+                  color: "white",
+                  width: "40px",
+                  height: "40px",
+                  minWidth: "0 !important",
+                }}
+              >
+                <IoIosArrowBack style={{ fontSize: "1.25rem" }} />
+              </Button>
+              <div className="title-container">
+                <h2>Create an event</h2>
+              </div>
+            </motion.div>
+
+            <motion.div
+              className="multi-step-form"
+              initial={{ y: 600, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ ease: "easeInOut", duration: 0.5 }}
+            >
+              <TitleStep
+                handleChange={handleChange}
+                handleNext={handleNext}
+                formData={formData}
+                formStep={formStep}
+              />
+
+              <DateStep
+                formStep={formStep}
+                handleChange={handleChange}
+                handleNext={handleNext}
+                handleBack={handleBack}
+                formData={formData}
+              />
+
+              <ParticipantsStep
+                formStep={formStep}
+                handleNext={handleNext}
+                handleBack={handleBack}
+                names={names}
+                invitations={invitations}
+                setInvitations={setInvitations}
+                emailInvitations={emailInvitations}
+                setEmailInvitations={setEmailInvitations}
+              />
+
+              <ImageStep
+                formStep={formStep}
+                handleBack={handleBack}
+                handleSelectImage={handleSelectImage}
+                handleSubmit={handleSubmit}
+                isExploding={isExploding}
+                selectedImage={selectedImage}
+              />
+
+              {/* extra step. DO NOT DELETE */}
+              <motion.div
+                initial={{ x: 100 * formStep + "%" }}
+                animate={{ x: -100 * formStep + "%" }}
+                className="form-step extra"
+              ></motion.div>
+            </motion.div>
+          </LocalizationProvider>
+        </ThemeProvider>
+      </div>
+      <BottomBar
+        formStep={formStep}
+        setFormStep={setFormStep}
+        formData={formData}
+        isExploding={isExploding}
+        handleSubmit={handleSubmit}
+      />
+    </>
   );
 };
 
