@@ -6,7 +6,7 @@ export const getTimezone = async (lat,lng,setTimezone) => {
         const response = await axios.get(
           `https://api.geoapify.com/v1/geocode/reverse?lat=${lat}&lon=${lng}&apiKey=${KEY}`
         );
-        console.log(response.data.features[0].properties.timezone)
+        // console.log(response.data.features[0].properties.timezone)
         setTimezone(response.data.features[0].properties.timezone)
       } catch (error) {
         console.error(error);
