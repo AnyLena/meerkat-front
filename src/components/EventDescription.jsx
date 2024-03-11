@@ -51,6 +51,9 @@ const EventDescription = ({ eventData, setEventData, user, token }) => {
           <p>{eventData.description}</p>
         )}
         <div className="buttons">
+
+
+          
           {eventData.owner._id === user._id && (
             <div className="edit">
               <button className="edit-btn" onClick={handleEdit}>{edit ? "cancel" : "edit"}</button>
