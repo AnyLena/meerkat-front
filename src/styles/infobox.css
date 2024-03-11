@@ -71,8 +71,8 @@
     }
   }
   .time-center {
-    border-right: 1px solid black; 
-    border-left: 1px solid black; 
+    border-right: 1px solid black;
+    border-left: 1px solid black;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -197,6 +197,17 @@
 @media screen and (max-width: 400px) {
   .time-infobox {
     font-size: 14px;
-    /* width: 90vw; */
+
+    .time-envelope {
+      svg {
+        font-size: 2.3rem;
+      }
+    }
+    .time-date {
+      padding-right: 10px !important;
+    }
+    .edit-btn {
+      margin: 0 !important;
+    }
   }
 }
