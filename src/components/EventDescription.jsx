@@ -1,5 +1,8 @@
 import { useState, useRef, useEffect } from "react";
 import { putEvent } from "../api/events";
+import { FaPencilAlt } from "react-icons/fa";
+import { IoIosCheckmark, IoIosClose } from "react-icons/io";
+import "../styles/event.css"
 
 const EventDescription = ({ eventData, setEventData, user, token }) => {
   const [edit, setEdit] = useState(false);
@@ -37,7 +40,7 @@ const EventDescription = ({ eventData, setEventData, user, token }) => {
   }, [edit]);
 
   return (
-    <>
+    <section className="event-description">
       <div className="text">
         {edit ? (
           <input
@@ -53,20 +56,22 @@ const EventDescription = ({ eventData, setEventData, user, token }) => {
         <div className="buttons">
 
 
-          
           {eventData.owner._id === user._id && (
-            <div className="edit">
-              <button className="edit-btn" onClick={handleEdit}>{edit ? "cancel" : "edit"}</button>
-            </div>
-          )}
+           
+        <button onClick={handleEdit} className="edit-btn">
+                    {!edit ? <FaPencilAlt /> : <IoIosClose />}
+                  </button>
+           )}
+
+
           {edit && (
             <div className="save">
-              <button className="save-btn" onClick={handleUpdateEvent}>save</button>
+              <button className="save-btn" onClick={handleUpdateEvent}>    <IoIosCheckmark /></button>
             </div>
           )}
         </div>
       </div>
-    </>
+    </section>
   );
 };
 
