@@ -127,4 +127,8 @@
   .btn-disabled {
     background-color: red;
   }
+
+  .todo-item.grid4 {
+    grid-template-columns: 45px auto 50px 40px !important;
+  }
 }
