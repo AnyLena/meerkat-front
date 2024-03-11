@@ -37,8 +37,6 @@ const Todolist = ({ eventData, setEventData }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [currentTodo, setCurrentTodo] = useState({});
   const [snackBarMessage, setSnackBarMessage] = useState({
-    message: '',
-    severity: ""
   });
 
   // EVENT HANDLERS FOR TO-DOS
@@ -86,7 +84,13 @@ const Todolist = ({ eventData, setEventData }) => {
   };
 
   const handleSave = () => {
-    editTodo(eventData._id, currentTodo, token, setEventData,setSnackBarMessage);
+    editTodo(
+      eventData._id,
+      currentTodo,
+      token,
+      setEventData,
+      setSnackBarMessage
+    );
     setIsEditing(false);
     setCurrentTodo(null);
   };
@@ -106,6 +110,14 @@ const Todolist = ({ eventData, setEventData }) => {
     const data = { title: event.target.value };
     setFormData((prev) => ({ ...prev, ...data }));
   };
+
+  // const handleClickUnauthorized = () => {
+  //   setSnackBarMessage({
+  //     message: "Todo edited successfully",
+  //     severity: "success",
+  //   });
+  //   console.log('click')
+  // };
 
   const getAssigned = (todo, value) => {
     let assignee;
@@ -192,7 +204,11 @@ const Todolist = ({ eventData, setEventData }) => {
                   },
                 }}
               >
-                <Button id={todo._id} className="btn-check btn-disabled">
+                <Button
+                  id={todo._id}
+                  // onClick={handleClickUnauthorized}
+                  className="btn-check btn-disabled"
+                >
                   {todo.done ? <FaRegCircleCheck /> : <FaRegCircle />}
                 </Button>
               </Tooltip>
@@ -347,9 +363,12 @@ const Todolist = ({ eventData, setEventData }) => {
             </Button>
           </Box>
 
-          {snackBarMessage && (
-            <Message message={snackBarMessage.message} severity={snackBarMessage.severity} />
-          )}
+          {snackBarMessage ? (
+            <Message
+              message={snackBarMessage.message}
+              severity={snackBarMessage.severity}
+            />
+          ) : null}
         </section>
       ) : null}
     </>

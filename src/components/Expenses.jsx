@@ -7,6 +7,8 @@ import "../styles/expenses.css";
 import { Box, TextField, Button } from "@mui/material";
 import { IoIosClose } from "react-icons/io";
 
+import Message from "./Message.jsx";
+
 const Expenses = ({ eventData, setEventData }) => {
   const [userExpenses, setUserExpenses] = useState([]);
   const [formData, setFormData] = useState({
@@ -14,6 +16,8 @@ const Expenses = ({ eventData, setEventData }) => {
     amount: "",
   });
   const { token, user } = useAuth();
+  const [snackBarMessage, setSnackBarMessage] = useState({
+  });
 
   const handleInput = (event, key) => {
     const data = { [key]: event.target.value };
@@ -21,7 +25,7 @@ const Expenses = ({ eventData, setEventData }) => {
   };
 
   const handleAdd = () => {
-    handleAddExpense(eventData._id, formData, token, setEventData);
+    handleAddExpense(eventData._id, formData, token, setEventData, setSnackBarMessage);
     setFormData({
       title: "",
       amount: "",
@@ -29,7 +33,7 @@ const Expenses = ({ eventData, setEventData }) => {
   };
 
   const handleDelete = (expenseId) => {
-    handleDeleteExpense(expenseId, eventData._id, token, setEventData);
+    handleDeleteExpense(expenseId, eventData._id, token, setEventData, setSnackBarMessage);
   };
 
   const getAmountPayed = (user) => {
@@ -188,6 +192,12 @@ const Expenses = ({ eventData, setEventData }) => {
             </>
           ) : null}
         </div>
+        {snackBarMessage ? (
+            <Message
+              message={snackBarMessage.message}
+              severity={snackBarMessage.severity}
+            />
+          ) : null}
       </section>
     </>
   );
