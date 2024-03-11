@@ -4,6 +4,7 @@ import ProfileSelectorModal from "./ProfileSelectorModal";
 import { IoIosClose, IoIosCheckmark } from "react-icons/io";
 import { FaPencilAlt } from "react-icons/fa";
 import { editUser } from "../../api/users";
+import { MdOutlineCameraswitch } from "react-icons/md";
 
 const UserProfile = ({ user, setUser, token }) => {
   const { name, email, contacts, picture } = user;
@@ -40,8 +41,11 @@ const UserProfile = ({ user, setUser, token }) => {
         animate={{ opacity: 1 }}
         transition={{ ease: "easeInOut", duration: 0.5 }}
       >
-        <div className="profile-image" onClick={handleOpenModal}>
+        <div className="profile-image">
           <img src={picture.url} alt={name} />
+          <button onClick={handleOpenModal} className="switch-profile-picture">
+            <MdOutlineCameraswitch />
+          </button>
         </div>
 
         <div className="profile-details">

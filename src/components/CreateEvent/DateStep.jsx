@@ -141,33 +141,6 @@ const DateStep = ({
           </GoogleMap>
         </div>
       )}
-
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "center",
-          gap: "4rem",
-          marginTop: "2rem",
-        }}
-      >
-        <Button type="button" onClick={handleBack} sx={buttonStyle}>
-          Back
-        </Button>
-        <Button
-          disabled={
-            formData.date === "" ||
-            formData.time === "" ||
-            formData.time?.invalid?.reason === "unparsable" ||
-            formData.location === ""
-          }
-          type="button"
-          onClick={handleNext}
-          sx={buttonStyle}
-        >
-          Next
-        </Button>
-      </Box>
     </motion.div>
   );
 };

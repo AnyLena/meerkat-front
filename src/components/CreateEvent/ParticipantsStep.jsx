@@ -82,22 +82,6 @@ const ParticipantsStep = ({
         emailInvitations={emailInvitations}
         setEmailInvitations={setEmailInvitations}
       />
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "center",
-          gap: "4rem",
-          marginTop: "2rem",
-        }}
-      >
-        <Button sx={buttonStyle} type="button" onClick={handleBack}>
-          Back
-        </Button>
-        <Button sx={buttonStyle} type="button" onClick={handleNext}>
-          Next
-        </Button>
-      </Box>
     </motion.div>
   );
 };

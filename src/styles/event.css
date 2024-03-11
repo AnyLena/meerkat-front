@@ -6,7 +6,7 @@
   height: auto;
   margin-bottom: 4rem;
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 800px) {
     background-size: 800px auto;
     background-position: center top;
   }
@@ -47,7 +47,16 @@
     }
   }
 }
-
+.event-content {
+  background-image: none !important;
+  @media screen and (max-width: 800px) {
+    background-image: inherit !important;
+    background-repeat: no-repeat;
+    background-size:auto;
+    background-position: top;
+    background-attachment: fixed;
+  }
+}
 .event {
   margin: 0;
   max-width: 800px;
@@ -134,7 +143,7 @@
 
   .info {
     background-color: white;
-    border-radius: 35px 35px 0px 0px;
+    border-radius: 35px;
     padding: 20px;
     margin-top: -40px;
     min-height: 110vh;
@@ -221,12 +230,17 @@
     }
   }
 }
+.abschlussleiste {
+  background-color: white;
+  border-radius: 0px 0px 35px 35px;
+}
 .leave-or-delete {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin-top: 6rem;
+  margin: 4rem 0;
+  padding-bottom: 4rem;
   gap: 2rem;
   button {
     padding: 0.5rem;
@@ -252,3 +266,4 @@
   }
 
 }
+

@@ -42,14 +42,6 @@ const TitleStep = ({ formStep, handleNext, formData, handleChange }) => {
           onChange={(e) => handleChange("description", e.target.value)}
         />
       </Box>
-      <Button
-        disabled={!formData.title}
-        type="button"
-        onClick={handleNext}
-        sx={{ ...buttonStyle, width: "60px", margin: "0 auto" }}
-      >
-        Next
-      </Button>
     </motion.div>
   );
 };

@@ -5,6 +5,7 @@ import DashboardMenu from "../components/DashboardMenu.jsx";
 
 //COMPONENTS
 import EventCard from "../components/EventCard";
+import NavBar from "../components/Navbar";
 
 //STYLES
 import "../styles/dashboard.css";
@@ -72,6 +73,7 @@ const PastEvents = () => {
         ) : null}
       </section>
       </motion.div>
+      <NavBar />
     </>
   );
 };

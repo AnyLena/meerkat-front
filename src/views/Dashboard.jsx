@@ -8,6 +8,7 @@ import DashboardMenu from "../components/DashboardMenu.jsx";
 import EventCard from "../components/EventCard";
 import Notifications from "../components/Notifications";
 import Welcome from "../components/Welcome";
+import NavBar from "../components/Navbar";
 
 //STYLES
 import "../styles/dashboard.css";
@@ -129,6 +130,7 @@ const Dashboard = () => {
           </>
         ) : null}
       </section>
+      <NavBar />
     </>
     // </motion.div>
   );
