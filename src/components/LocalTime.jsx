@@ -18,10 +18,6 @@ const LocalTime = ({ start, edit, eventData, newStart, handleDateChange }) => {
     setTimezoneUser(timezoneOffset);
   }, [start]);
 
-  useEffect(() => {
-    console.log(timezoneUser);
-    console.log(timezone);
-  }, [timezoneUser]);
   return (
     <>
       {!edit ? (

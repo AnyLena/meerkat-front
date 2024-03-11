@@ -37,11 +37,6 @@ const Dashboard = () => {
   }, [invitations]);
 
   return (
-    // <motion.div
-    //   initial={{ opacity: 1, y: -10 }}
-    //   animate={{ opacity: 1, y: 0 }}
-    //   transition={{ duration: 0.7 }}
-    // >
     <>
       {Object.keys(user).length > 0 ? <DashboardMenu /> : null}
       <section className="dashboard">
@@ -137,7 +132,6 @@ const Dashboard = () => {
       </section>
       <NavBar />
     </>
-    // </motion.div>
   );
 };
 

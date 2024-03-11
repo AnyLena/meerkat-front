@@ -2,6 +2,7 @@ import { useAuth } from "../context/useAuth";
 import { useEffect, useState } from "react";
 import { toggleTodo } from "../api/todos.js";
 import { addTodo, deleteTodo, editTodo } from "../api/todos.js";
+import Message from "./Message.jsx";
 
 //STYLE
 import "../styles/todolist.css";
@@ -14,7 +15,7 @@ import {
   InputLabel,
   FormControl,
   Tooltip,
-  Zoom 
+  Zoom,
 } from "@mui/material";
 import { IoIosClose } from "react-icons/io";
 import { FaPencilAlt } from "react-icons/fa";
@@ -35,10 +36,12 @@ const Todolist = ({ eventData, setEventData }) => {
   });
   const [isEditing, setIsEditing] = useState(false);
   const [currentTodo, setCurrentTodo] = useState({});
+  const [snackBarMessage, setSnackBarMessage] = useState({
+  });
 
   // EVENT HANDLERS FOR TO-DOS
   const handleAdd = async () => {
-    addTodo(eventData._id, formData, token, setEventData);
+    addTodo(eventData._id, formData, token, setEventData, setSnackBarMessage);
 
     setFormData({
       assignee: user._id,
@@ -58,7 +61,7 @@ const Todolist = ({ eventData, setEventData }) => {
   const handleEdit = (todo) => {
     if (currentTodo === null) {
       setCurrentTodo(todo);
-      setIsEditing(true)
+      setIsEditing(true);
     }
     if (todo._id === currentTodo._id) {
       setIsEditing(!isEditing);
@@ -81,13 +84,19 @@ const Todolist = ({ eventData, setEventData }) => {
   };
 
   const handleSave = () => {
-    editTodo(eventData._id, currentTodo, token, setEventData);
+    editTodo(
+      eventData._id,
+      currentTodo,
+      token,
+      setEventData,
+      setSnackBarMessage
+    );
     setIsEditing(false);
     setCurrentTodo(null);
   };
 
   const handleDelete = (todoId) => {
-    deleteTodo(eventData._id, todoId, token, setEventData);
+    deleteTodo(eventData._id, todoId, token, setEventData, setSnackBarMessage);
     setIsEditing(false);
     setCurrentTodo(null);
   };
@@ -101,6 +110,14 @@ const Todolist = ({ eventData, setEventData }) => {
     const data = { title: event.target.value };
     setFormData((prev) => ({ ...prev, ...data }));
   };
+
+  // const handleClickUnauthorized = () => {
+  //   setSnackBarMessage({
+  //     message: "Todo edited successfully",
+  //     severity: "success",
+  //   });
+  //   console.log('click')
+  // };
 
   const getAssigned = (todo, value) => {
     let assignee;
@@ -187,7 +204,11 @@ const Todolist = ({ eventData, setEventData }) => {
                   },
                 }}
               >
-                <Button id={todo._id} className="btn-check btn-disabled">
+                <Button
+                  id={todo._id}
+                  // onClick={handleClickUnauthorized}
+                  className="btn-check btn-disabled"
+                >
                   {todo.done ? <FaRegCircleCheck /> : <FaRegCircle />}
                 </Button>
               </Tooltip>
@@ -266,18 +287,14 @@ const Todolist = ({ eventData, setEventData }) => {
             {user._id === eventData.owner._id ? (
               <div className="center-item">
                 <button onClick={() => handleEdit(todo)} className="edit-btn">
-                    {!isEditing ? <FaPencilAlt /> : <IoIosClose />}
-                  </button>
+                  {!isEditing ? <FaPencilAlt /> : <IoIosClose />}
+                </button>
               </div>
             ) : null}
 
             {isEditing && currentTodo._id === todo._id ? (
               <div className="todo-buttons">
-                <Button
-                  className="btn-grey"
-                  id="btn-save"
-                  onClick={handleSave}
-                >
+                <Button className="btn-grey" id="btn-save" onClick={handleSave}>
                   save task
                 </Button>
                 <Button
@@ -345,6 +362,13 @@ const Todolist = ({ eventData, setEventData }) => {
               Add
             </Button>
           </Box>
+
+          {snackBarMessage ? (
+            <Message
+              message={snackBarMessage.message}
+              severity={snackBarMessage.severity}
+            />
+          ) : null}
         </section>
       ) : null}
     </>
