@@ -136,7 +136,7 @@
 
   .info {
     background-color: white;
-    border-radius: 35px 35px 0px 0px;
+    border-radius: 35px;
     padding: 20px;
     margin-top: -40px;
     min-height: 110vh;
@@ -223,12 +223,17 @@
     }
   }
 }
+.abschlussleiste{
+  background-color: white;
+  border-radius: 0px 0px 35px 35px;
+}
 .leave-or-delete {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin-top: 6rem;
+  margin: 4rem 0;
+  padding-bottom: 4rem;
   gap: 2rem;
   button {
     padding: 0.5rem;

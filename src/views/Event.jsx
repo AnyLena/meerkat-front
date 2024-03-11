@@ -38,7 +38,9 @@ const Event = () => {
     scrollTo(0, 0);
   }, []);
 
-  useEffect(()=>{console.log(eventData)},[eventData])
+  useEffect(() => {
+    console.log(eventData);
+  }, [eventData]);
 
   return (
     <div
@@ -130,20 +132,19 @@ const Event = () => {
               />
               <Todolist eventData={eventData} setEventData={setEventData} />
 
-
               <Location location={eventData.location} />
 
               {eventData.location.map && eventData.location.lat ? (
                 <Weatherforecast eventData={eventData} />
               ) : null}
-              <Expenses eventData={eventData} setEventData={setEventData}/>
+              <Expenses eventData={eventData} setEventData={setEventData} />
               <SharedFiles messages={messages} />
-              {eventData.owner._id === user._id && (
-                <DeleteEvent eventData={eventData} token={token} user={user} />
-              )}
             </section>
           </section>
         ) : null}
+        {eventData.owner._id === user._id && (
+          <DeleteEvent eventData={eventData} token={token} user={user} />
+        )}
       </motion.div>
     </div>
   );
