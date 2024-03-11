@@ -26,7 +26,7 @@ const Infobox = ({
   // const [end, setEnd] = useState({});
   const [open, setOpen] = useState(false);
   const [edit, setEdit] = useState(false);
-  const [newStart, setNewStart] = useState();
+  const [newStart, setNewStart] = useState("");
   const inputRef = useRef();
 
   useEffect(() => {
@@ -125,7 +125,13 @@ const Infobox = ({
                 </>
               ) : null}
             </div>
-            <LocalTime start={start} edit={edit} eventData={eventData}/>
+            <LocalTime
+              start={start}
+              edit={edit}
+              eventData={eventData}
+              newStart={newStart}
+              handleDateChange={handleDateChange}
+            />
           </div>
           <MailboxIcon eventId={eventId} setOpen={setOpen} />
         </div>

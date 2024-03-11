@@ -19,6 +19,7 @@ import { IoIosArrowBack } from "react-icons/io";
 
 // Form Steps
 import BottomBar from "../components/CreateEvent/BottomBar";
+import ConfirmModal from "../components/ConfirmModal";
 import TitleStep from "../components/CreateEvent/TitleStep";
 import DateStep from "../components/CreateEvent/DateStep";
 import ParticipantsStep from "../components/CreateEvent/ParticipantsStep";
@@ -43,6 +44,7 @@ const Form = () => {
   const [selectedImage, setSelectedImage] = useState("");
   const [invitations, setInvitations] = useState([]);
   const [emailInvitations, setEmailInvitations] = useState([]);
+  const [openConfirmModal, setOpenConfirmModal] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -67,6 +69,10 @@ const Form = () => {
   const handleChange = (key, value) => {
     setFormData({ ...formData, [key]: value });
   };
+
+  const handleCancel = () => {
+    navigate("/");
+  }
 
   useEffect(() => {
     console.log(formData);
@@ -101,7 +107,7 @@ const Form = () => {
             >
               <Button
                 className="back-btn"
-                onClick={() => navigate(-1)}
+                onClick={() => setOpenConfirmModal(true)}
                 sx={{
                   borderRadius: "50%",
                   backgroundColor: "rgba(0, 0, 0, 0.1)",
@@ -176,6 +182,14 @@ const Form = () => {
         isExploding={isExploding}
         handleSubmit={handleSubmit}
       />
+      {openConfirmModal && (
+        <ConfirmModal
+          message="Are you sure you want to cancel? You will lose all the information you have entered."
+          handleConfirm={handleCancel}
+          active={openConfirmModal}
+          setActive={setOpenConfirmModal}
+        />
+      )}
     </>
   );
 };

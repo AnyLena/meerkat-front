@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { getTimezone } from "../api/timezone";
 
-const LocalTime = ({ start, edit, eventData }) => {
+const LocalTime = ({ start, edit, eventData, newStart, handleDateChange }) => {
   const [timezone, setTimezone] = useState({});
   const [timezoneStart, setTimezoneStart] = useState();
   const [timezoneUser, setTimezoneUser] = useState();

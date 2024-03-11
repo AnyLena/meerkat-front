@@ -25,12 +25,14 @@
       justify-content: center;
       margin-top: 1rem;
       gap: 1rem;
+      
     }
     button {
       padding: 0.5rem 1rem;
       border-radius: 5px;
       cursor: pointer;
       transition: 0.3s;
+      border: none;
       &:active {
         transform: scale(0.95);
       }

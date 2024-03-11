@@ -49,6 +49,7 @@
 }
 .event-content {
   background-image: none !important;
+  padding-bottom: 6rem;
   @media screen and (max-width: 800px) {
     background-image: inherit !important;
     background-repeat: no-repeat;
@@ -75,7 +76,6 @@
     margin-top: 40vh;
     background-color: rgba(255, 255, 255, 0.7);
     display: flex;
-    /* align-items: baseline; */
     justify-content: center;
 
     .title-edit {
@@ -147,6 +147,9 @@
     padding: 20px;
     margin-top: -40px;
     min-height: 110vh;
+    @media screen and (max-width: 800px) {
+      border-radius: 35px 35px 0 0;
+    }
   }
 
   .text {
@@ -239,8 +242,7 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin: 4rem 0;
-  padding-bottom: 4rem;
+  margin: 4rem 0 0 0;
   gap: 2rem;
   button {
     padding: 0.5rem;
