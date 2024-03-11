@@ -7,10 +7,10 @@ import { FaPencilAlt } from "react-icons/fa";
 import { IoIosClose } from "react-icons/io";
 import { IoIosCheckmark } from "react-icons/io";
 import { months, days } from "../utils/dateNames.js";
-import { getTimezone } from "../api/timezone.js";
 
 //STYLES
 import "../styles/infobox.css";
+import LocalTime from "./LocalTime.jsx";
 
 const Infobox = ({
   date,
@@ -27,18 +27,7 @@ const Infobox = ({
   const [open, setOpen] = useState(false);
   const [edit, setEdit] = useState(false);
   const [newStart, setNewStart] = useState();
-  const [timezone, setTimezone] = useState({});
-  const [timezoneStart, setTimezoneStart] = useState();
   const inputRef = useRef();
-
-  useEffect(() => {
-    getTimezone(eventData.location.lat, eventData.location.lng, setTimezone);
-    if (start instanceof Date) {
-      const newDate = new Date(eventData.date.start);
-      newDate.setSeconds(newDate.getSeconds() + timezone.offset_DST_seconds);
-      setTimezoneStart(newDate);
-    }
-  }, [start]);
 
   useEffect(() => {
     const dateStart = new Date(eventData.date.start);
@@ -46,9 +35,6 @@ const Infobox = ({
     setNewStart(dateStart);
   }, [eventData]);
 
-  useEffect(() => {
-    // console.log(timezone);
-  }, [timezone]);
   const handleEdit = () => {
     setEdit(!edit);
   };
@@ -139,48 +125,7 @@ const Infobox = ({
                 </>
               ) : null}
             </div>
-            {!edit ? (
-              <p>
-                {start instanceof Date ? (
-                  <>
-                    {start.getHours()}:
-                    {start.getMinutes().toString().padStart(2, "0")} |{" "}
-                    {Object.keys(timezone).length > 0 ? (
-                      <span>
-                        {timezone.offset_STD[0] === "+"
-                          ? (Number(
-                              eventData.date.start.split("T")[1].split(":")[0]
-                            ) +
-                              Number(
-                                timezone.offset_STD.split("+")[1].split(":")[0]
-                              )) %
-                            24
-                          : (Number(
-                              eventData.date.start.split("T")[1].split(":")[0]
-                            ) -
-                              Number(
-                                timezone.offset_STD.split("-")[1].split(":")[0]
-                              ) +
-                              24) %
-                            24}
-                      </span>
-                    ) : null}
-                    :{start.getMinutes().toString().padStart(2, "0")}{" "}
-                    <span className="local">(local time)</span>
-                  </>
-                ) : null}
-
-                {/* {date.end ? ` – ${end.hours}:${end.minutes}` : null} */}
-              </p>
-            ) : (
-              <input
-                type="time"
-                value={`${("0" + newStart.getHours()).slice(-2)}:${(
-                  "0" + newStart.getMinutes()
-                ).slice(-2)}`}
-                onChange={handleDateChange}
-              />
-            )}
+            <LocalTime start={start} edit={edit} eventData={eventData}/>
           </div>
           <MailboxIcon eventId={eventId} setOpen={setOpen} />
         </div>

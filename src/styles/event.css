@@ -56,7 +56,7 @@
   h1 {
     position: relative;
     top: 50%;
- margin-left: 37px; 
+    margin-left: 37px;
     font-size: 2rem;
     text-align: center;
     padding: 20px 0 60px 0;
@@ -78,19 +78,18 @@
     input {
       font-size: 1.5rem;
       background-color: rgba(255, 255, 255, 0.8);
-      font-family: 'Oswald';  
+      font-family: "Oswald";
       font-size: 2rem;
       border: none;
       border-radius: 5px;
       text-align: center;
       outline: none;
-      margin-left: 75px;   
+      margin-left: 75px;
     }
-
 
     .buttons {
       position: relative;
-      top:-100;
+      top: -100;
       margin: 1.2rem 0rem 0rem 0.5rem;
       max-height: 50px;
       display: flex;
@@ -108,7 +107,6 @@
         }
       }
     }
-   
   }
 
   @media screen and (max-width: 550px) {
@@ -240,9 +238,17 @@
       transform: scale(0.95);
     }
   }
-  .leave-btn, .delete-btn {
+  .leave-btn,
+  .delete-btn {
     background-color: var(--alert-color);
     color: black;
     padding: 1rem;
   }
+}
+
+.event-description {
+  button {
+    border-radius: 30px;
+  }
+
 }

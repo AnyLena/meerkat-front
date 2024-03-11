@@ -117,6 +117,7 @@ const ResponsiveAppBar = () => {
               variant="h5"
               noWrap
               component="a"
+              className="app-name"
               sx={{
                 mr: 2,
                 display: { xs: "flex", md: "none" },
