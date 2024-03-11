@@ -1,4 +1,10 @@
+import { useAuth } from "../context/useAuth";
 import { useEffect, useState } from "react";
+import { toggleTodo } from "../api/todos.js";
+import { addTodo, deleteTodo, editTodo } from "../api/todos.js";
+
+//STYLE
+import "../styles/todolist.css";
 import {
   Box,
   Button,
@@ -8,14 +14,11 @@ import {
   InputLabel,
   FormControl,
   Tooltip,
+  Zoom 
 } from "@mui/material";
-import { FaRegEdit, FaRegTrashAlt } from "react-icons/fa";
+import { IoIosClose } from "react-icons/io";
+import { FaPencilAlt } from "react-icons/fa";
 import { FaRegCircleCheck, FaRegCircle } from "react-icons/fa6";
-import "../styles/todolist.css";
-import { useAuth } from "../context/useAuth";
-import Zoom from "@mui/material/Zoom";
-import { toggleTodo } from "../api/todos.js";
-import { addTodo, deleteTodo, editTodo } from "../api/todos.js";
 
 const Todolist = ({ eventData, setEventData }) => {
   const { token, user } = useAuth();
@@ -262,29 +265,29 @@ const Todolist = ({ eventData, setEventData }) => {
 
             {user._id === eventData.owner._id ? (
               <div className="center-item">
-                <Button className="btn-icon" onClick={() => handleEdit(todo)}>
-                  <FaRegEdit />
-                </Button>
+                <button onClick={() => handleEdit(todo)} className="edit-btn">
+                    {!isEditing ? <FaPencilAlt /> : <IoIosClose />}
+                  </button>
               </div>
             ) : null}
 
             {isEditing && currentTodo._id === todo._id ? (
-              <>
+              <div className="todo-buttons">
                 <Button
-                  className="btn-icon btn-save"
+                  className="btn-grey"
                   id="btn-save"
                   onClick={handleSave}
                 >
-                  save
+                  save task
                 </Button>
                 <Button
-                  className="btn-icon btn-delete"
+                  className="btn-red"
                   id="btn-delete"
                   onClick={() => handleDelete(todo._id)}
                 >
-                  <FaRegTrashAlt />
+                  delete task
                 </Button>
-              </>
+              </div>
             ) : null}
           </div>
         ))}

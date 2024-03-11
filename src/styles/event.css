@@ -259,3 +259,11 @@
     padding: 1rem;
   }
 }
+
+.event-description {
+  button {
+    border-radius: 30px;
+  }
+
+}
+

@@ -56,6 +56,7 @@ const DateStep = ({
         label="Date"
         onChange={(newValue) => handleChange("date", newValue)}
         className="date-picker"
+        disablePast
         required
       />
 
