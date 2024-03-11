@@ -29,11 +29,13 @@ const LocalTime = ({ start, edit, eventData }) => {
           {start instanceof Date ? (
             <>
               {start.getHours()}:
-              {start.getMinutes().toString().padStart(2, "0")} 
-              {timezoneUser === timezone.offset_STD_seconds ? null : 
-              Object.keys(timezone).length > 0 ? (
+              {start.getMinutes().toString().padStart(2, "0")}
+              {!eventData.location.lat ? null : timezoneUser ===
+                timezone.offset_STD_seconds ? null : Object.keys(timezone)
+                  .length > 0 ? (
                 <>
-                  {" | "}<span>
+                  {" | "}
+                  <span>
                     {timezone.offset_STD[0] === "+"
                       ? (Number(
                           eventData.date.start.split("T")[1].split(":")[0]
