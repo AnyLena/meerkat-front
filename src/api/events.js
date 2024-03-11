@@ -52,7 +52,8 @@ export const createEvent = async (
   }
 };
 
-export const fetchUserEvents = async (setUserEvents, token) => {
+export const fetchUserEvents = async (setUserEvents, token, setLoadingEvents) => {
+  setLoadingEvents(true)
   try {
     const response = await axios.get(`${SERVER}/events`, {
       headers: {
@@ -63,6 +64,8 @@ export const fetchUserEvents = async (setUserEvents, token) => {
     setUserEvents(response.data);
   } catch (error) {
     console.log(error);
+  } finally {
+    setLoadingEvents(false)
   }
 };
 

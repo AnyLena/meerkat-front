@@ -9,6 +9,7 @@ import EventCard from "../components/EventCard";
 import Notifications from "../components/Notifications";
 import Welcome from "../components/Welcome";
 import NavBar from "../components/Navbar";
+import Loader from "../components/Loader.jsx";
 
 //STYLES
 import "../styles/dashboard.css";
@@ -21,11 +22,12 @@ const Dashboard = () => {
   const { user, setUser, token } = useAuth();
   const [userEvents, setUserEvents] = useState([]);
   const [invitations, setInvitations] = useState([]);
+  const [loadingEvents, setLoadingEvents] = useState(false);
   const today = new Date();
   const randomMessage = Math.floor(Math.random() * welcomeMessages.length);
 
   useEffect(() => {
-    fetchUserEvents(setUserEvents, token);
+    fetchUserEvents(setUserEvents, token, setLoadingEvents);
     getMyInvitations(token, setInvitations);
   }, []);
 
@@ -50,8 +52,11 @@ const Dashboard = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7 }}
             >
-              {invitations.length === 0 && userEvents.length === 0 ? (
-                <Welcome/>
+              {loadingEvents ? <Loader /> : null}
+              {!loadingEvents &&
+              invitations.length === 0 &&
+              userEvents.length === 0 ? (
+                <Welcome />
               ) : null}
               {invitations.length > 0 ? (
                 <>
