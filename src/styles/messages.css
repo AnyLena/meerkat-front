@@ -138,7 +138,7 @@
       height: 4rem;
       border: 1px solid var(--background-color);
       border-radius: 25px;
-      padding-left: 1rem;
+      padding: 0 1rem;
       font-size: 1rem;
       &:focus {
         outline: none;
