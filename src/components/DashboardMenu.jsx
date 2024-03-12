@@ -27,7 +27,7 @@ import "../styles/appbar.css";
 const pages = [
   { name: "Upcoming Events", path: "/" },
   { name: "Past Events", path: "/past-events" },
-  { name: "Create Event", path: "/new" },
+  // { name: "Create Event", path: "/new" },
 
 ];
 
@@ -136,7 +136,7 @@ const ResponsiveAppBar = () => {
               Meerkats
             </Typography>
             <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-             <img src={Traveler} className="traveler-logo" alt="meerkat" />
+             {/* <img src={Traveler} className="traveler-logo" alt="meerkat" /> */}
               {pages.map((page) => {
                 const pagePath = `${page.path}`;
                 return (
