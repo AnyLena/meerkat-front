@@ -16,8 +16,7 @@ const Expenses = ({ eventData, setEventData }) => {
     amount: "",
   });
   const { token, user } = useAuth();
-  const [snackBarMessage, setSnackBarMessage] = useState({
-  });
+  const [snackBarMessage, setSnackBarMessage] = useState();
 
   const handleInput = (event, key) => {
     const data = { [key]: event.target.value };

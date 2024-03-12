@@ -36,8 +36,7 @@ const Todolist = ({ eventData, setEventData }) => {
   });
   const [isEditing, setIsEditing] = useState(false);
   const [currentTodo, setCurrentTodo] = useState({});
-  const [snackBarMessage, setSnackBarMessage] = useState({
-  });
+  const [snackBarMessage, setSnackBarMessage] = useState(null);
 
   // EVENT HANDLERS FOR TO-DOS
   const handleAdd = async () => {
@@ -111,13 +110,12 @@ const Todolist = ({ eventData, setEventData }) => {
     setFormData((prev) => ({ ...prev, ...data }));
   };
 
-  // const handleClickUnauthorized = () => {
-  //   setSnackBarMessage({
-  //     message: "Todo edited successfully",
-  //     severity: "success",
-  //   });
-  //   console.log('click')
-  // };
+  const handleClickUnauthorized = () => {
+    setSnackBarMessage({
+      message: "You can not change this",
+      severity: "success",
+    });
+  };
 
   const getAssigned = (todo, value) => {
     let assignee;
@@ -206,7 +204,7 @@ const Todolist = ({ eventData, setEventData }) => {
               >
                 <Button
                   id={todo._id}
-                  // onClick={handleClickUnauthorized}
+                  onClick={handleClickUnauthorized}
                   className="btn-check btn-disabled"
                 >
                   {todo.done ? <FaRegCircleCheck /> : <FaRegCircle />}
