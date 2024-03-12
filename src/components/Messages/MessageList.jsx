@@ -39,7 +39,7 @@ const MessageList = ({ messages, userId }) => {
                 {message.file && (
                   <>
                     <div className="file-container">
-                      {message.file.match(/\.(jpeg|jpg|gif|png)$/) != null ? (
+                      {message.file.match(/\.(jpeg|jpg|gif|png|webp)$/) != null ? (
                         <img
                           onClick={() => setSelectedImage(message.file)}
                           src={message.file}

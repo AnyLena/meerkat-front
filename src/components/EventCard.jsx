@@ -26,7 +26,7 @@ const EventCard = ({
   }, []);
 
   return (
-    <>
+    <div className="event-card">
       <div className="time-infobox">
         <div className="time-grid-container">
           <div className="time-date">
@@ -68,7 +68,7 @@ const EventCard = ({
           </div>
         ) : null}
       </div>
-    </>
+    </div>
   );
 };
 
