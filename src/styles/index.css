@@ -128,11 +128,11 @@ button {
 
 img {
   &.profile-small {
-    background-color: white;
+    /* background-color: white; */
     height: 40px;
     width: 40px;
-    border-radius: 30px;
-    border: 2px solid var(--background-color);
+    /* border-radius: 30px; */
+    /* border: 2px solid var(--background-color); */
     margin: 5px;
   }
 }
