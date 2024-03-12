@@ -18,9 +18,10 @@
     display: flex;
     justify-content: space-between;
     max-width: 800px;
-    margin:0 auto;
+    margin: 0 auto;
   }
 }
+
 .create-event-header {
   display: flex;
   flex-direction: row;
@@ -75,7 +76,10 @@
     transform: translate(-50%, -50%);
   }
 }
-
+.heading-description {
+  padding: 20px 15px 10px 15px;
+  color: #737373
+}
 .map-container {
   height: 100%;
   width: 100%;
