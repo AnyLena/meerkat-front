@@ -17,14 +17,30 @@ const Expenses = ({ eventData, setEventData }) => {
   });
   const { token, user } = useAuth();
   const [snackBarMessage, setSnackBarMessage] = useState();
+  const [addDisabled, setAddDisabled] = useState(true);
 
   const handleInput = (event, key) => {
     const data = { [key]: event.target.value };
     setFormData((prev) => ({ ...prev, ...data }));
   };
 
+  useEffect(() => {
+    const isNumber = (value) => /^\d*\.?\d*$/.test(value);
+    if (formData.amount !== '' && isNumber(formData.amount) && formData.title !== "") {
+      setAddDisabled(false);
+    } else {
+      setAddDisabled(true);
+    }
+  }, [formData]);
+
   const handleAdd = () => {
-    handleAddExpense(eventData._id, formData, token, setEventData, setSnackBarMessage);
+    handleAddExpense(
+      eventData._id,
+      formData,
+      token,
+      setEventData,
+      setSnackBarMessage
+    );
     setFormData({
       title: "",
       amount: "",
@@ -32,7 +48,13 @@ const Expenses = ({ eventData, setEventData }) => {
   };
 
   const handleDelete = (expenseId) => {
-    handleDeleteExpense(expenseId, eventData._id, token, setEventData, setSnackBarMessage);
+    handleDeleteExpense(
+      expenseId,
+      eventData._id,
+      token,
+      setEventData,
+      setSnackBarMessage
+    );
   };
 
   const getAmountPayed = (user) => {
@@ -131,7 +153,11 @@ const Expenses = ({ eventData, setEventData }) => {
               value={formData.amount}
               onChange={(event) => handleInput(event, "amount")}
             />
-            <Button className="btn-green" onClick={handleAdd}>
+            <Button
+              className="btn-green"
+              disabled={addDisabled}
+              onClick={handleAdd}
+            >
               Add
             </Button>
           </Box>
@@ -192,11 +218,11 @@ const Expenses = ({ eventData, setEventData }) => {
           ) : null}
         </div>
         {snackBarMessage ? (
-            <Message
-              message={snackBarMessage.message}
-              severity={snackBarMessage.severity}
-            />
-          ) : null}
+          <Message
+            message={snackBarMessage.message}
+            severity={snackBarMessage.severity}
+          />
+        ) : null}
       </section>
     </>
   );
