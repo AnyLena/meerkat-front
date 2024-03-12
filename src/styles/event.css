@@ -185,6 +185,10 @@
     }
   }
   .location {
+    .location-text {
+      margin: 1rem; 
+      font-size: 1.1rem;
+    }
     .map {
       padding: 1rem;
       width: calc(100% - 2rem);

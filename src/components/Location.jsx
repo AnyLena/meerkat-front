@@ -10,7 +10,7 @@ const Location = ({ location }) => {
   return (
     <section className="location">
       <h2 className="event-heading">Location</h2>
-      <div className="text">
+      <div className="location-text">
         <p>{location.description}</p>
       </div>
 
