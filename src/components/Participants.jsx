@@ -20,6 +20,7 @@ const Participants = ({ open, setOpen, setEventData, eventData }) => {
   const [contacts, setContacts] = useState({});
   const [invitations, setInvitations] = useState(null);
   const [emailInvitationMessage, setEmailInvitationMessage] = useState("");
+  const [emailInput, setEmailInput] = useState("");
 
   const style = {
     backgroundColor: "white",
@@ -55,8 +56,16 @@ const Participants = ({ open, setOpen, setEventData, eventData }) => {
     e.preventDefault();
     setEmailInvitationMessage(`Invitation sent to ${e.target[0].value}!`);
     emailInvitation(e.target[0].value, eventData._id, token);
+    setEmailInput("");
+    setTimeout(() => {
+      setEmailInvitationMessage("");
+    }, 3000);
   };
 
+  const handleChangeEmail = (e) => {
+    setEmailInput(e.target.value);
+  };
+  
   useEffect(() => {
     filterContacts();
     getInvitations(eventData._id, token, setInvitations);
@@ -236,7 +245,12 @@ const Participants = ({ open, setOpen, setEventData, eventData }) => {
                       <div className="email-invitation-container">
                         <label>Invite via email</label>
                         <form onSubmit={handleEmailInvitation}>
-                          <input type="email" placeholder="Email" />
+                          <input
+                            value={emailInput}
+                            onChange={handleChangeEmail}
+                            type="email"
+                            placeholder="Email"
+                          />
                           <button type="submit">Invite</button>
                         </form>
                         <p>{emailInvitationMessage}</p>
