@@ -1,5 +1,6 @@
 import * as React from "react";
 import { motion } from "framer-motion";
+import Traveler from "../assets/decorations/traveler.jpg"
 
 import {
   AppBar,
@@ -26,6 +27,8 @@ import "../styles/appbar.css";
 const pages = [
   { name: "Upcoming Events", path: "/" },
   { name: "Past Events", path: "/past-events" },
+  { name: "Create Event", path: "/new" },
+
 ];
 
 const ResponsiveAppBar = () => {
@@ -33,7 +36,7 @@ const ResponsiveAppBar = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
-  
+
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -133,6 +136,7 @@ const ResponsiveAppBar = () => {
               Meerkats
             </Typography>
             <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+             <img src={Traveler} className="traveler-logo" alt="meerkat" />
               {pages.map((page) => {
                 const pagePath = `${page.path}`;
                 return (
@@ -142,11 +146,13 @@ const ResponsiveAppBar = () => {
                     sx={{
                       my: 2,
                       color:
-                        location.pathname === pagePath ? "var(--headingBG-color)" : "white",
+                        location.pathname === pagePath
+                          ? "var(--headingBG-color)"
+                          : "white",
                       display: "block",
                     }}
                   >
-                    {page.name}
+                    {page.name} 
                   </Button>
                 );
               })}
@@ -156,7 +162,7 @@ const ResponsiveAppBar = () => {
               {user.picture?.url ? (
                 <IconButton onClick={handleProfile} sx={{ p: 0 }}>
                   <p className="welcome-message">
-                    Welcome, <span>{user.name}</span>
+                    <span>{user.name}</span>
                   </p>
                   <Avatar alt={user.username} src={user.picture.url} />
                 </IconButton>
