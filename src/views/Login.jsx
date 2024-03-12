@@ -35,7 +35,6 @@ const Login = ({
       ...prev,
       [name]: value,
     }));
-    console.log(userData);
   };
 
   const handleSubmit = async (e) => {

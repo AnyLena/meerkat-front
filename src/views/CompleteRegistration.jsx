@@ -11,6 +11,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import { inputStyle, buttonStyle } from "../styles/MUI";
 import { completeRegistration } from "../api/users.js";
 import { useNavigate } from "react-router-dom";
+import Message from "../components/Message";
 
 const CompleteRegistration = () => {
   const { token } = useParams();
@@ -43,7 +44,6 @@ const CompleteRegistration = () => {
       ...prev,
       [name]: value,
     }));
-    console.log(userData);
   };
 
   const handleSubmit = (e) => {
@@ -58,77 +58,80 @@ const CompleteRegistration = () => {
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: -300 }}
-      animate={{ opacity: 1, y: 0 }}
-      className="signup"
-    >
-      <div className="signup-header">
-        <h2>Complete registration</h2>
-      </div>
+    <>
+      <motion.div
+        initial={{ opacity: 0, y: -300 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="signup"
+      >
+        <div className="signup-header">
+          <h2>Complete registration</h2>
+        </div>
 
-      <div className="signup-form">
-        <form onSubmit={handleSubmit}>
-          <TextField
-            id="outlined-basic"
-            label="Name"
-            variant="outlined"
-            name="name"
-            required
-            onChange={handleChange}
-            sx={inputStyle}
-          />
-          <TextField
-            id="outlined-basic"
-            variant="outlined"
-            name="email"
-            type="email"
-            required
-            value={decryptedToken.email}
-            disabled
-            sx={inputStyle}
-          />
-          <TextField
-            onChange={handleChange}
-            required
-            type="password"
-            name="password"
-            id="outlined-basic"
-            label="Password"
-            variant="outlined"
-            sx={inputStyle}
-          />
+        <div className="signup-form">
+          <form onSubmit={handleSubmit}>
+            <TextField
+              id="outlined-basic"
+              label="Name"
+              variant="outlined"
+              name="name"
+              required
+              onChange={handleChange}
+              sx={inputStyle}
+            />
+            <TextField
+              id="outlined-basic"
+              variant="outlined"
+              name="email"
+              type="email"
+              required
+              value={decryptedToken.email}
+              disabled
+              sx={inputStyle}
+            />
+            <TextField
+              onChange={handleChange}
+              required
+              type="password"
+              name="password"
+              id="outlined-basic"
+              label="Password"
+              variant="outlined"
+              sx={inputStyle}
+            />
 
-          <ProfileSelector setUserData={setUserData} />
+            <ProfileSelector setUserData={setUserData} />
 
-          <Box sx={{ position: "relative" }}>
-            <Button
-              variant="contained"
-              disabled={loading}
-              type="submit"
-              sx={buttonStyle}
-              className="signup-btn"
-            >
-              Complete registration
-            </Button>
-          </Box>
-          <div className="loading">
-            {loading && (
-              <CircularProgress
-                sx={{
-                  color: "var(--primary-color)",
-                  position: "absolute",
-                  top: "50%",
-                  left: "50%",
-                  marginLeft: "-12px",
-                  marginTop:"-4rem"
-                }}
-              />
-            )}
-          </div>
-        </form>
-      </div>
-    </motion.div>
+            <Box sx={{ position: "relative" }}>
+              <Button
+                variant="contained"
+                disabled={loading}
+                type="submit"
+                sx={buttonStyle}
+                className="signup-btn"
+              >
+                Complete registration
+              </Button>
+            </Box>
+            <div className="loading">
+              {loading && (
+                <CircularProgress
+                  sx={{
+                    color: "var(--primary-color)",
+                    position: "absolute",
+                    top: "50%",
+                    left: "50%",
+                    marginLeft: "-12px",
+                    marginTop: "-4rem",
+                  }}
+                />
+              )}
+            </div>
+          </form>
+        </div>
+      </motion.div>
+      {loading && <Message message="User created. You may log in now. " severity="success" />}
+    </>
   );
 };
 
