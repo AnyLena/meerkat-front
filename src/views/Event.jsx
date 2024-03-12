@@ -16,13 +16,14 @@ import SharedFiles from "../components/SharedFiles.jsx";
 import EventDescription from "../components/EventDescription.jsx";
 import DeleteEvent from "../components/DeleteEvent.jsx";
 import NavBar from "../components/Navbar";
+import Expenses from "../components/Expenses.jsx";
 
 //STYLES
 import "../styles/event.css";
 import { motion } from "framer-motion";
 import { Button } from "@mui/material";
 import { IoIosArrowBack } from "react-icons/io";
-import Expenses from "../components/Expenses.jsx";
+
 
 const Event = () => {
   const navigate = useNavigate();
