@@ -23,7 +23,7 @@ import "../styles/event.css";
 import { motion } from "framer-motion";
 import { Button } from "@mui/material";
 import { IoIosArrowBack } from "react-icons/io";
-
+import NotInvited from "../components/NotInvited.jsx";
 
 const Event = () => {
   const navigate = useNavigate();
@@ -75,6 +75,10 @@ const Event = () => {
           >
             <IoIosArrowBack style={{ fontSize: "1.25rem" }} />
           </Button>
+
+          {!loading && Object.keys(eventData).length === 0 ? (
+            <NotInvited />
+          ) : null}
 
           {Object.keys(eventData).length > 0 && (
             <div className="top-container">

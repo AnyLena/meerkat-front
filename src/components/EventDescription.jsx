@@ -4,8 +4,6 @@ import purify from "dompurify";
 
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import * as Emoji from "quill-emoji";
-Quill.register("modules/emoji", Emoji);
 
 import { FaPencilAlt } from "react-icons/fa";
 import { IoIosCheckmark, IoIosClose } from "react-icons/io";
