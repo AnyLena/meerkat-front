@@ -152,46 +152,6 @@
     }
   }
 
-  .text {
-    display: flex;
-    justify-content: space-between;
-    font-size: 1.2rem;
-    margin: 1rem;
-    align-items: center;
-    input {
-      width: 80%;
-      padding: 0.5rem;
-      border: none;
-      font-size: 1rem;
-      &:focus {
-        border: 2px solid var(--primary-color);
-        border-radius: 10px;
-        outline: none;
-      }
-    }
-    .buttons {
-      display: flex;
-      .save-btn,
-      .edit-btn {
-        padding: 0.5rem;
-        border: none;
-        cursor: pointer;
-        transition: 0.3s;
-        margin-left: 1rem;
-        &:active {
-          transform: scale(0.95);
-        }
-      }
-      .save-btn {
-        background-color: var(--secondary-color);
-        color: black;
-      }
-      .edit-btn {
-        background-color: rgb(230, 230, 230);
-      }
-    }
-  }
-
   h2 {
     margin-top: 50px;
   }
@@ -263,32 +223,93 @@
 }
 
 .event-description {
-  button {
-    border-radius: 30px;
+
+  .description-show {
+    display: grid;
+    grid-template-columns: auto 50px;
+    font-size: 1.1rem;
+    margin: 1rem;
+    align-items: flex-start;
+    
+      .edit-btn {
+        padding: 0.5rem;
+        border: none;
+        cursor: pointer;
+        transition: 0.3s;
+        margin-left: 1rem;
+        border-radius: 30px;
+        &:active {
+          transform: scale(0.95);
+        }
+        &:hover {
+          background-color: rgb(210, 210, 210);
+        }
+      }
+
+      .save-btn {
+        background-color: var(--secondary-color);
+        color: black;
+      }
+      .edit-btn {
+        background-color: rgb(230, 230, 230);
+      }
+    }
+
+  h1,
+  h2,
+  h3
+  {
+    margin: 0;
+    padding: 0;
+    text-align: left;
   }
-  .description-text {
-    h1,
-    h2,
-    h3 {
-      margin: 0;
-      padding: 0;
-      text-align: left;
+  h1 {
+    font-size: 1.6rem;
+  }
+  h2 {
+    font-size: 1.4rem;
+  }
+  h3 {
+    font-size: 1.2rem;
+  }
+  ol,
+  ul,
+  p {
+    margin: 10px 0;
+  }
+  li {
+    margin: 0 1.5rem;
+  }
+  .description-edit{
+    flex-direction: column;
+
+    .save {
+      display: flex;
+      margin-top: 1rem;
+      justify-content: center;
     }
-    h1 {
-      font-size: 1.6rem;
+
+    .save-btn, .close-btn {
+      padding: 0.5rem;
+      border: none;
+      cursor: pointer;
+      transition: 0.3s;
+      margin-left: 1rem;
+      border-radius: 30px;
+      &:active {
+        transform: scale(0.95);
+      }
+      &:hover {
+        background-color: rgb(210, 210, 210);
+      }
     }
-    h2 {
-      font-size: 1.4rem;
+    
+    .save-btn {
+      background-color: var(--secondary-color);
+      color: black;
     }
-    h3 {
-      font-size: 1.2rem;
-    }
-    ul,
-    p {
-      margin: 5px 0;
-    }
-    li {
-      margin: 0 1.5rem;
+    .edit-btn {
+      background-color: rgb(230, 230, 230);
     }
   }
 }

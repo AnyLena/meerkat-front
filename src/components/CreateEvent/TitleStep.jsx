@@ -1,11 +1,40 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { motion } from "framer-motion";
 import { Box, TextField, Button } from "@mui/material";
+import ReactQuill from "react-quill";
+import purify from "dompurify";
+import "react-quill/dist/quill.snow.css";
+import { useState } from "react";
 
 import { buttonStyle } from "../../styles/MUI";
 import "../../styles/create-event.css";
 
 const TitleStep = ({ formStep, handleNext, formData, handleChange }) => {
+  const [newDescription, setNewDescription] = useState("");
+
+  const sanitizeConfig = {
+    ALLOWED_TAGS: [
+      "p",
+      "#text",
+      "h1",
+      "h2",
+      "h3",
+      "strong",
+      "em",
+      "u",
+      "ul",
+      "ol",
+      "li",
+      "a",
+    ],
+    KEEP_CONTENT: false,
+  };
+
+  useEffect(() => {
+    const sanitizedData = purify.sanitize(newDescription, sanitizeConfig);
+    handleChange("description", sanitizedData);
+  }, [newDescription]);
+
   return (
     <motion.div
       initial={{ x: -100 * formStep + "%" }}
@@ -31,15 +60,11 @@ const TitleStep = ({ formStep, handleNext, formData, handleChange }) => {
           variant="outlined"
           onChange={(e) => handleChange("title", e.target.value)}
         />
-
-        <TextField
-          id="outlined-multiline-static"
-          label="Description"
-          multiline
-          rows={4}
-          variant="outlined"
-          style={{ marginTop: "2rem" }}
-          onChange={(e) => handleChange("description", e.target.value)}
+        <p className="heading-description">Description</p>
+        <ReactQuill
+          theme="snow"
+          value={newDescription}
+          onChange={setNewDescription}
         />
       </Box>
     </motion.div>
