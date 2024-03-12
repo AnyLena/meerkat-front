@@ -1,20 +1,21 @@
 import { useState, useRef, useEffect } from "react";
 import { putEvent } from "../api/events";
+import purify from "dompurify"
+
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
+
 import { FaPencilAlt } from "react-icons/fa";
 import { IoIosCheckmark, IoIosClose } from "react-icons/io";
-import "../styles/event.css"
+import "../styles/event.css";
 
 const EventDescription = ({ eventData, setEventData, user, token }) => {
   const [edit, setEdit] = useState(false);
   const [newDescription, setNewDescription] = useState(eventData.description);
-  const inputRef = useRef();
-
-  const handleChange = (e) => {
-    setNewDescription(e.target.value);
-  };
 
   const handleUpdateEvent = () => {
-    const data = { description: newDescription };
+    const sanitizedData = purify.sanitize(newDescription, { sanitize: true })
+    const data = { description: sanitizedData };
     putEvent(eventData._id, token, data, setEventData);
     setEdit(false);
   };
@@ -23,50 +24,30 @@ const EventDescription = ({ eventData, setEventData, user, token }) => {
     setEdit(!edit);
   };
 
-  const handleKeyDown = (e) => {
-    if (e.key === "Enter") {
-      handleUpdateEvent();
-    }
-    if (e.key === "Escape") {
-      setEdit(false);
-    }
-  };
-
-  useEffect(() => {
-    if (edit && inputRef.current) {
-      inputRef.current.focus();
-      inputRef.current.select();
-    }
-  }, [edit]);
-
   return (
     <section className="event-description">
       <div className="text">
         {edit ? (
-          <input
-            ref={inputRef}
-            type="text"
+          <ReactQuill
+            theme="snow"
             value={newDescription}
-            onChange={handleChange}
-            onKeyDown={handleKeyDown}
+            onChange={setNewDescription}
           />
         ) : (
-          <p>{eventData.description}</p>
+          <div dangerouslySetInnerHTML={{ __html:purify.sanitize(eventData.description, { sanitize: true }) }} />
         )}
         <div className="buttons">
-
-
           {eventData.owner._id === user._id && (
-           
-        <button onClick={handleEdit} className="edit-btn">
-                    {!edit ? <FaPencilAlt /> : <IoIosClose />}
-                  </button>
-           )}
-
-
+            <button onClick={handleEdit} className="edit-btn">
+              {!edit ? <FaPencilAlt /> : <IoIosClose />}
+            </button>
+          )}
           {edit && (
             <div className="save">
-              <button className="save-btn" onClick={handleUpdateEvent}>    <IoIosCheckmark /></button>
+              <button className="save-btn" onClick={handleUpdateEvent}>
+                {" "}
+                <IoIosCheckmark />
+              </button>
             </div>
           )}
         </div>
