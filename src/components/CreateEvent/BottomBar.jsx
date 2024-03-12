@@ -51,51 +51,55 @@ const BottomBar = ({
       transition={{ ease: "easeOut", duration: 0.5 }}
       className="bottom-bar"
     >
-      <Button
-        disabled={backButtonDisabled()}
-        type="button"
-        onClick={handlePrev}
-        sx={buttonStyle}
-      >
-        Back
-      </Button>
-      {formStep < 1 && (
+      <div className="buttons">
         <Button
-          disabled={nextButtonDisabled()}
+          disabled={backButtonDisabled()}
           type="button"
-          onClick={handleNext}
+          onClick={handlePrev}
           sx={buttonStyle}
         >
-          Next
+          Back
         </Button>
-      )}
-      {formStep === 1 && (
-        <Button
-          className="create-event-btn"
-          type="submit"
-          onClick={handleSubmit}
-          disabled={isExploding || createEventDisabled()}
-          sx={{
-            animation:
-              isExploding || createEventDisabled() ? "none" : "pulse 2s infinite",
-          }}
-        >
-          {isExploding ? "Creating event..." : "Create Event"}
-          {isExploding && (
-            <CircularProgress
-              size={24}
-              sx={{
-                color: "var(--primary-color)",
-                position: "absolute",
-                top: "50%",
-                left: "50%",
-                marginTop: "-12px",
-                marginLeft: "-12px",
-              }}
-            />
-          )}
-        </Button>
-      )}
+        {formStep < 1 && (
+          <Button
+            disabled={nextButtonDisabled()}
+            type="button"
+            onClick={handleNext}
+            sx={buttonStyle}
+          >
+            Next
+          </Button>
+        )}
+        {formStep === 1 && (
+          <Button
+            className="create-event-btn"
+            type="submit"
+            onClick={handleSubmit}
+            disabled={isExploding || createEventDisabled()}
+            sx={{
+              animation:
+                isExploding || createEventDisabled()
+                  ? "none"
+                  : "pulse 2s infinite",
+            }}
+          >
+            {isExploding ? "Creating event..." : "Create Event"}
+            {isExploding && (
+              <CircularProgress
+                size={24}
+                sx={{
+                  color: "var(--primary-color)",
+                  position: "absolute",
+                  top: "50%",
+                  left: "50%",
+                  marginTop: "-12px",
+                  marginLeft: "-12px",
+                }}
+              />
+            )}
+          </Button>
+        )}
+      </div>
       <div className="explosion">{isExploding && <ConfettiExplosion />}</div>
     </motion.div>
   );
