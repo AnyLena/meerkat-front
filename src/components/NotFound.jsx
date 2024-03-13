@@ -10,7 +10,7 @@ const NotFound = () => {
         <h1>Whoops!</h1>
         <h2>It seems like you are a little lost</h2>
 
-        <p>Let us help you to get back an track.</p>
+        <p>Let us help you to get back on track.</p>
         <Link to="/">
           <Button className="btn-green">Go back to Dashboard</Button>
         </Link>

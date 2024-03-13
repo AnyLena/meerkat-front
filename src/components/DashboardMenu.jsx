@@ -109,7 +109,7 @@ const ResponsiveAppBar = () => {
                         cursor: "pointer",
                       }}
                     >
-                      {page.name}
+                      {page.name} 
                     </Typography>
                   </MenuItem>
                 ))}
@@ -156,6 +156,19 @@ const ResponsiveAppBar = () => {
                   </Button>
                 );
               })}
+              <Button
+                    onClick={(e) => handleCloseNavMenu("/new")}
+                    sx={{
+                      my: 2,
+                      color:
+                        location.pathname === "/new"
+                          ? "var(--headingBG-color)"
+                          : "white",
+                      display: "block",
+                    }}
+                  >
+                   Create Event 
+                  </Button>
             </Box>
 
             <Box sx={{ flexGrow: 0 }}>

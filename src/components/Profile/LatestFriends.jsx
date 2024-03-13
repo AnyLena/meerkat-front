@@ -33,15 +33,15 @@ const LatestFriends = ({ user, token, setUser }) => {
             overflowX:"scroll",
             scrollbarWidth: "thin", // for Firefox
             scrollbarColor: "var(--primary color) var(--secondary-color)", // for Firefox
-            "&::-webkit-scrollbar": {
+            "&::WebkitScrollbar": {
               // for Chrome, Safari and Edge
               width: "12px",
             },
-            "&::-webkit-scrollbar-track": {
+            "&::WebkitScrollbarTrack": {
               // for Chrome, Safari and Edge
               background: "var(--secondary-color)",
             },
-            "&::-webkit-scrollbar-thumb": {
+            "&::WebkitScrollbarThumb": {
               // for Chrome, Safari and Edge
               background: "var(--primary-color)",
             },

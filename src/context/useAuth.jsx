@@ -50,7 +50,6 @@ export const AuthProvider = ({ children }) => {
           },
         });
         setUser(response.data);
-        console.log("user",response.data);
       } catch (e) {
         console.log(e);
         logout();

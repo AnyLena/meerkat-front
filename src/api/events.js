@@ -53,8 +53,8 @@ export const createEvent = async (
 };
 
 export const fetchUserEvents = async (setUserEvents, token, setLoadingEvents) => {
-  setLoadingEvents(true)
   try {
+    setLoadingEvents(true);
     const response = await axios.get(`${SERVER}/events`, {
       headers: {
         "Content-Type": "application/json",

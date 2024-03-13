@@ -32,7 +32,6 @@ const Dashboard = () => {
   }, []);
 
   useEffect(() => {
-    console.log(invitations);
     fetchUserEvents(setUserEvents, token);
   }, [invitations]);
 
@@ -65,8 +64,8 @@ const Dashboard = () => {
                     {invitations.some(
                       (invitation) => invitation.type === "event"
                     ) ? (
-                      <>
-                        <h3 className="notifications-head_a">
+                      <div>
+                        <h3>
                           Event Invitations
                         </h3>
                         <Notifications
@@ -76,14 +75,14 @@ const Dashboard = () => {
                           type="event"
                           setUserEvents={setUserEvents}
                         />{" "}
-                      </>
+                      </div>
                     ) : null}
 
                     {invitations.some(
                       (invitation) => invitation.type === "friendship"
                     ) ? (
-                      <>
-                        <h3 className="notifications-head_b">
+                      <div>
+                        <h3 className="second-h3">
                           Friend Requests
                         </h3>
                         <Notifications
@@ -92,7 +91,7 @@ const Dashboard = () => {
                           setUser={setUser}
                           type="friendship"
                         />{" "}
-                      </>
+                      </div>
                     ) : null}
                   </div>
                 </>

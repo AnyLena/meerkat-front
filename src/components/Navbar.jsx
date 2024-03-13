@@ -31,7 +31,7 @@ const Navbar = () => {
       <BottomNavigation
         style={navStyle}
         value={value}
-        sx={{ flexGrow: 1 }}
+        sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}
         onChange={(event, newValue) => {
           setValue(newValue);
         }}

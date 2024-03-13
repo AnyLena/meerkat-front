@@ -7,7 +7,7 @@
   margin-bottom: 4rem;
 
   @media screen and (max-width: 800px) {
-    background-size: 800px auto;
+    background-size: auto 100vh;
     background-position: center top;
   }
 }
@@ -49,9 +49,9 @@
 }
 .event-content {
   background-image: none !important;
-  padding-bottom: 6rem;
+  /* padding-bottom: 6rem; */
   @media screen and (max-width: 800px) {
-    background-image: inherit !important;
+    /* background-image: inherit !important; */
     background-repeat: no-repeat;
     background-size: auto;
     background-position: top;
@@ -75,6 +75,7 @@
   .header {
     margin-top: 40vh;
     background-color: rgba(255, 255, 255, 0.7);
+    background-image: none !important;
     display: flex;
     justify-content: center;
 
@@ -201,13 +202,15 @@
   background-color: white;
   border-radius: 0px 0px 35px 35px;
 }
+
 .leave-or-delete {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin: 4rem 0 0 0;
+  margin: 4rem 0 0rem 0;
   gap: 2rem;
+  padding-bottom: 4rem;
   button {
     padding: 0.5rem;
     max-width: 100px;
@@ -222,7 +225,7 @@
   .delete-btn {
     background-color: var(--alert-color);
     color: black;
-    padding: 1rem;
+    padding:1rem;
   }
 }
 
