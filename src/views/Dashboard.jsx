@@ -32,7 +32,7 @@ const Dashboard = () => {
   }, []);
 
   useEffect(() => {
-    fetchUserEvents(setUserEvents, token);
+    fetchUserEvents(setUserEvents, token, setLoadingEvents);
   }, [invitations]);
 
   return (

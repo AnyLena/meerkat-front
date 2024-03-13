@@ -141,6 +141,8 @@
       border-top-right-radius: 30px;
     }
   }
+ 
+ 
 
   .info {
     background-color: white;
@@ -320,3 +322,7 @@
     }
   }
 }
+@media screen and (min-width: 900px) {
+  .event-container {
+    margin-bottom: 0rem;
+}}
