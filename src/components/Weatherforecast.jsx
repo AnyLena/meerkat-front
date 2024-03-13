@@ -19,10 +19,8 @@ const Weatherforecast = ({ eventData }) => {
       setNoWeatherData("future");
     } else if (eventDate < today) {
       setNoWeatherData("past");
-    } else {
-      if (typeof lat === Number) {
+    } else {    
         getWeather();
-      }
     }
   };
 
@@ -36,7 +34,7 @@ const Weatherforecast = ({ eventData }) => {
       .toString()
       .padStart(2, "0")}-${eventDate.getDate().toString().padStart(2, "0")}`;
     const hour = eventDate.getHours();
-    if (typeof lat === Number) {
+    if (typeof lat === 'number') {
       getWeatherData(lat, lng, date, hour, setWeatherData);
     }
   };
