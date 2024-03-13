@@ -6,7 +6,6 @@ import purify from "dompurify";
 import "react-quill/dist/quill.snow.css";
 import { useState } from "react";
 
-import { buttonStyle } from "../../styles/MUI";
 import "../../styles/create-event.css";
 
 const TitleStep = ({ formStep, handleNext, formData, handleChange }) => {
@@ -65,6 +64,7 @@ const TitleStep = ({ formStep, handleNext, formData, handleChange }) => {
           theme="snow"
           value={newDescription}
           onChange={setNewDescription}
+
         />
       </Box>
     </motion.div>

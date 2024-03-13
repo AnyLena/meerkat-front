@@ -154,7 +154,9 @@ const Event = () => {
             </section>
           ) : null}
           {eventData && eventData.owner?._id === user._id && (
+          
             <DeleteEvent eventData={eventData} token={token} user={user} />
+    
           )}
         </motion.div>
       </div>

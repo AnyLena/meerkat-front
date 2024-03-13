@@ -188,7 +188,7 @@ const Expenses = ({ eventData, setEventData }) => {
                     <h3>{participant.name}</h3>
                     <p>payed {getAmountPayed(participant.name)}€</p>
                     <p>
-                      {getAmountDiff(participant.name) < 0 ? "gives " : "gets "}
+                      {getAmountDiff(participant.name) < 0 ? "owes " : "gets "}
                       <span className="user-amount--bold">
                         {getAmountDiff(participant.name) < 0
                           ? getAmountDiff(participant.name) * -1

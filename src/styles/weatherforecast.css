@@ -1,4 +1,8 @@
 .weatherforecast {
+  .text {
+    margin: 1rem;
+    font-size: 1.1rem;
+  }
   .weather-info {
     display: flex;
     justify-content: center;
@@ -7,6 +11,8 @@
     margin: 20px;
     line-height: 1.3;
     /* border: red 1px solid */
+    
+    
     .temp {
       font-size: 2rem;
       font-family: "Oswald";
@@ -34,7 +40,7 @@
       margin: 20px auto;
     }
     .weather-info-text {
-        grid-area: 2/1/3/3;
+      grid-area: 2/1/3/3;
     }
   }
 }

@@ -1,9 +1,16 @@
 .notifications {
+  /* display: flex;
+      flex-wrap: wrap; */
   h3 {
     text-align: center;
     margin: 1rem;
-  }
 
+    
+  }
+.second-h3 {
+
+margin-top: 2rem;
+}
   .notification {
     display: flex;
     align-items: center;
@@ -15,19 +22,20 @@
     margin: 0 auto;
 
     img {
-        height: 40px !important;
-        width: 40px !important;
-      }
+      height: 40px !important;
+      width: 40px !important;
+    }
   }
 
   .buttons {
     display: flex;
     margin-left: auto;
     justify-content: space-evenly;
-    gap: 15px;
+    gap: 10px;
+    flex-direction: column;
 
     button {
-      padding: 10px 20px;
+      padding: 8px 12px;
       margin: 0;
     }
   }
@@ -37,5 +45,21 @@
   .notifications {
     display: flex;
     flex-direction: column;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  .notifications {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+
+    .buttons {
+      flex-direction: column;
+    }
+    .second-h3 {
+  
+      margin-top: 0rem;
+      }
   }
 }
