@@ -40,7 +40,7 @@ const FriendshipRequests = ({
                   inv.inviting._id === user._id &&
                   inv.status === "pending" && (
                     <div className="invitation" key={inv._id}>
-                      <img src={inv.invited.picture.url} alt="" />
+                      <img src={inv.invited.picture?.url} alt="" />
                       <p>{inv.invited.name}</p>
                       <button
                         onClick={() => handleDeleteRequest(inv._id)}
