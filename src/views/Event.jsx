@@ -40,9 +40,9 @@ const Event = () => {
     scrollTo(0, 0);
   }, []);
 
-  useEffect(() => {
-    console.log(eventData);
-  }, [eventData]);
+  // useEffect(() => {
+  //   console.log(eventData);
+  // }, [eventData]);
 
   return (
     <>

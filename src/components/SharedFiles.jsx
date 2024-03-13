@@ -14,10 +14,11 @@ const SharedFiles = ({ messages }) => {
             <h2>Shared files</h2>
           </div>
           <div className="files">
-            {messages.map((message) => (
-              <>
+            {messages.map((message, index) => (
+              <div  key={index}>
                 {message.file?.match(/\.(jpeg|jpg|gif|png)$/) != null ? (
                   <img
+                   
                     onClick={() => setSelectedImage(message.file)}
                     src={message.file}
                     alt=""
@@ -49,7 +50,7 @@ const SharedFiles = ({ messages }) => {
                     src={selectedImage}
                   />
                 )}
-              </>
+              </div>
             ))}
           </div>
         </div>

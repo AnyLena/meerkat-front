@@ -32,7 +32,6 @@ const Dashboard = () => {
   }, []);
 
   useEffect(() => {
-    console.log(invitations);
     fetchUserEvents(setUserEvents, token);
   }, [invitations]);
 

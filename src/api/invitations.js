@@ -10,7 +10,6 @@ export const getMyInvitations = async (token, setInvitations) => {
         Authorization: `Bearer ${token}`,
       },
     });
-    console.log(response.data, "My invitations");
     setInvitations(response.data);
   } catch (error) {
     console.error(error);
@@ -25,7 +24,6 @@ export const getMyFriendRequests = async (token, setInvitations) => {
         Authorization: `Bearer ${token}`,
       },
     });
-    console.log(response.data, "My friend requests");
     setInvitations(response.data);
   } catch (error) {
     console.error(error);

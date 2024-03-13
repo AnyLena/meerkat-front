@@ -74,9 +74,9 @@ const Form = () => {
     navigate("/");
   }
 
-  useEffect(() => {
-    console.log(formData);
-  }, [formData]);
+  // useEffect(() => {
+  //   console.log(formData);
+  // }, [formData]);
 
   const handleSubmit = () => {
     createEvent(
