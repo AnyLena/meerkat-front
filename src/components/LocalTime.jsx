@@ -7,7 +7,9 @@ const LocalTime = ({ start, edit, eventData, newStart, handleDateChange }) => {
   const [timezoneUser, setTimezoneUser] = useState();
 
   useEffect(() => {
-    getTimezone(eventData.location.lat, eventData.location.lng, setTimezone);
+    if (typeof eventData.location.lat === Number) {
+      getTimezone(eventData.location.lat, eventData.location.lng, setTimezone);
+    }
     if (start instanceof Date) {
       const newDate = new Date(eventData.date.start);
       newDate.setSeconds(newDate.getSeconds() + timezone.offset_DST_seconds);

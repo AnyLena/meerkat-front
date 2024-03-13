@@ -24,7 +24,6 @@
     }
   }
 
-
   .dashboard-events {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -46,7 +45,7 @@
   }
 }
 .event-card {
-  &:hover{
+  &:hover {
     transform: scale(1.01);
   }
 }
@@ -57,7 +56,9 @@
   gap: 40px;
   justify-content: center;
   align-items: center;
-  margin-top:4rem;
+  p {
+    margin-top: -100px;
+  }
 }
 
 @media screen and (max-width: 1000px) {
@@ -67,7 +68,6 @@
     .dashboard-events {
       display: flex;
       flex-direction: column;
-
     }
   }
 }
@@ -75,11 +75,11 @@
 .welcome-screen {
   text-align: center;
 
-  h1,button {
+  h1,
+  button {
     margin: 2rem;
   }
   h1 {
     margin-top: 4rem;
   }
 }
-

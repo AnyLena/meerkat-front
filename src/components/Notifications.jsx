@@ -2,12 +2,10 @@ import React, { useEffect } from "react";
 import { useAuth } from "../context/useAuth";
 import { acceptInvitation, rejectInvitation } from "../api/invitations.js";
 import { convertDate } from "../utils/convertDate.js";
-import { fetchUserEvents } from "../api/events.js";
 import { useState } from "react";
 
 const Notifications = ({ invitations, setInvitations, setUser, type, setUserEvents }) => {
   const { token } = useAuth();
-  const [fetchEvents, setFetchEvents] = useState(false)
 
   const handleReject = async (id) => {
     rejectInvitation(id, token, setInvitations);

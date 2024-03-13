@@ -20,20 +20,25 @@ const Weatherforecast = ({ eventData }) => {
     } else if (eventDate < today) {
       setNoWeatherData("past");
     } else {
-      getWeather();
+      if (typeof lat === Number) {
+        getWeather();
+      }
     }
   };
 
   const getWeather = () => {
     const lat = eventData.location.lat;
     const lng = eventData.location.lng;
+    console.log(lat, lng)
 
     const eventDate = new Date(eventData.date.start);
     const date = `${eventDate.getFullYear()}-${(eventDate.getMonth() + 1)
       .toString()
       .padStart(2, "0")}-${eventDate.getDate().toString().padStart(2, "0")}`;
     const hour = eventDate.getHours();
-    getWeatherData(lat, lng, date, hour, setWeatherData);
+    if (typeof lat === Number) {
+      getWeatherData(lat, lng, date, hour, setWeatherData);
+    }
   };
 
   useEffect(() => {

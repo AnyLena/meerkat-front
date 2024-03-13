@@ -16,10 +16,11 @@ import { Button } from "@mui/material";
 const PastEvents = () => {
   const { user, token } = useAuth();
   const [userEvents, setUserEvents] = useState([]);
+  const [loadingEvents, setLoadingEvents] = useState(null)
   const today = new Date();
 
   useEffect(() => {
-    fetchUserEvents(setUserEvents, token);
+    fetchUserEvents(setUserEvents, token, setLoadingEvents);
   }, []);
 
   return (
